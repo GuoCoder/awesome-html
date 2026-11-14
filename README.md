@@ -29,7 +29,7 @@
 
 <sub>类别：FPS · 语言：HTML · 全中文重混</sub>
 
-[离线归档](<几猫国产3A大作_V1(1).html>) ｜ [在线试玩](https://fable52.games/play/jimao-cs)
+[离线归档](games/00/) ｜ [在线试玩](https://fable52.games/play/jimao-cs)
 
 
 ### 01 · FOG CITY
