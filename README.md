@@ -2,7 +2,7 @@
 
 这是一批由 **Fable 5.2**（AI 辅助编程）在很短时间内生成的网页小游戏合集，题材涵盖开放世界、FPS、RTS、解谜、驾驶、体育、恐怖、仙侠等。技术栈以 Three.js / WebGL、Canvas 2D 与原生 JS 为主，不少作品被压缩成单个 HTML 文件。本仓库将可离线运行的版本归档到 [`games/`](games/)，封面图存于 [`screenshots/`](screenshots/)，并在每条下方注明原始来源与作者。
 
-**收录**：26 款（本地离线归档 16 款，其余为在线演示或源码链接） · 数据快照：2026-11-12
+**收录**：27 款（本地离线归档 16 款，其余为在线演示或源码链接） · 数据快照：2026-11-12
 
 ## 离线运行说明
 
@@ -401,6 +401,20 @@
 [离线归档](games/26/) ｜ [在线试玩](https://fable52.games/play/harvest-standoff) ｜ [作者演示站](https://harvest-standoff.vercel.app/) ｜ [源码](https://github.com/andreteow/farm-ca)
 
 *感谢作者 **@andreteow** 的开源分享！*
+
+### 27 · 黑神话：悟空 · 虎先锋
+
+![黑神话：悟空 · 虎先锋](screenshots/27.jpg)
+
+**中文**：《黑神话：悟空》同人浏览器 Boss 战：对阵虎先锋，含轻棍、重棍、闪身、定身法与变身等招式；资源约 82 MiB，由作者站点在线流式加载，源码仓库未公开，仅作在线试玩归档。
+
+**EN**: A fan-made browser boss fight against the Tiger Vanguard.
+
+<sub>类别：动作 · 技术：three.js (WebGPU) · 语言：JavaScript · 体量：1.4 MB · 游玩量：300</sub>
+
+[在线试玩](https://fable52.games/play/wukong-tiger-vanguard) ｜ [作者演示站](https://www.anxiangsir.com/wukong-tiger-engine/)
+
+*感谢作者 **anxiangsir.com** 的分享！*
 
 ## 归档与来源说明
 
