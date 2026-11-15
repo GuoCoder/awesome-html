@@ -272,7 +272,7 @@
 
 ![TukTuk](screenshots/19.jpg)
 
-**中文**：驾驶突突车穿行拥挤的埃及街头，闪躲小巴、出租车和满载西瓜的货车。部分模型、贴图与音效在作者源站已失效（404），离线版可能缺少对应素材。
+**中文**：驾驶突突车穿行拥挤的街头，闪躲小巴、出租车和满载西瓜的货车。原作界面为阿拉伯语，本离线归档已整体汉化为中文；图形与音效均由代码实时生成，无外部素材依赖。
 
 **EN**: Weave a tuk-tuk through a crowded Egyptian street, dodging microbuses, taxis and watermelon pickups.
 

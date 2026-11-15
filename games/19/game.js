@@ -151,7 +151,7 @@ const M = {
   melon: std(0x2f6b3a, { roughness: 0.6 }), wood: std(0x8a6642), skin: std(0xb98a63), dish: std(0xd9d6cf, { side: THREE.DoubleSide, roughness: 0.5 }),
 };
 const WALLS = ["#d9b98c", "#c9a273", "#e3c9a1", "#b98d68", "#cfa98a", "#a8573c", "#d8c2a6", "#bfa07a"];
-const SIGNS = ["كشري الباشا", "عصير قصب", "فول وطعمية", "سوبر ماركت", "صيدلية", "موبايلات", "قهوة بلدي", "حلاق الشباب", "مخبز", "خضار وفاكهة", "ترزي", "مكتبة"];
+const SIGNS = ["老王烩饭", "甘蔗汁", "蚕豆炸丸", "便利店", "药店", "手机维修", "路边咖啡", "青年理发", "面包房", "蔬菜水果", "裁缝铺", "文具店"];
 const SIGN_BG = ["#b3261e", "#1f6b4a", "#1d4f91", "#7a3b12", "#111111", "#6a1f6e"];
 const CLOTH = [0xd9483b, 0x2f6fd0, 0xf2f0e6, 0xf0b429, 0x2f9e6b, 0xe07aa0];
 
@@ -227,7 +227,7 @@ function facadeTex(wM, floors, wall, sign) {
     g.strokeStyle = "rgba(0,0,0,.45)"; g.lineWidth = 2;
     for (let x = 14; x < W - 14; x += 26) { g.beginPath(); g.moveTo(x, H - FH + 36); g.lineTo(x, H); g.stroke(); }
     g.fillStyle = sign.bg; g.fillRect(4, H - FH + 2, W - 8, 30);
-    g.fillStyle = "#fff"; g.font = "bold 22px Tahoma, Arial"; g.textAlign = "center"; g.textBaseline = "middle"; g.direction = "rtl";
+    g.fillStyle = "#fff"; g.font = "bold 22px Tahoma, Arial"; g.textAlign = "center"; g.textBaseline = "middle"; g.direction = "ltr";
     g.fillText(sign.text, W / 2, H - FH + 18, W - 16);
   });
 }
@@ -354,9 +354,9 @@ function wheel(r, x, z, w = 0.24) {
 function plate(band) {                          // لوحة مصرية
   const t = canvasTex(128, 64, (g) => {
     g.fillStyle = "#f4f4f0"; g.fillRect(0, 0, 128, 64); g.fillStyle = band; g.fillRect(0, 0, 128, 20);
-    g.fillStyle = "#111"; g.font = "bold 13px Tahoma"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("مصر  EGYPT", 64, 11);
-    g.font = "bold 30px Tahoma"; g.direction = "rtl";
-    g.fillText(`${pick(["ب ط", "س م", "ر ق", "ن ه", "ع د"])} ${RI(1, 9)}${RI(0, 9)}${RI(0, 9)}${RI(0, 9)}`, 64, 43);
+    g.fillStyle = "#111"; g.font = "bold 13px Tahoma"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("中国  CHINA", 64, 11);
+    g.font = "bold 26px Tahoma, Arial"; g.direction = "ltr";
+    g.fillText(`${pick(["京", "沪", "粤", "川", "鲁"])}${pick(["A","B","C","D","E"])} ${RI(1, 9)}${RI(0, 9)}${RI(0, 9)}${RI(0, 9)}`, 64, 43);
     g.strokeStyle = "#111"; g.lineWidth = 3; g.strokeRect(1.5, 1.5, 125, 61);
   });
   return new THREE.Mesh(new THREE.PlaneGeometry(0.52, 0.26), new THREE.MeshBasicMaterial({ map: t }));
@@ -416,7 +416,7 @@ function tuktuk() {
   g.add(box(1.62, 0.1, 2.5, M.yellow, 0, 2.32, 0.12), box(1.5, 0.08, 2.3, M.black, 0, 2.24, 0.12));
   const back = new THREE.Mesh(new THREE.PlaneGeometry(1.36, 0.62), new THREE.MeshBasicMaterial({ map: canvasTex(256, 116, (c) => {
     c.fillStyle = "#151515"; c.fillRect(0, 0, 256, 116); c.strokeStyle = "#ffd21f"; c.lineWidth = 5; c.strokeRect(6, 6, 244, 104);
-    c.fillStyle = "#ffd21f"; c.font = "bold 46px Tahoma, Arial"; c.textAlign = "center"; c.textBaseline = "middle"; c.direction = "rtl"; c.fillText("وسّع يا باشا", 128, 60, 220);
+    c.fillStyle = "#ffd21f"; c.font = "bold 46px Tahoma, Arial"; c.textAlign = "center"; c.textBaseline = "middle"; c.direction = "ltr"; c.fillText("麻烦让让", 128, 60, 220);
   }) }));
   back.position.set(0, 1.2, 1.245); g.add(back);
   g.add(box(1.3, 0.5, 0.04, std(0x24303c, { transparent: true, opacity: 0.55, roughness: 0.1 }), 0, 1.92, 1.2));
@@ -489,7 +489,7 @@ function start() { reset(); S.state = "play"; $("menu").hidden = true; $("over")
 function gameOver() {
   S.state = "over"; S.shake = 0.6; crashSound();
   const d = Math.floor(S.dist); if (d > best) { best = d; try { localStorage.setItem("tuktuk-best", String(best)); } catch (e) { /* خاص */ } }
-  $("oDist").textContent = d; $("oFare").textContent = S.fare; $("oBest").textContent = `أحسن مسافة ليك: ${best} متر`;
+  $("oDist").textContent = d; $("oFare").textContent = S.fare; $("oBest").textContent = `你的最佳纪录：${best} 米`;
   S.overT = 0;
 }
 
@@ -558,7 +558,7 @@ function update(dt) {
       if (rz > 20) { world.remove(b); S.bumps.splice(i, 1); }
     }
     if (S.toastT && S.t - S.toastT > 0.7) { $("toast").classList.remove("on"); S.toastT = 0; }
-    $("dist").textContent = `${Math.floor(S.dist)} م`; $("fare").textContent = `${S.fare} ج`;
+    $("dist").textContent = `${Math.floor(S.dist)} 米`; $("fare").textContent = `${S.fare} 元`;
   }
   if (S.state === "over" && S.overT >= 0) { S.overT += dt; if (S.overT > 0.65) { $("over").hidden = false; S.overT = -1; } }
   const moving = S.state === "play", menuDrift = S.state === "menu" ? S.t * 6 : 0;
@@ -613,7 +613,7 @@ canvas.addEventListener("pointerdown", (e) => { touch = { x: e.clientX, moved: f
 canvas.addEventListener("pointermove", (e) => { if (touch && !touch.moved && Math.abs(e.clientX - touch.x) > 28) { steer(e.clientX > touch.x ? 1 : -1); touch.moved = true; } });
 canvas.addEventListener("pointerup", (e) => { if (touch && !touch.moved) steer(e.clientX > innerWidth / 2 ? 1 : -1); touch = null; });
 $("start").onclick = start; $("again").onclick = start;
-$("mute").onclick = () => { sfx.muted = !sfx.muted; $("mute").textContent = sfx.muted ? "الصوت: مقفول" : "الصوت: شغال"; };
+$("mute").onclick = () => { sfx.muted = !sfx.muted; $("mute").textContent = sfx.muted ? "声音：关" : "声音：开"; };
 
 // ---------- اللوب
 if (CAP) {
