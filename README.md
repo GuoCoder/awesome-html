@@ -4,7 +4,7 @@
 
 **仓库地址**：[GuoCoder/awesome-html-games](https://github.com/GuoCoder/awesome-html-games)
 
-**收录**：45 款（本地离线归档 19 款，其余为在线演示或源码链接） · 数据快照：2026-11-16
+**收录**：47 款（本地离线归档 21 款，其余为在线演示或源码链接） · 数据快照：2026-11-16
 
 ## 离线运行说明
 
@@ -669,6 +669,30 @@
 [离线归档](games/45/) ｜ [在线试玩](https://br8t.com/ouro/) ｜ [源码](https://github.com/CatanCats/Ouro)
 
 *感谢作者 **@CatanCats** 的开源分享！*
+
+### 46 · Black Tide
+
+![Black Tide](screenshots/46.jpg)
+
+**中文**：海盗劫案题材的 Saltline 重混：触发中继读取货单，在六只宝箱中撬开正确的那只，再守住梯子直到接应小艇抵达。Three.js 单文件，已离线归档。
+
+**EN**: A pirate heist remix of Saltline: tap the relays to read the manifest, crack the right strongbox among six, then hold the ladder until the launch arrives.
+
+<sub>类别：FPS · 技术：three.js · 语言：HTML · 体量：1.6 MB · 游玩量：16</sub>
+
+[离线归档](games/46/) ｜ [在线试玩](https://fable52.games/play/black-tide-hdab0j)
+
+### 47 · Undertow
+
+![Undertow](screenshots/47.jpg)
+
+**中文**：夜港风暴中的拖船救援，基于 Saltline 引擎：钩住漂流的集装箱，救出困在其中的男孩，并把断电失控的渡轮引离礁石。Three.js 单文件，已离线归档。
+
+**EN**: A night-storm harbour tug game built on the Saltline engine: hook drifting containers, rescue a boy trapped in one and keep a blacked-out ferry off the rocks.
+
+<sub>类别：模拟 · 技术：three.js · 语言：HTML · 体量：1.7 MB · 游玩量：26</sub>
+
+[离线归档](games/47/) ｜ [在线试玩](https://fable52.games/play/undertow-y8xvs5)
 
 ## 归档与来源说明
 

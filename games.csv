@@ -44,3 +44,5 @@ id,name,repo,play_url,author_demo,render,build,delivery,language,stars,category,
 43,Arcfall Artillery,,https://fable52.games/play/arcfall-artillery-ho7odp,https://arcfall.ez8.tools/,原生,,作者站点,JavaScript,0,回合制,2026-11-16
 44,潮汐战线 Tidemark,CocoSgt/dsh-game-tidemark,https://fable52.games/play/tidemark,https://dsh-game-store.com/games/tidemark/play/,原生,,第三方游戏站 + 开源仓库,JavaScript,0,策略,2026-11-16
 45,Ouro,CatanCats/Ouro,https://br8t.com/ouro/,,WebAssembly + WebGPU,C→WASM；在线版 Rust 联网,离线单文件自包含；在线多人需服务端,JavaScript,,io 贪吃蛇,2026-11-16
+46,Black Tide,,https://fable52.games/play/black-tide-hdab0j,,three.js,,单文件 HTML,HTML,0,FPS,2026-11-16
+47,Undertow,,https://fable52.games/play/undertow-y8xvs5,,three.js,,单文件 HTML,HTML,0,模拟,2026-11-16
