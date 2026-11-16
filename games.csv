@@ -26,3 +26,20 @@ id,name,repo,play_url,author_demo,render,build,delivery,language,stars,category,
 25,Becario del Universo,masugus/fable5.2-5min-game,https://fable52.games/play/becario-del-universo,https://masugus.github.io/fable5.2-5min-game/,原生,无构建,单文件 HTML,HTML,0,休闲,2026-11-12
 26,Harvest Standoff,andreteow/farm-ca,https://fable52.games/play/harvest-standoff,https://harvest-standoff.vercel.app/,three.js,自写 build.mjs,dist 目录,JavaScript,0,竞技,2026-11-12
 27,黑神话：悟空 · 虎先锋,,https://fable52.games/play/wukong-tiger-vanguard,https://www.anxiangsir.com/wukong-tiger-engine/,three.js (WebGPU),,作者站流式加载,JavaScript,0,动作,2026-11-15
+28,Duskline,,https://fable52.games/play/duskline-vxn7rh,,原生 WebGL,,单文件 HTML,HTML,0,跑酷,2026-11-16
+29,烬堡 EMBERHOLD,,https://fable52.games/play/emberhold-xwn1lu,,three.js,,单文件 HTML + 本地 three 模块,HTML,0,动作,2026-11-16
+30,MAKINAMON · Versión Pulso,gavilanbe/makinamon-pulso,https://fable52.games/play/makinamon-pulso,https://gavilanbe.github.io/makinamon-pulso/,原生 Retro,,GitHub Pages 站点,JavaScript,0,RPG,2026-11-16
+31,What the Water Keeps,,https://fable52.games/play/what-the-water-keeps,https://what-the-water-keeps.vercel.app/,three.js,,Vercel 站点,JavaScript,0,探索,2026-11-16
+32,Riftline,wongh26/claude_fps,https://fable52.games/play/riftline,https://wongh26.github.io/claude_fps/,three.js,,GitHub Pages 站点,JavaScript,0,FPS,2026-11-16
+33,The County,TheMizeGuy/fable-5.2-potatobench,https://fable52.games/play/the-county,https://themizeguy.github.io/fable-5.2-potatobench/,three.js,,GitHub Pages 站点,JavaScript,0,策略,2026-11-16
+34,鹈鹕骑单车 · Pelican on a Bike,riba2534/claude-opus-5-5-demo,https://fable52.games/play/pelican-on-a-bike,https://lf3-static.bytednsdoc.com/obj/eden-cn/nulojnulwlo/pelican-bike/index.html,three.js,,单文件 HTML（CDN）,HTML,0,休闲,2026-11-16
+35,Evensong,,https://fable52.games/play/evensong,https://evensong-phi.vercel.app/,原生 WebGL,,Vercel 站点,JavaScript,0,动作,2026-11-16
+36,雾锁山门,op7418/guizang-game-skill,https://fable52.games/play/wusuo-shanmen,https://op7418.github.io/guizang-game-skill/,three.js,,GitHub Pages 站点,JavaScript,0,动作,2026-11-16
+37,飞车 3D,riba2534/claude-opus-5-5-demo,https://fable52.games/play/feiche-3d,https://lf3-static.bytednsdoc.com/obj/eden-cn/nulojnulwlo/qqfeiche3d/index.html,three.js,,单文件 HTML（CDN）,HTML,0,竞速,2026-11-16
+38,运输船 3D,riba2534/claude-opus-5-5-demo,https://fable52.games/play/transport-ship-3d,https://lf3-static.bytednsdoc.com/obj/eden-cn/nulojnulwlo/cf-transport-ship/transport-ship.html,three.js,,单文件 HTML（CDN）,HTML,0,FPS,2026-11-16
+39,Open Skies,,https://fable52.games/play/flight-simulator-nfljgw,,three.js,,平台内嵌（依赖在线数据）,JavaScript,0,模拟,2026-11-16
+40,海克斯大乱斗,,https://fable52.games/play/hextech-aram,https://lol.hanyue.io/,原生,,在线多人站点,JavaScript,0,MOBA,2026-11-16
+41,暖光玩具房 · V25,,https://fable52.games/play/warm-toy-room-v25,https://v25.dafeiyugame.site/,原生 WebGL,,作者站点,JavaScript,0,平台,2026-11-16
+42,BREACH · 运输船联机大厅,,https://fable52.games/play/breach-transport-ship-online,https://cf.hanyue.io/,原生,,在线多人站点,JavaScript,0,FPS,2026-11-16
+43,Arcfall Artillery,,https://fable52.games/play/arcfall-artillery-ho7odp,https://arcfall.ez8.tools/,原生,,作者站点,JavaScript,0,回合制,2026-11-16
+44,潮汐战线 Tidemark,CocoSgt/dsh-game-tidemark,https://fable52.games/play/tidemark,https://dsh-game-store.com/games/tidemark/play/,原生,,第三方游戏站 + 开源仓库,JavaScript,0,策略,2026-11-16

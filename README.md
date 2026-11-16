@@ -2,7 +2,7 @@
 
 这是一批由 **Fable 5.2**（AI 辅助编程）在很短时间内生成的网页小游戏合集，题材涵盖开放世界、FPS、RTS、解谜、驾驶、体育、恐怖、仙侠等。技术栈以 Three.js / WebGL、Canvas 2D 与原生 JS 为主，不少作品被压缩成单个 HTML 文件。本仓库将可离线运行的版本归档到 [`games/`](games/)，封面图存于 [`screenshots/`](screenshots/)，并在每条下方注明原始来源与作者。
 
-**收录**：27 款（本地离线归档 16 款，其余为在线演示或源码链接） · 数据快照：2026-11-12
+**收录**：44 款（本地离线归档 18 款，其余为在线演示或源码链接） · 数据快照：2026-11-16
 
 ## 离线运行说明
 
@@ -35,8 +35,8 @@
 
 ### 哪些必须用服务器、哪些可双击
 
-- **必须通过本地服务器打开**：使用 ES Module，或运行时加载本地数据/模型的作品，如 02、10、16、17、19、23、26；双击会被浏览器拦截。
-- **一般可直接双击**：纯内联单文件、经典 `<script>`、运行时不拉取本地资源的作品（如 00、06、07、20、22、25）；若个别浏览器仍拦截，改用服务器即可。
+- **必须通过本地服务器打开**：使用 ES Module，或运行时加载本地数据/模型的作品，如 02、10、16、17、19、23、26、29；双击会被浏览器拦截。
+- **一般可直接双击**：纯内联单文件、经典 `<script>`、运行时不拉取本地资源的作品（如 00、06、07、20、22、25、28）；若个别浏览器仍拦截，改用服务器即可。
 
 ### 其他离线限制
 
@@ -416,9 +416,248 @@
 
 *感谢作者 **anxiangsir.com** 的分享！*
 
+### 28 · Duskline
+
+![Duskline](screenshots/28.jpg)
+
+**中文**：3D 无尽跑酷：黄昏时分，维修机器人沿高架地铁线躲避清扫无人机的追击。纯内联单文件，已离线归档。
+
+**EN**: 3D endless runner: a maintenance robot flees a sweeper drone along an elevated metro line at sunset
+
+<sub>类别：跑酷 · 技术：原生 WebGL · 语言：HTML · 体量：91 KB · 游玩量：85</sub>
+
+[离线归档](games/28/) ｜ [在线试玩](https://fable52.games/play/duskline-vxn7rh)
+
+*感谢作者 **Raúl Berná** 的分享！*
+
+### 29 · 烬堡 EMBERHOLD
+
+![烬堡 EMBERHOLD](screenshots/29.jpg)
+
+**中文**：几何风魂系动作：穿越残破堡垒，在雾门之后对决灰烬王冠。单文件作品，three.js 运行库已随包离线镜像。
+
+**EN**: A geometric souls-like in one HTML file: fight through a ruined keep and duel the Ashen Crown beyond the fog gate.
+
+<sub>类别：动作 · 技术：three.js · 语言：HTML · 体量：182 KB · 游玩量：26</sub>
+
+[离线归档](games/29/) ｜ [在线试玩](https://fable52.games/play/emberhold-xwn1lu)
+
+*感谢作者 **lingki1** 的分享！*
+
+### 30 · MAKINAMON · Versión Pulso
+
+![MAKINAMON · Versión Pulso](screenshots/30.jpg)
+
+**中文**：Game Boy 彩屏风格的西班牙语怪物收集 RPG：集齐 50 只机械生物、赢下六场融合对决，在断电前抵达大工厂。
+
+**EN**: A Game Boy Color-style monster RPG in Spanish: collect 50 machine creatures, win six FUSIBLES and reach the Great Factory before the APAGÓN company.
+
+<sub>类别：RPG · 技术：原生 Retro · 语言：JavaScript · 游玩量：13</sub>
+
+[在线试玩](https://fable52.games/play/makinamon-pulso) ｜ [作者演示站](https://gavilanbe.github.io/makinamon-pulso/) ｜ [源码](https://github.com/gavilanbe/makinamon-pulso)
+
+*感谢作者 **@gavilanbe** 的开源分享！*
+
+### 31 · What the Water Keeps
+
+![What the Water Keeps](screenshots/31.jpg)
+
+**中文**：提灯缓行的乘船漫游：穿过一系列风格迥异的秘境，或随波逐流。放松向探索作品，作者未公开源码。
+
+**EN**: A slow boat ride by lantern light through a chain of very different realms, or let the current carry you.
+
+<sub>类别：探索 · 技术：three.js · 语言：JavaScript · 游玩量：675</sub>
+
+[在线试玩](https://fable52.games/play/what-the-water-keeps) ｜ [作者演示站](https://what-the-water-keeps.vercel.app/)
+
+*感谢作者 **Kevin Ngo** 的分享！*
+
+### 32 · Riftline
+
+![Riftline](screenshots/32.jpg)
+
+**中文**：快节奏浏览器英雄射击：双枪、三段充能传送与三秒回溯；可对战 bot，也可与好友点对点对决。
+
+**EN**: A fast browser hero shooter: twin pistols, a three-charge teleport and a three-second rewind. Practise against bots or duel a friend peer to peer.
+
+<sub>类别：FPS · 技术：three.js · 语言：JavaScript · 游玩量：15</sub>
+
+[在线试玩](https://fable52.games/play/riftline) ｜ [作者演示站](https://wongh26.github.io/claude_fps/) ｜ [源码](https://github.com/wongh26/claude_fps)
+
+*感谢作者 **@wongh26** 的开源分享！*
+
+### 33 · The County
+
+![The County](screenshots/33.jpg)
+
+**中文**：缅因州北部的土豆农场策略游戏：作物在地下生长，直到挖掘当天才知道收获了什么。
+
+**EN**: A potato farm in northern Maine, played like a strategy game. The crop grows underground, and you only find out what you grew on the day you dig.
+
+<sub>类别：策略 · 技术：three.js · 语言：JavaScript · 游玩量：17</sub>
+
+[在线试玩](https://fable52.games/play/the-county) ｜ [作者演示站](https://themizeguy.github.io/fable-5.2-potatobench/) ｜ [源码](https://github.com/TheMizeGuy/fable-5.2-potatobench)
+
+*感谢作者 **@TheMizeGuy** 的开源分享！*
+
+### 34 · 鹈鹕骑单车 · Pelican on a Bike
+
+![鹈鹕骑单车 · Pelican on a Bike](screenshots/34.jpg)
+
+**中文**：戴头盔、系红围巾的鹈鹕骑着复古单车沿海岸捕鱼，单提示生成的程序化休闲小品。
+
+**EN**: A pelican in a helmet and red scarf rides a vintage bike along the coast catching fish: a one-prompt Claude Opus 5.5 build.
+
+<sub>类别：休闲 · 技术：three.js · 语言：HTML · 体量：799 KB</sub>
+
+[在线试玩](https://fable52.games/play/pelican-on-a-bike) ｜ [作者演示站](https://lf3-static.bytednsdoc.com/obj/eden-cn/nulojnulwlo/pelican-bike/index.html) ｜ [源码](https://github.com/riba2534/claude-opus-5-5-demo)
+
+*感谢作者 **@riba2534** 的开源分享！*
+
+### 35 · Evensong
+
+![Evensong](screenshots/35.jpg)
+
+**中文**：沉没大教堂中的一场对决：浏览器内可玩的魂系动作 demo，作者未公开源码。
+
+**EN**: One duel in a drowned cathedral: a souls-like demo that plays in the browser.
+
+<sub>类别：动作 · 技术：原生 WebGL · 语言：JavaScript · 游玩量：397</sub>
+
+[在线试玩](https://fable52.games/play/evensong) ｜ [作者演示站](https://evensong-phi.vercel.app/)
+
+*感谢作者 **evensong-phi.vercel.app** 的分享！*
+
+### 36 · 雾锁山门
+
+![雾锁山门](screenshots/36.jpg)
+
+**中文**：俯视角仙侠动作：攀登雾锁山门，击败守卫，与李苍将军对决。
+
+**EN**: A top-down xianxia action game: climb a misty mountain gate, fight its guards and duel the general Li Cang.
+
+<sub>类别：动作 · 技术：three.js · 语言：JavaScript · 游玩量：238</sub>
+
+[在线试玩](https://fable52.games/play/wusuo-shanmen) ｜ [作者演示站](https://op7418.github.io/guizang-game-skill/) ｜ [源码](https://github.com/op7418/guizang-game-skill)
+
+*感谢作者 **@op7418** 的开源分享！*
+
+### 37 · 飞车 3D
+
+![飞车 3D](screenshots/37.jpg)
+
+**中文**：仿 QQ 飞车的 3D 卡丁车竞速：漂移蓄能、小喷、双喷、氮气与道具赛，四条赛道。
+
+**EN**: A fan-made 3D kart racer in the style of QQ Speed: drift charging, mini-boosts, double boosts, nitro and item races on four tracks.
+
+<sub>类别：竞速 · 技术：three.js · 语言：HTML · 体量：701 KB · 游玩量：156</sub>
+
+[在线试玩](https://fable52.games/play/feiche-3d) ｜ [作者演示站](https://lf3-static.bytednsdoc.com/obj/eden-cn/nulojnulwlo/qqfeiche3d/index.html) ｜ [源码](https://github.com/riba2534/claude-opus-5-5-demo)
+
+*感谢作者 **@riba2534** 的开源分享！*
+
+### 38 · 运输船 3D
+
+![运输船 3D](screenshots/38.jpg)
+
+**中文**：仿 CF 经典运输船地图的浏览器重制：与 bot 组队死斗，单提示生成。
+
+**EN**: A fan-made browser remake of CrossFire's classic Transport Ship map: team deathmatch against bots, built from one prompt by Claude Opus 5.5.
+
+<sub>类别：FPS · 技术：three.js · 语言：HTML · 体量：842 KB · 游玩量：105</sub>
+
+[在线试玩](https://fable52.games/play/transport-ship-3d) ｜ [作者演示站](https://lf3-static.bytednsdoc.com/obj/eden-cn/nulojnulwlo/cf-transport-ship/transport-ship.html) ｜ [源码](https://github.com/riba2534/claude-opus-5-5-demo)
+
+*感谢作者 **@riba2534** 的开源分享！*
+
+### 39 · Open Skies
+
+![Open Skies](screenshots/39.jpg)
+
+**中文**：环球飞行模拟：真实机场、真实地形与实时天气，循序渐进的飞行教学；地形瓦片、天气与建筑数据均运行时在线拉取，无法完整离线。
+
+**EN**: Fly anywhere on Earth: real airports, real terrain and live weather, with a flight school that teaches you one skill at a time
+
+<sub>类别：模拟 · 技术：three.js · 语言：JavaScript · 体量：5.2 MB · 游玩量：69</sub>
+
+[在线试玩](https://fable52.games/play/flight-simulator-nfljgw)
+
+*感谢作者 **ari neuwirth** 的分享！*
+
+### 40 · 海克斯大乱斗
+
+![海克斯大乱斗](screenshots/40.jpg)
+
+**中文**：同人 ARAM 竞技场：选英雄在冰桥之上在线大乱斗，多人联机需服务器，未公开源码。
+
+**EN**: Pick a champion and brawl online on a frozen bridge in this fan-made ARAM-style arena.
+
+<sub>类别：MOBA · 技术：原生 · 语言：JavaScript · 游玩量：113</sub>
+
+[在线试玩](https://fable52.games/play/hextech-aram) ｜ [作者演示站](https://lol.hanyue.io/)
+
+*感谢作者 **hanyue.io** 的分享！*
+
+### 41 · 暖光玩具房 · V25
+
+![暖光玩具房 · V25](screenshots/41.jpg)
+
+**中文**：合作向平台跳跃 demo：在暖光玩具房里奔跑、跳跃、搬运玩具，集齐五颗星星。
+
+**EN**: A co-op-style platformer demo: run, jump and haul toys around a warm-lit playroom to collect five stars.
+
+<sub>类别：平台 · 技术：原生 WebGL · 语言：JavaScript · 游玩量：59</sub>
+
+[在线试玩](https://fable52.games/play/warm-toy-room-v25) ｜ [作者演示站](https://v25.dafeiyugame.site/)
+
+*感谢作者 **dafeiyugame.site** 的分享！*
+
+### 42 · BREACH · 运输船联机大厅
+
+![BREACH · 运输船联机大厅](screenshots/42.jpg)
+
+**中文**：运输船地图的在线多人 FPS 大厅：输入昵称即可加入对战，联机需后端服务器，未公开源码。
+
+**EN**: Online multiplayer FPS lobby on a transport-ship map: pick a name and jump in.
+
+<sub>类别：FPS · 技术：原生 · 语言：JavaScript · 游玩量：62</sub>
+
+[在线试玩](https://fable52.games/play/breach-transport-ship-online) ｜ [作者演示站](https://cf.hanyue.io/)
+
+*感谢作者 **hanyue.io** 的分享！*
+
+### 43 · Arcfall Artillery
+
+![Arcfall Artillery](screenshots/43.jpg)
+
+**中文**：浮空裂岛上的回合制炮击：判断风向、调整角度，把对手击落或打穿地板。
+
+**EN**: Turn-based artillery on crumbling sky islands: read the wind, set your angle and knock the other fighter out, or drop it through the floor.
+
+<sub>类别：回合制 · 技术：原生 · 语言：JavaScript · 游玩量：18</sub>
+
+[在线试玩](https://fable52.games/play/arcfall-artillery-ho7odp) ｜ [作者演示站](https://arcfall.ez8.tools/)
+
+*感谢作者 **K 2 3 6 3** 的分享！*
+
+### 44 · 潮汐战线 Tidemark
+
+![潮汐战线 Tidemark](screenshots/44.jpg)
+
+**中文**：高级战争风格回合制策略：33 个陆海空单位、29 名指挥官与六幕战役，MIT 开源。
+
+**EN**: Turn-based strategy in the spirit of Advance Wars: 33 land, sea and air units, 29 commanders and a six-act campaign, open source under MIT.
+
+<sub>类别：策略 · 技术：原生 · 语言：JavaScript · 游玩量：33</sub>
+
+[在线试玩](https://fable52.games/play/tidemark) ｜ [作者演示站](https://dsh-game-store.com/games/tidemark/play/) ｜ [源码](https://github.com/CocoSgt/dsh-game-tidemark)
+
+*感谢作者 **@CocoSgt** 的开源分享！*
+
 ## 归档与来源说明
 
 - 游戏名称、源码仓库、平台页、演示站、技术栈与分类等原始字段见 [`games.csv`](games.csv)。
 - 离线归档自作者公开演示站镜像；封面图来自 Fable 5.2 平台缩略图。版权与著作权归各原作者所有，本仓库仅作学习与收藏用途。
 - 仅提供源码、暂无公开演示的条目（01 / 04 / 05 / 11 / 24），README 中仅保留源码链接。
 - 08 为 Node + WebSocket 多人联机服务，12–15 的游戏本体由 Fable 平台流式提供、无独立公开演示站，均未做本地静态归档，仅保留封面图与在线 / 源码链接。
+- 39（Open Skies）运行时在线拉取地形瓦片、实时天气与 OSM 建筑数据，无法完整离线；40、42 为在线多人联机，需后端服务器，均仅作在线条目归档。
