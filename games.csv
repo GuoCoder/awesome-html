@@ -43,3 +43,4 @@ id,name,repo,play_url,author_demo,render,build,delivery,language,stars,category,
 42,BREACH · 运输船联机大厅,,https://fable52.games/play/breach-transport-ship-online,https://cf.hanyue.io/,原生,,在线多人站点,JavaScript,0,FPS,2026-11-16
 43,Arcfall Artillery,,https://fable52.games/play/arcfall-artillery-ho7odp,https://arcfall.ez8.tools/,原生,,作者站点,JavaScript,0,回合制,2026-11-16
 44,潮汐战线 Tidemark,CocoSgt/dsh-game-tidemark,https://fable52.games/play/tidemark,https://dsh-game-store.com/games/tidemark/play/,原生,,第三方游戏站 + 开源仓库,JavaScript,0,策略,2026-11-16
+45,Ouro,CatanCats/Ouro,https://br8t.com/ouro/,,WebAssembly + WebGPU,C→WASM；在线版 Rust 联网,离线单文件自包含；在线多人需服务端,JavaScript,,io 贪吃蛇,2026-11-16

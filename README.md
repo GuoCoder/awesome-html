@@ -4,7 +4,7 @@
 
 **仓库地址**：[GuoCoder/awesome-html-games](https://github.com/GuoCoder/awesome-html-games)
 
-**收录**：44 款（本地离线归档 18 款，其余为在线演示或源码链接） · 数据快照：2026-11-16
+**收录**：45 款（本地离线归档 19 款，其余为在线演示或源码链接） · 数据快照：2026-11-16
 
 ## 离线运行说明
 
@@ -38,7 +38,7 @@
 ### 哪些必须用服务器、哪些可双击
 
 - **必须通过本地服务器打开**：使用 ES Module，或运行时加载本地数据/模型的作品，如 02、10、16、17、19、23、26、29；双击会被浏览器拦截。
-- **一般可直接双击**：纯内联单文件、经典 `<script>`、运行时不拉取本地资源的作品（如 00、06、07、20、22、25、28）；若个别浏览器仍拦截，改用服务器即可。
+- **一般可直接双击**：纯内联单文件、经典 `<script>`、运行时不拉取本地资源的作品（如 00、06、07、20、22、25、28、45）；若个别浏览器仍拦截，改用服务器即可。
 
 ### 其他离线限制
 
@@ -655,6 +655,20 @@
 [在线试玩](https://fable52.games/play/tidemark) ｜ [作者演示站](https://dsh-game-store.com/games/tidemark/play/) ｜ [源码](https://github.com/CocoSgt/dsh-game-tidemark)
 
 *感谢作者 **@CocoSgt** 的开源分享！*
+
+### 45 · Ouro
+
+![Ouro](screenshots/45.jpg)
+
+**中文**：开源 slither.io 风格贪吃蛇 io 游戏：吞食成长、围截对手，含五个难度等级的 AI bot 与小地图，支持鼠标/键盘/触屏。模拟逻辑编译为 WebAssembly，WebGPU 渲染（WebGL2 后备）；离线版单文件自包含，在线版可与他人和 bot 同场竞技。
+
+**EN**: An open-source slither.io-style browser io game: eat to grow and cut off rivals, with five AI bot tiers, a minimap and mouse/keyboard/touch controls. A WebAssembly simulation and WebGPU renderer (WebGL 2 backup); the offline build is a single self-contained file, while the online version pits you against other players and bots.
+
+<sub>类别：io 贪吃蛇 · 技术：WebAssembly + WebGPU · 语言：JavaScript · 体量：160 KB</sub>
+
+[离线归档](games/45/) ｜ [在线试玩](https://br8t.com/ouro/) ｜ [源码](https://github.com/CatanCats/Ouro)
+
+*感谢作者 **@CatanCats** 的开源分享！*
 
 ## 归档与来源说明
 

@@ -1,0 +1,1664 @@
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#070a12">
+<title>Ouro offline – free open-source slither.io-style snake game on your device</title>
+<meta name="description" content="Ouro offline: a free, open-source slither.io-style snake game that runs entirely on your device. Grow by eating and cut off 60 AI snakes in five difficulty tiers; works without internet. Super efficient: WebAssembly and WebGPU, runs smoothly even on old laptops and phones. No download, no sign-up.">
+<meta name="keywords" content="snake game, slither.io, slither io, slither.io clone, slither io unblocked, open source slither.io, io game, multiplayer snake, browser game, html5 game, free online game, snake io, webgpu game, webassembly game, lightweight game">
+<meta name="author" content="CatanCats">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://br8t.com/ouro/offline.html">
+<meta name="application-name" content="Ouro">
+<meta name="apple-mobile-web-app-title" content="Ouro">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<!-- link previews (Discord, WhatsApp, X, Facebook...) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://br8t.com/ouro/offline.html">
+<meta property="og:title" content="Ouro – open-source slither.io-style snake game, play now">
+<meta property="og:description" content="Eat, grow and cut off 60 AI snakes, from Rookie to Legend. Free, open source, instant in your browser, and light enough for any device.">
+<meta property="og:site_name" content="Ouro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ouro – open-source slither.io-style snake game, play now">
+<meta name="twitter:description" content="Eat, grow and cut off 60 AI snakes, from Rookie to Legend. Free, open source, instant in your browser, and light enough for any device.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%23070a12'/%3E%3Cpath d='M24 8a16 16 0 1 1-13.9 8' fill='none' stroke='%2334d399' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='14.8' cy='10.9' r='5.8' fill='%2338bdf8'/%3E%3C/svg%3E">
+<!-- structured data: lets search engines show it as a game -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"VideoGame","name":"Ouro","alternateName":["Ouro at br8t.com","Serpent.io"],
+ "url":"https://br8t.com/ouro/offline.html",
+ "description":"A free, open-source slither.io-style snake game that runs in any browser. Play online with other people and 60 AI snakes in five difficulty tiers, or offline on your own device. A WebAssembly simulation and WebGPU rendering (WebGL 2 as backup) keep it fast and light on CPU, GPU and memory.",
+ "genre":["Arcade","IO game","Snake"],"gamePlatform":["Web browser","PC","Mobile"],"applicationCategory":"GameApplication",
+ "operatingSystem":"Any","playMode":"SinglePlayer","isAccessibleForFree":true,"inLanguage":"en",
+ "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+ "license":"https://github.com/CatanCats/Serpent.io/blob/main/LICENCE",
+ "sameAs":["https://br8t.com/ouro/","https://github.com/CatanCats/Serpent.io","https://catancats.github.io/Serpent.io/"],
+ "author":{"@type":"Organization","name":"CatanCats","url":"https://github.com/CatanCats"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070a12;
+    --panel: rgba(12, 17, 30, .86);
+    --line: rgba(148, 163, 184, .14);
+    --text: #e6ebf5;
+    --dim: #8391aa;
+    --accent: #34d399;
+    --accent2: #38bdf8;
+    --danger: #fb7185;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(--text);
+    font-family: Outfit, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-user-select: none; user-select: none; touch-action: none; }
+  canvas#gl { position: fixed; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; }
+
+  .glass { background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.35); }
+
+  /* HUD */
+  .hud { position: fixed; pointer-events: none; transition: opacity .3s; }
+  body:not(.playing) .hud.game { opacity: 0; }
+  #stats { left: max(16px, env(safe-area-inset-left)); bottom: max(16px, env(safe-area-inset-bottom)); padding: 14px 18px; min-width: 180px; }
+  #stats .label { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+  #stats .big { font-size: 36px; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums;
+    background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  #stats .sub { font-size: 14px; color: var(--dim); margin-top: 4px; font-variant-numeric: tabular-nums; }
+  #stats .sub b { color: var(--text); font-weight: 600; }
+
+  #board { right: max(16px, env(safe-area-inset-right)); top: max(16px, env(safe-area-inset-top)); min-width: 220px; padding: 12px 14px;
+    transform: scale(var(--lbs, 1)); transform-origin: top right; } /* size: the − / + buttons, remembered */
+  #board h3 { display: flex; align-items: center; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); font-weight: 600; margin-bottom: 8px; }
+  #board ol { list-style: none; padding: 0; font-size: 14px; font-variant-numeric: tabular-nums; }
+  #board li { display: flex; gap: 8px; align-items: center; padding: 2px 0; color: #c3cbe0; }
+  #board li .n { width: 18px; color: var(--dim); font-size: 12px; }
+  #board li .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  #board li .nm { flex: 1; white-space: nowrap; } /* whole names: the board grows to fit */
+  .lbsz { margin-left: auto; padding-left: 12px; display: flex; gap: 4px; pointer-events: auto; }
+  .lbsz button { width: 22px; height: 20px; padding: 0; border: none; border-radius: 6px; background: rgba(255,255,255,.08); color: var(--dim); font: 600 14px/20px inherit; font-family: inherit; cursor: pointer; }
+  .lbsz button:hover { color: var(--text); background: rgba(255,255,255,.14); }
+  #board li.me { color: #fff; font-weight: 600; }
+  #board li.me .nm::after { content: " •"; color: var(--accent); }
+  .tg { flex: none; font-size: 8.5px; font-weight: 600; letter-spacing: .08em; padding: 1px 5px; border-radius: 6px; } /* the level's name in its colour */
+  .tg::after { content: attr(data-l); }
+  /* phones / touch screens below full size: the level as one coloured letter, so whole snake names fit */
+  #board.short .tg { width: 16px; padding: 0; text-align: center; font-size: 10px; font-weight: 800; letter-spacing: 0; line-height: 15px; border-radius: 5px; }
+  #board.short .tg::after { content: attr(data-s); }
+  /* made narrow by hand (tgS, tgX): the same one letter, then no badge at all, so the names keep the room */
+  #board.tgS .tg { width: 16px; padding: 0; text-align: center; font-size: 10px; font-weight: 800; letter-spacing: 0; line-height: 15px; border-radius: 5px; }
+  #board.tgS .tg::after { content: attr(data-s); }
+  #board.tgX .tg { display: none; }
+  #board.tgX li .sc { min-width: 0; }
+  #board { z-index: 5; } /* above the start page: usable there too */
+  @media (max-width: 640px) { /* start page on a phone: the card starts below the open leaderboard */
+    body.lbOpen:not(.playing) .screen { overflow-y: auto; padding-top: 150px; place-items: start center; }
+  }
+  /* resize handles: left edge (width), bottom edge (height), bottom-left corner (both) */
+  .lbE { position: absolute; pointer-events: auto; touch-action: none; }
+  .lbE[data-rs="w"] { left: -5px; top: 34px; bottom: 16px; width: 12px; cursor: ew-resize; }
+  .lbE[data-rs="s"] { bottom: -5px; left: 16px; right: 10px; height: 12px; cursor: ns-resize; }
+  #board ol { overflow: hidden; }
+  #board.sized li .nm { overflow: hidden; text-overflow: ellipsis; } /* made narrower by hand: long names end in … */
+  #board.sized { min-width: 0; }
+  /* × folds it to the title bar */
+  #board.closed { min-width: 0; padding-bottom: 10px; }
+  #board.closed #lb, #board.closed .lbE, #board.closed #lbGrip { display: none; }
+  #board.closed h3 { margin-bottom: 0; }
+  #board.closed.sized { width: auto !important; }
+  #lbGrip { position: absolute; left: -2px; bottom: -2px; width: 22px; height: 22px; pointer-events: auto; cursor: nesw-resize; touch-action: none; }
+  #lbGrip::before { content: ""; position: absolute; left: 6px; bottom: 6px; width: 8px; height: 8px; border-left: 2px solid var(--dim); border-bottom: 2px solid var(--dim); border-radius: 0 0 0 3px; opacity: .7; }
+  .tg.t0 { color: #6ee7b7; background: rgba(52,211,153,.12); }
+  .tg.t1 { color: #7dd3fc; background: rgba(56,189,248,.12); }
+  .tg.t2 { color: #fbbf24; background: rgba(251,191,36,.12); }
+  .tg.t3 { color: #fb7185; background: rgba(251,113,133,.14); }
+  .tg.t4 { color: #1c1400; background: linear-gradient(90deg,#fde68a,#f59e0b); }
+  .tg.you { color: #04130d; background: linear-gradient(90deg,#34d399,#38bdf8); }
+  #board li .sc { min-width: 42px; text-align: right; }
+
+  /* the minimap itself is drawn on the game canvas, underneath this ring */
+  #mini { right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); width: 170px; height: 170px; border-radius: 50%;
+    border: 1px solid var(--line); box-shadow: 0 10px 40px rgba(0,0,0,.35); }
+
+  #perf { left: max(16px, env(safe-area-inset-left)); top: max(16px, env(safe-area-inset-top)); padding: 8px 12px; max-width: calc(100vw - 300px); font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--dim); border-radius: 10px; }
+  #perf b { color: var(--text); font-weight: 500; }
+  #perf.off { display: none; }
+  #perf { z-index: 60; } /* in front of the start page and the game-over card when on */
+  .overBtns { display: flex; gap: 10px; margin-top: 10px; }
+  .overBtns button { flex: 1; padding: 11px 10px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.06); color: var(--text);
+    font: 600 14px inherit; font-family: inherit; cursor: pointer; }
+  .overBtns button:hover { background: rgba(255,255,255,.12); }
+
+  /* Menus */
+  .screen { position: fixed; inset: 0; display: grid; place-items: center; padding: 16px; transition: opacity .35s, visibility .35s; }
+  .screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  .card { width: min(420px, 100%); padding: 32px 28px 26px; text-align: center; }
+  .logo { font-size: clamp(44px, 11vw, 64px); font-weight: 800; letter-spacing: -.03em; line-height: 1;
+    background: linear-gradient(100deg, #34d399 0%, #38bdf8 45%, #a78bfa 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .logo span { color: var(--text); -webkit-text-fill-color: var(--text); opacity: .9; }
+  .tag { margin: 10px 0 24px; color: var(--dim); font-size: 15px; }
+  input#name { width: 100%; font: inherit; font-size: 17px; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line);
+    background: rgba(2,6,16,.55); color: var(--text); outline: none; text-align: center; transition: border-color .2s, box-shadow .2s; -webkit-user-select: text; user-select: text; }
+  input#name:focus { border-color: rgba(56,189,248,.6); box-shadow: 0 0 0 4px rgba(56,189,248,.15); }
+  .skins { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 18px 0 20px; }
+  .skin { width: 28px; height: 28px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; padding: 0;
+    box-shadow: inset 0 -4px 8px rgba(0,0,0,.35); transition: transform .15s, border-color .15s; }
+  .skin:hover { transform: scale(1.12); }
+  .skin[aria-pressed="true"] { border-color: #fff; transform: scale(1.15); }
+  /* the last swatch: a colour picker (rainbow until a colour is chosen) */
+  .skin.pick { position: relative; display: inline-block; overflow: hidden; background: conic-gradient(#f43f5e, #f59e0b, #a3e635, #22d3ee, #818cf8, #e879f9, #f43f5e); }
+  .skin.pick input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; border: none; padding: 0; }
+  .skin.pick::after { content: "+"; position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font: 700 15px/1 inherit; font-family: inherit; text-shadow: 0 1px 3px #000; pointer-events: none; }
+  button.play { width: 100%; font: inherit; font-weight: 800; font-size: 18px; letter-spacing: .04em; padding: 15px; border: 0; border-radius: 12px; cursor: pointer; color: #04130d;
+    background: linear-gradient(100deg, #34d399, #38bdf8); box-shadow: 0 8px 30px rgba(52,211,153,.3); transition: transform .12s, box-shadow .2s, filter .2s; }
+  button.play:hover { filter: brightness(1.08); box-shadow: 0 10px 36px rgba(56,189,248,.35); }
+  button.play:active { transform: scale(.98); }
+  .keys { margin-top: 18px; color: var(--dim); font-size: 13px; line-height: 1.9; }
+  kbd { font: 12px ui-monospace, monospace; padding: 2px 7px; border-radius: 6px; border: 1px solid var(--line); background: rgba(255,255,255,.04); color: #cbd5e1; }
+  .rsw { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 10px; font-size: 12px; color: var(--dim); }
+  .rsw span { margin-right: 4px; letter-spacing: .08em; text-transform: uppercase; font-size: 11px; }
+  .rsw button { font: inherit; font-size: 12px; padding: 5px 10px; border-radius: 8px; border: 1px solid var(--line); background: rgba(255,255,255,.03); color: #cbd5e1; cursor: pointer; }
+  .rsw button[aria-pressed="true"] { border-color: rgba(56,189,248,.7); color: #fff; background: rgba(56,189,248,.14); }
+  .slow { margin-top: 12px; padding: 10px 12px; border-radius: 10px; font-size: 12.5px; line-height: 1.5; color: #fde68a; background: rgba(251,191,36,.1); border: 1px solid rgba(251,191,36,.3); text-align: left; }
+  .tech { margin-top: 14px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #56627a; }
+
+  .over h2 { font-size: 34px; font-weight: 800; letter-spacing: -.02em; }
+  .over .by { color: var(--dim); margin: 6px 0 20px; min-height: 1.4em; }
+  .over .by b { color: var(--danger); font-weight: 600; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 22px; }
+  .grid3 div { padding: 12px 6px; border-radius: 12px; background: rgba(2,6,16,.45); border: 1px solid var(--line); }
+  .grid3 b { display: block; font-size: 24px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .grid3 span { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+  .new { color: var(--accent) !important; }
+  a.mode { display: inline-block; margin-top: 12px; font-size: 14px; color: var(--accent2); text-decoration: none; border-bottom: 1px solid rgba(56,189,248,.35); }
+  a.mode:hover { color: #fff; }
+  a.mode.dl { display: block; width: fit-content; margin: 8px auto 0; font-size: 13px; }
+
+  @media (max-width: 640px) {
+    #board { min-width: 0; padding: 10px 12px; }
+    #board li { font-size: 12px; }
+    #board:not(.sized) li:nth-child(n+6) { display: none; }
+    #mini { width: 112px; height: 112px; }
+    #stats { padding: 10px 14px; min-width: 0; }
+    #stats .big { font-size: 28px; }
+    #perf { display: none; }
+  }
+  /* Ouro look. All of it static (no animation, no blur, nothing drawn per frame), so it costs nothing while playing. */
+  .brand { display: flex; align-items: center; justify-content: center; gap: 14px; }
+  .brand svg { width: clamp(52px, 13vw, 70px); height: clamp(52px, 13vw, 70px); flex: none; filter: drop-shadow(0 6px 16px rgba(56,189,248,.28)); }
+  .brand .logo { text-align: left; }
+  .brand .at { margin-top: 7px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; color: var(--dim); }
+  .glass { box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06); }
+  .card { position: relative; background-image: linear-gradient(180deg, rgba(56,189,248,.07), rgba(56,189,248,0) 38%); }
+  .card::before { content: ""; position: absolute; left: 22%; right: 22%; top: -1px; height: 1px; background: linear-gradient(90deg, transparent, #38bdf8, #34d399, transparent); }
+  /* no full-screen darkening layer here: the game draws its floor darker behind these screens (free) */
+  #board h3 { color: #a5b1c9; }
+  #board li:nth-child(-n+3) .n { font-weight: 800; }
+  #board li:nth-child(1) .n { color: #fbbf24; }
+  #board li:nth-child(2) .n { color: #cbd5e1; }
+  #board li:nth-child(3) .n { color: #f59e0b; opacity: .8; }
+  .over h2 { background: linear-gradient(100deg, #fb7185, #f59e0b); -webkit-background-clip: text; background-clip: text; color: transparent; }
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+
+<div id="perf" class="hud glass off"></div>
+<div id="stats" class="hud game glass">
+  <div class="label">Length</div>
+  <div class="big" id="len">10</div>
+  <div class="sub">Rank <b id="rank">–</b> of <b id="total">–</b> · Kills <b id="kills">0</b></div>
+</div>
+<div id="board" class="hud glass"><h3>Leaderboard<span class="lbsz"><button data-d="-1" title="Smaller leaderboard" aria-label="Smaller leaderboard">−</button><button data-d="1" title="Bigger leaderboard" aria-label="Bigger leaderboard">+</button><button id="lbX" title="Hide the leaderboard" aria-label="Hide or show the leaderboard">×</button></span></h3><ol id="lb"></ol><div class="lbE" data-rs="w" title="Drag to resize (double-click: fit)"></div><div class="lbE" data-rs="s" title="Drag to resize (double-click: fit)"></div><div id="lbGrip" data-rs="ws" title="Drag to resize (double-click: fit)"></div></div>
+<div id="mini" class="hud game"></div>
+
+<div id="menu" class="screen">
+  <div class="card glass">
+    <div class="brand"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="og" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset=".55" stop-color="#38bdf8"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs><path d="M24 7a17 17 0 1 1-14.7 8.5" fill="none" stroke="url(#og)" stroke-width="7" stroke-linecap="round"/><circle cx="14.2" cy="10.1" r="6.2" fill="#34d399"/><circle cx="16.3" cy="8.6" r="1.7" fill="#070a12"/></svg><div><div class="logo">ouro</div><div class="at">at br8t.com</div></div></div>
+
+    <p class="tag">Eat. Grow. Cut them off.</p>
+    <input id="name" maxlength="16" placeholder="Your nickname (blank: a random one)" autocomplete="off" spellcheck="false">
+    <div class="skins" id="skins" role="group" aria-label="Skin"></div>
+    <button class="play" id="play">PLAY</button>
+    <a class="mode" href="./">← Play online with others</a>
+    <a class="mode dl" id="dl" href="offline.html" download="ouro-offline.html">⬇ Download to play without internet</a>
+    <div class="keys"><kbd>Mouse</kbd> steer · <kbd>Click</kbd>/<kbd>Space</kbd> boost<br><kbd>←</kbd><kbd>→</kbd> steer with keys · Touch: drag to steer, 2 fingers boost · <kbd>P</kbd> perf</div>
+    <div class="rsw" id="qsw" role="group" aria-label="Quality">
+      <span>Quality</span>
+      <button data-q="sharp">Sharp</button><button data-q="balanced">Balanced</button><button data-q="fast">Fast</button>
+    </div>
+    <div class="rsw" id="rsw" role="group" aria-label="Renderer">
+      <span>Renderer</span>
+      <button data-r="auto">Auto</button><button data-r="webgpu">WebGPU</button><button data-r="webgl">WebGL</button>
+    </div>
+    <div class="tech"><span id="tech"></span> · now: <span id="rnow">…</span></div>
+    <div class="slow" id="slowNote" hidden></div>
+  </div>
+</div>
+
+<div id="over" class="screen hidden">
+  <div class="card glass over">
+    <h2>You were eaten</h2>
+    <p class="by" id="by"></p>
+    <div class="grid3">
+      <div><b id="oLen">0</b><span>Length</span></div>
+      <div><b id="oKills">0</b><span>Kills</span></div>
+      <div><b id="oBest">0</b><span>Best</span></div>
+    </div>
+    <button class="play" id="again">PLAY AGAIN</button>
+    <div class="overBtns"><button id="toStart">Start screen</button><button id="sheet" title="A picture with this run's numbers and the moment you died">⬇ Information sheet</button></div>
+    <div class="keys"><kbd>Enter</kbd> to respawn · <kbd>Esc</kbd> start screen</div>
+  </div>
+</div>
+
+<script>
+"use strict";
+const WASM_BASE64 = "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";
+/* ============================================================================
+   WebGL 2 renderer (fallback when WebGPU is unavailable).
+   Interface shared with the WebGPU renderer:
+     name, passNames, canTime, gpuMs, passMs,
+     resize(vw, vh), placeMini(cx, cy, rPx), labelSlot(canvas, x, y), draw(frameNo, playing, timing)
+   ========================================================================== */
+/* Floor layout, shared by both renderers (this file is inlined before render-gpu.js). */
+const FLOOR_BASE = [.052, .065, .104];         // the floor colour: one colour everywhere inside the world
+const FLOOR_DARK = [.008, .009, .014];         // outside the world: darkness
+const FLOOR_RIM_COL = [.62, .17, .25];         // the world's edge: a thin red line
+// Honeycomb DOTS (one at each hex corner, 2 CSS px square): ~17x fewer pixels than lines, so
+// they can be brighter, and their colour tells where you are (free: worked out per dot).
+const FLOOR_DOT = [.21, .25, .37];             // dots: well lighter than the floor
+const FLOOR_DOT_EDGE = [.52, .14, .18];        // the last 1600 units before the edge: turning red
+const FOOD_GLOW = "1.7";                        // food halo radius, in pellet radii
+const FLOOR_RING_SEG = 128;                    // segments of each ring, spread over the part of the edge in view only
+const FLOOR_RING_SPAN = 1000;                  // landmark: every this many units from the middle, a circle of brighter dots
+const FLOOR_HX = (46 * Math.sqrt(3)).toFixed(4), FLOOR_HY = "46.";  // hex lattice period (world units)
+/* The floor is one colour, so the screen is simply cleared to it (nearly free). The rest
+   is worked out by the vertex shaders from the Frame block (nothing extra is uploaded);
+   the CPU only picks the clear colour and the hex instance count
+   (from the Frame block [camX camY halfW halfH | px ...| .. WR]). */
+function floorPlan(fb, p) {
+  const cx = fb[0], cy = fb[1], hw = fb[2], hh = fb[3], px = fb[4], WR = fb[10], lit = 1 - fb[11]; // [11]: darker behind the start page
+  const d = Math.hypot(cx, cy), reach = Math.hypot(hw, hh) + 40;
+  p.out = d > WR;                                               // camera centre outside the world: clear to darkness
+  p.edge = d + reach > WR - Math.max(2, px * 1.5) && d - reach < WR + 32; // the edge on screen: else no ring draws at all
+  const c = p.clear || (p.clear = [0, 0, 0, 1]), src = p.out ? FLOOR_DARK : FLOOR_BASE;
+  for (let i = 0; i < 3; i++) c[i] = src[i] * lit;
+  const fade = 1 - Math.min(1, Math.max(0, (px - 3) / 2));      // zoomed far out: lines fade, then are skipped
+  // columns and rows with a margin; the shader derives its own column count, which may
+  // differ by one through rounding: the margin keeps the screen covered either way
+  // dots: 4 per hex cell (2 lattices x 2 owned corners), 6 vertices each, in ONE plain draw
+  p.hexes = fade > 0 ? (Math.ceil((2 * hw) / (46 * Math.sqrt(3))) + 3) * (Math.ceil((2 * hh) / 46) + 4) * 4 : 0;
+  if (p.hexes > 60000) p.hexes = 0;                             // (only when zoomed out enormously, e.g. after death)
+  return p;
+}
+
+function createGL(canvas, E) {
+  const gl = canvas.getContext("webgl2", { antialias: false, alpha: false, depth: false, stencil: false,
+    premultipliedAlpha: true, powerPreference: "high-performance" });
+  if (!gl) return null;
+  const { NS, RING } = E;
+  // Skin palette in a uniform buffer, looked up once per VERTEX and handed to the pixels
+  // as flat colours. (Indexing a constant array per pixel is a slow path on Direct3D,
+  // which runs WebGL in Edge/Chrome on Windows.)
+  const PAL = `layout(std140) uniform Pal { vec4 uPal[256]; };`; // 128 main colours, then 128 stripe colours
+  // Per-frame values shared by every program: ONE uniform-buffer upload per frame.
+  // highp members: fragment shaders below default to mediump (half precision on mobile GPUs)
+  const FRAME = `layout(std140) uniform Frame { highp vec4 uCamHalf; highp vec4 uPxTime; highp vec4 uResWR; };`;
+
+  /* Floor: every part is ONE flat colour, and almost no pixels are drawn at all.
+     1. The screen is cleared to the floor colour (or to darkness when the camera is
+        outside the world). A clear is nearly free: GPUs mark whole blocks as "clear
+        colour" instead of writing every pixel.
+     2. Hex outlines: thin quads exactly one pixel wide in one flat colour.
+     3. Only when the world's edge is on screen: a thin red line along it, and the other
+        side of it (darkness, or the floor when the camera is outside) in one flat colour.
+     No floor pixel does any maths or blending: each shape's colour comes from its
+     vertex shader. Ring shapes (instance = kind):
+       0 inside the world, floor colour (camera outside)   1 thin dark ring past the edge (camera outside)
+       2 the red edge line                                   3 darkness outside the world (camera inside)
+     The dark rings also hide hex lines poking past the edge. A shape that is off screen
+     collapses to nothing in the vertex shader. */
+  const FLOOR_RIM = `
+  float rimHW(){ return max(2.,uPxTime.x*1.5); }                  // half width of the edge line (world units)
+  float lineFade(){ return 1.-clamp((uPxTime.x-3.)*.5,0.,1.); }  // zoomed far out: lines fade out`;
+  const RING_VS = `#version 300 es
+  ${FRAME}
+  ${FLOOR_RIM}
+  uniform int uFirst;                                           // kind of instance 0 (no base instance in WebGL)
+  flat out vec3 vCol;
+  void main(){
+    int q=gl_VertexID/6, k=gl_VertexID-q*6, kind=gl_InstanceID+uFirst;
+    int da=(k==1||k==4||k==5)?1:0, dr=(k==2||k==3||k==5)?1:0;
+    float d=length(uCamHalf.xy), reach=length(uCamHalf.zw), WRr=uResWR.z, hw=rimHW();
+    float rIn=WRr-hw, rOut=WRr+hw, rHide=WRr+32.;
+    vec2 R; bool vis;
+    if(kind==0){ R=vec2(0.,rIn); vis=d-reach<rIn; vCol=vec3(${FLOOR_BASE.join(",")}); }
+    else if(kind==1){ R=vec2(rOut,rHide); vis=d+reach>rOut && d-reach<rHide; vCol=vec3(${FLOOR_DARK.join(",")}); }
+    else if(kind==2){ R=vec2(rIn,rOut); vis=d+reach>rIn && d-reach<rOut; vCol=vec3(${FLOOR_RIM_COL.join(",")}); }
+    else { R=vec2(rOut,d+reach+8.); vis=d+reach>rOut; vCol=vec3(${FLOOR_DARK.join(",")}); }
+    // only the arc in view (kinds 1-3: the ring is thin, or the camera is inside it, so the
+    // arc of its inner radius within reach + its width covers every visible piece); kind 0: whole
+    float ca=atan(uCamHalf.y,uCamHalf.x), re=reach+(R.y-R.x>64.?0.:R.y-R.x)+4., r0=max(R.x,1.);
+    float cs=(d*d+r0*r0-re*re)/(2.*max(d,1.)*r0), span=(kind==0||cs<=-1.)?3.14159265:acos(min(cs,1.));
+    float a=ca+(float(q+da)*${(2 / FLOOR_RING_SEG).toFixed(8)}-1.)*span, r=dr==1?R.y:R.x;
+    vec2 w=vec2(cos(a),sin(a))*r, c=(w-uCamHalf.xy)/uCamHalf.zw;
+    gl_Position=vis?vec4(c.x,-c.y,0,1):vec4(2,2,2,1);
+    vCol*=1.-uResWR.w;                                          // darker behind the start page
+  }`;
+  const RING_FS = `#version 300 es
+  precision mediump float;
+  flat in vec3 vCol; out vec4 o;
+  void main(){ o=vec4(vCol,1); }`;                            // one flat colour: no maths per pixel
+  const HEX_VS = `#version 300 es
+  ${FRAME}
+  ${FLOOR_RIM}
+  flat out vec3 vCol;
+  // a dot at each hex corner: each hex owns 2 of its 6 (every corner is shared by 3 hexes:
+  // its right one and its upper-right one); unit hex: inradius .5
+  const vec2 DC[2]=vec2[2](vec2(.5774,0.),vec2(.2887,.5));
+  void main(){
+    vec2 S=vec2(${FLOOR_HX},${FLOOR_HY});
+    int nx=int(ceil(2.*uCamHalf.z/S.x))+3;                      // columns, first column and row: as floorPlan
+    ivec2 f0=ivec2(floor((uCamHalf.xy-uCamHalf.zw)/S))-1;
+    int di=gl_VertexID/6, k=gl_VertexID-di*6;                    // one dot per 6 vertices: no instancing (tiny instances run badly)
+    int e=di&1, lat=(di>>1)&1, cell=di>>2;
+    vec2 ctr=(vec2(float(cell%nx+f0.x),float(cell/nx+f0.y))+float(lat)*.5)*S;
+    if(length(ctr)>uResWR.z){ gl_Position=vec4(2,2,2,1); return; } // outside the world: no dots
+    vec2 q=vec2((k==1||k==4||k==5)?1.:-1., (k==2||k==3||k==5)?1.:-1.); // 2 triangles
+    vec2 P=ctr+DC[e]*46.;
+    vec2 c=(P+q*uPxTime.x*max(1.,uPxTime.z)-uCamHalf.xy)/uCamHalf.zw; // a square 2 CSS pixels wide
+    gl_Position=vec4(c.x,-c.y,0,1);
+    float d=length(P), WR=uResWR.z;
+    vec3 col=vec3(${FLOOR_DOT.join(",")});
+    col=mix(col, vec3(${FLOOR_DOT_EDGE.join(",")}), smoothstep(WR-1600.,WR-200.,d));
+    // detail, free (per vertex, no extra pixels): each dot its own brightness, and a dotted
+    // circle every FLOOR_RING_SPAN units from the middle (how far in you are)
+    float h=fract(sin(dot(floor(P),vec2(12.9898,78.233)))*43758.5453);
+    float ring=abs(mod(d+23.,${FLOOR_RING_SPAN}.)-23.)<23.?1.7:1.;
+    col*=(.72+.5*h)*ring;
+    vCol=mix(vec3(${FLOOR_BASE.join(",")}), col, lineFade())*(1.-uResWR.w); // [w]: darker behind the start page
+  }`;
+  const HEX_FS = `#version 300 es
+  precision mediump float;
+  flat in vec3 vCol; out vec4 o;
+  void main(){ o=vec4(vCol,1); }`;                            // one flat colour: no blending, no maths
+
+  // Food: instanced glowing orbs.
+  const VS = `#version 300 es
+  ${FRAME}
+  ${PAL}
+  layout(location=0) in ivec2 aP; layout(location=1) in uvec4 aB; // x, y (Q1) | value, skin, born lo, born hi
+  out vec2 vL; out float vR; flat out uvec4 vI; flat out vec3 vC;
+  // One instance per pellet, straight from memory. The list holds the pellets of the
+  // cells in view; the rest of the margin is culled here.
+  void main(){
+    vec2 p=vec2(aP)*.5, c0=p-uCamHalf.xy; float r=min(3.5+sqrt(float(aB.x)/16.)*2.6,15.);
+    if(aB.x==0u || any(greaterThan(abs(c0),uCamHalf.zw+r*${FOOD_GLOW}+uPxTime.x*1.5))){ gl_Position=vec4(2,2,2,1); return; }
+    vec2 q = vec2(float(gl_VertexID&1), float(gl_VertexID>>1))*2.-1.; // 4 corners: fewest vertices
+    bool tiny = r/uPxTime.x < 1.6;                          // pellet under ~1.6 px: no halo
+    vec2 l = q*(tiny ? r*.7+uPxTime.x*1.5 : r*${FOOD_GLOW});
+    vec2 c = (c0+l)/uCamHalf.zw;
+    gl_Position = vec4(c.x,-c.y,0,1);
+    // age in quarter-steps, smooth (the clock has fractions); a pellet "born in the future"
+    // (online: drawn slightly in the past) counts as just born, not wrapped round to fully grown
+    float age=mod(uPxTime.w-float(aB.z|(aB.w<<8)),65536.); if(age>60000.) age=0.;
+    vL=l; vR=r; vI=uvec4(0u,aB.y,((aB.z|(aB.w<<8))*37u+uint(aP.x&255))&255u,uint(min(age,255.)*16.)); vC=uPal[aB.y&127u].rgb; // pulse phase: from the pellet itself
+  }`;
+  const FS = `#version 300 es
+  precision mediump float;
+  ${FRAME}
+  in vec2 vL; in float vR; flat in uvec4 vI; flat in vec3 vC;
+  out vec4 o;
+  void main(){
+    float d=length(vL), r=vR, aa=uPxTime.x*1.2;
+    vec3 c=vC;
+    highp float ph=uPxTime.y*4.+float(vI.z)*.0245;
+    float pulse=.75+.25*sin(ph);
+    float born=smoothstep(0.,10.,float(vI.w)*.0625);   // fade in over ~0.6 s, smoothly every frame
+    float rr=r*(.4+.6*born);
+    if(d>=max(rr*${FOOD_GLOW},rr*.7+aa)) discard; // corner of the quad, outside the glow: nothing to blend
+    float core=(1.-smoothstep(rr*.7-aa,rr*.7+aa,d))*born;
+    float t=min(d/(rr*${FOOD_GLOW}),1.), g=1.-t*t;
+    float glow = r/uPxTime.x < 1.6 ? 0. : g*g*pulse*born; // fuller halo, still 0 at the quad edge
+    o=vec4(c*glow + mix(c,vec3(1),.55*(1.-d/(rr*.7)))*core, core);
+  }`;
+
+  // Snakes: the GPU builds the ribbons itself ("vertex pulling"). Each instance
+  // is one visible snake; its vertices read trail points straight out of an
+  // RG16I texture that is a byte copy of WebAssembly memory. CPU work per snake:
+  // one 48-byte header.
+  const RVS = `#version 300 es
+  precision highp float; precision highp int; precision highp isampler2D;
+  ${FRAME}
+  ${PAL}
+  uniform highp isampler2D uTrail;
+  layout(location=0) in vec4 aH0;  // head x, y, u, radius
+  layout(location=1) in vec4 aH1;  // spacing, stride, angle, width factor
+  layout(location=2) in uvec4 aH2; // row, newest trail index, segments, skin|flags<<8
+  out float vT, vV; out vec2 vDir; flat out uint vFl; flat out float vR, vNl; flat out vec3 vCA, vCB;
+  const float CR=1./.42;
+  vec2 T(int k){ return vec2(texelFetch(uTrail, ivec2((int(aH2.y)-k)&${RING - 1}, int(aH2.x)), 0).rg)*.5; }
+  vec2 fwd(){ return vec2(cos(aH1.z),sin(aH1.z)); }
+  // Strip order: tail cap, body samples tail->head, head, head cap. All snakes share
+  // one instanced draw sized for the longest, so spare vertices must be nearly free:
+  // they repeat the head cap (no texture reads) and form zero-area triangles.
+  void main(){
+    // body samples sit on trail points whose ring index is a multiple of the stride, so
+    // the same points stay sampled as the snake moves (no wobble when zoomed out)
+    int n=int(aH2.z), st=int(aH1.y), i0=n-1-((n-1-int(aH2.y))&(st-1)), K=i0>=1?(i0-1)/st+1:0;
+    int j=gl_VertexID>>1; bool side=(gl_VertexID&1)==0;
+    float W=aH1.w, hr=aH0.w*W;
+    vec2 p, tg; float t;
+    if(j<=0){                       // tail cap: 2 texture reads
+      vec2 a=T(n-2), b=T(n-1), d=b-a; float l=length(d);
+      d=l>1e-3?d/l:-fwd(); p=mix(a,b,aH0.z)+d*hr; tg=-d; t=float(n-1)+CR*W;
+    } else if(j<=K){                // body sample: 3 texture reads
+      int i=max(i0-(j-1)*st,1);
+      vec2 a=T(i-1), b=T(i), c=T(i+1), d=a-c; float l=length(d);
+      p=mix(a,b,aH0.z); tg=l>1e-3?d/l:fwd(); t=float(i);
+    } else if(j==K+1){ p=aH0.xy; tg=fwd(); t=0.; }                 // head
+    else { tg=fwd(); p=aH0.xy+tg*hr; t=-CR*W; }                      // head cap (and spares)
+    vec2 nrm=vec2(-tg.y,tg.x)*hr;
+    vec2 c=(p+(side?nrm:-nrm)-uCamHalf.xy)/uCamHalf.zw;
+    gl_Position=vec4(c.x,-c.y,0,1);
+    vT=t; vV=side?W:-W; vDir=tg;
+    uint sk=aH2.w&127u; vCA=uPal[sk].rgb; vCB=uPal[128u+sk].rgb;
+    vFl=(aH2.w>>8)|(aH2.y<<8); vR=aH0.w; vNl=float(n-1); // flags | newest ring index
+  }`;
+  const RFS = `#version 300 es
+  precision highp float;
+  ${FRAME}
+  in float vT, vV; in vec2 vDir; flat in uint vFl; flat in float vR, vNl; flat in vec3 vCA, vCB;
+  out vec4 o;
+  const float SP=.42, CR=1./.42;
+  vec3 shade(float k, vec2 l, float nd, vec2 f){
+    uint ki=uint(k);
+    // stripes follow each scale's fixed trail index (newest - k), not its count from the
+    // head, so they stay put as the snake moves instead of sliding and flickering
+    vec3 base = ki==0u || ((((vFl>>8)-ki)>>2u)&1u)==0u ? vCA : vCB;
+    vec3 c=base*(1.05-.55*nd*nd);
+    vec2 sp=l-vec2(-.28,-.36);
+    c+=vec3(.28)*exp(-dot(sp,sp)*7.);
+    c=mix(c*.55,c,1.-smoothstep(.82,1.,nd));
+    if(ki==0u){ // head: eyes
+      vec2 sd=vec2(-f.y,f.x); float aa=uPxTime.x*1.2/vR;
+      for(int e=0;e<2;e++){
+        vec2 ec=f*.32+sd*(e==0?.45:-.45);
+        c=mix(c,vec3(.97),1.-smoothstep(.3-aa,.3+aa,length(l-ec)));
+        c=mix(c,vec3(.03,.04,.07),1.-smoothstep(.16-aa,.16+aa,length(l-ec-f*.11)));
+      }
+    }
+    return c;
+  }
+  void main(){
+    float aa=uPxTime.x*1.2/vR, av=abs(vV);
+    if(av>1.+aa && (vFl&5u)==0u) discard; // outside the body and no glow: skip everything
+    vec2 f=normalize(vDir), side=vec2(-f.y,f.x);
+    float h=av<1. ? sqrt(1.-av*av)*CR : 0.;
+    float k0=clamp(av<1. ? ceil(vT-h) : floor(vT+.5), 0., vNl), k1=min(k0+1.,vNl);
+    vec2 l0=-f*(vT-k0)*SP+side*vV, l1=-f*(vT-k1)*SP+side*vV;
+    float n0=length(l0), n1=length(l1);
+    float e0=1.-smoothstep(1.-aa,1.+aa,n0), e1=(1.-smoothstep(1.-aa,1.+aa,n1))*(1.-e0);
+    float a=e0+e1, glow=0.;
+    vec3 gc=vCA*1.2;
+    float gd=min(n0,n1); // distance to the nearest scale circle: round glow, also at head and tail
+    if((vFl&1u)!=0u) glow=exp(-pow(max(gd-.8,0.)/.45,2.))*(.55+.25*sin(uPxTime.y*18.))*(1.-a);
+    else if((vFl&4u)!=0u){ glow=exp(-pow(max(gd-.85,0.)/.3,2.))*(.45+.15*sin(uPxTime.y*2.5+vT*.3))*(1.-a); gc=vec3(1.,.78,.3); }
+    if(a<=0. && glow<=.003) discard;
+    vec3 c=(e0>0. ? shade(k0,l0,n0,f)*e0 : vec3(0)) + (e1>0. ? shade(k1,l1,n1,f)*e1 : vec3(0));
+    if((vFl&2u)==0u){ // other snakes (not yours): a faint thin red outline, so they stand out
+      float rim=smoothstep(.9-aa,.9+aa,av);
+      if((k0==0. && dot(l0,f)>0.) || (k0==vNl && dot(l0,f)<0.)) rim=max(rim,smoothstep(.9-aa,.9+aa,n0)); // round head front, tail end
+      c=mix(c,vec3(.85,.18,.22)*a,rim*.5);
+    }
+    if((vFl&4u)!=0u) c+=vec3(1.,.85,.4)*.18*a*(.5+.5*sin(vT*.8-uPxTime.y*3.)); // shimmering scales
+    o=vec4(c+gc*glow, a);
+  }`;
+
+  // Name + level labels: pre-drawn once per snake into a texture atlas, drawn
+  // as one instanced quad per visible snake at a constant on-screen size.
+  const LVS = `#version 300 es
+  ${FRAME}
+  layout(location=0) in vec4 aH0; layout(location=2) in uvec4 aH2;
+  uniform vec2 uSlot, uCells; // slot size in CSS px, atlas grid
+  out vec2 vUV;
+  void main(){
+    vec2 q=vec2(float(gl_VertexID&1), float(gl_VertexID>>1));     // 0..1, y down
+    vec2 c=(aH0.xy-vec2(0.,aH0.w*1.25)-uCamHalf.xy)/uCamHalf.zw;   // anchor just above the head
+    vec2 off=vec2(q.x-.5, q.y-1.)*uSlot*uPxTime.z;                // screen px, y down
+    gl_Position=vec4(c.x+off.x*2./uResWR.x, -c.y-off.y*2./uResWR.y, 0, 1);
+    float slot=float(aH2.x);
+    vUV=(vec2(mod(slot,uCells.x), floor(slot/uCells.x))+q)/uCells;
+  }`;
+  const LFS = `#version 300 es
+  precision mediump float;
+  uniform sampler2D uAtlas; in vec2 vUV; out vec4 o;
+  void main(){ o=texture(uAtlas,vUV); }`;
+
+  // Minimap: one instanced draw in a corner of the same canvas (no Canvas2D).
+  const MVS = `#version 300 es
+  ${PAL}
+  layout(location=0) in vec3 aP; layout(location=1) in uint aI;
+  uniform vec3 uMini; // centre (clip) and radius in device px
+  uniform vec2 uRes;
+  out vec2 vL; out vec2 vS; flat out uint vI; flat out vec3 vC;
+  void main(){
+    uint kind=aI&255u; vC=uPal[(aI>>8)&127u].rgb;
+    vec2 q=vec2(float(gl_VertexID&1), float(gl_VertexID>>1))*2.-1.;
+    vec2 ext = kind==3u ? vec2(aP.z, float(aI>>8)/16777215.) + 6./uMini.z : vec2(aP.z*(kind==0u?1.03:1.) + 1.5/uMini.z);
+    vec2 m=aP.xy+q*ext;                       // minimap units (disc radius 1), y down
+    gl_Position=vec4(uMini.xy+vec2(m.x,-m.y)*uMini.z*2./uRes,0,1);
+    vL=q*ext; vS=ext; vI=aI;
+  }`;
+  const MFS = `#version 300 es
+  precision mediump float;
+  uniform highp vec3 uMini;
+  in vec2 vL; in vec2 vS; flat in uint vI; flat in vec3 vC; out vec4 o;
+  vec4 over(vec4 a, vec4 b){ return a+b*(1.-a.a); } // premultiplied "a over b"
+  void main(){
+    uint kind=vI&255u; float aa=1./uMini.z; vec4 c=vec4(0);
+    // pixels that would add nothing are discarded (no blending); flat areas skip the edge maths
+    if(kind==0u){ // backdrop + centre zone + rim
+      float d=length(vL); if(d>1.+aa) discard;
+      vec4 c0=vec4(vec3(.047,.066,.118)*.9,.9), cz=vec4(vec3(.98,.44,.52)*.07,.07);
+      if(abs(d-.35)>aa && d<1.-4.*aa) c = d<.35 ? over(cz,c0) : c0;
+      else {
+        c=c0*(1.-smoothstep(1.-aa,1.+aa,d));
+        c=over(cz*(1.-smoothstep(.35-aa,.35+aa,d)), c);
+        c=over(vec4(vec3(.98,.44,.52)*.5,.5)*(1.-smoothstep(0.,2.*aa,abs(d-(1.-2.*aa)))), c);
+      }
+    } else if(kind==1u){
+      float r=vS.x-1.5*aa, dd=length(vL); if(dd>r+aa) discard;
+      float a=(1.-smoothstep(r-aa,r+aa,dd))*float((vI>>16)&255u)/255.;
+      c=vec4(vC*a,a);
+    } else if(kind==2u){ // you
+      float d=length(vL), r=vS.x-1.5*aa; if(d>r+aa) discard;
+      c=over(vec4(vec3(1),1)*(1.-smoothstep(r*.55-aa,r*.55+aa,d)), vec4(vec3(.3),.3)*(1.-smoothstep(r-aa,r+aa,d)));
+    } else { // view rectangle outline
+      vec2 h=vS-6.*aa, e=abs(vL)-h; float d=abs(max(e.x,e.y)); if(d>1.5*aa) discard;
+      float a=(1.-smoothstep(.5*aa,1.5*aa,d))*.4; c=vec4(vec3(a),a);
+    }
+    o=c;
+  }`;
+
+
+  function prog(vs, fs, ubo = true) {
+    const p = gl.createProgram();
+    for (const [t, src] of [[gl.VERTEX_SHADER, vs], [gl.FRAGMENT_SHADER, fs]]) {
+      const s = gl.createShader(t); gl.shaderSource(s, src); gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+      gl.attachShader(p, s);
+    }
+    gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
+    if (ubo) gl.uniformBlockBinding(p, gl.getUniformBlockIndex(p, "Frame"), 0);
+    const pi = gl.getUniformBlockIndex(p, "Pal");
+    if (pi !== gl.INVALID_INDEX) gl.uniformBlockBinding(p, pi, 1);
+    return p;
+  }
+  const ringP = prog(RING_VS, RING_FS), hexP = prog(HEX_VS, HEX_FS), foodP = prog(VS, FS), ribP = prog(RVS, RFS), lblP = prog(LVS, LFS), miniP = prog(MVS, MFS, false);
+
+  // Textures live on fixed units for the whole run (no per-frame rebinding):
+  // unit 0 trail, unit 2 label atlas.
+  const atlas = gl.createTexture();
+  gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, atlas);
+  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA8, E.AW, E.AH); // drawn ~1:1 with the screen: no mips needed
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.activeTexture(gl.TEXTURE0);
+
+  const firstU = gl.getUniformLocation(ringP, "uFirst");
+  const plan = {};
+  gl.useProgram(ribP); gl.uniform1i(gl.getUniformLocation(ribP, "uTrail"), 0);
+  gl.useProgram(lblP);
+  gl.uniform1i(gl.getUniformLocation(lblP, "uAtlas"), 2);
+  gl.uniform2f(gl.getUniformLocation(lblP, "uSlot"), E.SLOT_W, E.SLOT_H);
+  gl.uniform2f(gl.getUniformLocation(lblP, "uCells"), E.CELLS_X, E.CELLS_Y);
+
+  // ONE buffer per frame mirrors the WASM per-frame block (uniforms + all instance
+  // data), double-buffered so the CPU never waits for the GPU. The UBO is a range of it.
+  const A = E.arena, arena = [], foodVao = [], hdrVao = [], miniVao = [];
+  const inst = (loc, n, type, stride, off, int) => {
+    gl.enableVertexAttribArray(loc);
+    if (int) gl.vertexAttribIPointer(loc, n, type, stride, off); else gl.vertexAttribPointer(loc, n, type, false, stride, off);
+    gl.vertexAttribDivisor(loc, 1);
+  };
+  for (let i = 0; i < 2; i++) {
+    arena[i] = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, arena[i]);
+    gl.bufferData(gl.ARRAY_BUFFER, A.size, gl.DYNAMIC_DRAW);
+    foodVao[i] = gl.createVertexArray(); gl.bindVertexArray(foodVao[i]);
+    inst(0, 2, gl.SHORT, 8, A.food, true); inst(1, 4, gl.UNSIGNED_BYTE, 8, A.food + 4, true);
+    hdrVao[i] = gl.createVertexArray(); gl.bindVertexArray(hdrVao[i]);
+    inst(0, 4, gl.FLOAT, 48, A.hdr); inst(1, 4, gl.FLOAT, 48, A.hdr + 16); inst(2, 4, gl.UNSIGNED_INT, 48, A.hdr + 32, true);
+    miniVao[i] = gl.createVertexArray(); gl.bindVertexArray(miniVao[i]);
+    inst(0, 3, gl.FLOAT, 16, A.mini); inst(1, 1, gl.UNSIGNED_INT, 16, A.mini + 12, true);
+  }
+  // Trail: one RG16I texture; rows of on-screen snakes are kept in sync from WASM's upload list.
+  const trailTex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, trailTex); // unit 0
+  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RG16I, RING, NS);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  const palBuf = gl.createBuffer();
+  gl.bindBuffer(gl.UNIFORM_BUFFER, palBuf);
+  gl.bufferData(gl.UNIFORM_BUFFER, E.palette, gl.STATIC_DRAW);
+  gl.bindBufferBase(gl.UNIFORM_BUFFER, 1, palBuf);
+  const emptyVao = gl.createVertexArray();
+  gl.bindVertexArray(null);
+  gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA); // premultiplied (enabled after the floor)
+
+  // GPU timing per pass (EXT_disjoint_timer_query_webgl2), read back without stalling.
+  const tq = gl.getExtension("EXT_disjoint_timer_query_webgl2");
+  const pending = []; // frames of 5 queries
+  const miniU = gl.getUniformLocation(miniP, "uMini"), miniRes = gl.getUniformLocation(miniP, "uRes");
+  let vw = 1, vh = 1;
+
+  const R = {
+    name: "WebGL 2", gpuMs: -1, passMs: null, canTime: !!tq, passNames: ["floor", "food", "snakes", "labels", "map"],
+    resize(w, h) { vw = w; vh = h; },
+    placeMini(cx, cy, r) { gl.useProgram(miniP); gl.uniform3f(miniU, cx, cy, r); gl.uniform2f(miniRes, vw, vh); },
+    labelSlot(src, x, y) {
+      gl.activeTexture(gl.TEXTURE2);
+      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+      gl.texSubImage2D(gl.TEXTURE_2D, 0, x, y, gl.RGBA, gl.UNSIGNED_BYTE, src);
+      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+      gl.activeTexture(gl.TEXTURE0);
+    },
+    draw(frameNo, playing, timing) {
+      const o = E.frameOut, nFood = o[0], nVis = o[1], maxK = o[2], nMini = playing ? o[4] : 0;
+      const f = frameNo & 1;
+      const qs = timing && tq && pending.length < 3 && (frameNo & 7) === 0 ? [] : null; // timed: 1 frame in 8 (see WebGPU)
+      const mark = () => { if (!qs) return; if (qs.length) gl.endQuery(tq.TIME_ELAPSED_EXT); const q = gl.createQuery(); gl.beginQuery(tq.TIME_ELAPSED_EXT, q); qs.push(q); };
+      // ONE upload: uniforms + snake headers + minimap + used food, from WASM memory
+      gl.bindBuffer(gl.ARRAY_BUFFER, arena[f]);
+      gl.bufferSubData(gl.ARRAY_BUFFER, 0, E.arenaBytes, 0, A.food + nFood * 8);
+      gl.bindBufferRange(gl.UNIFORM_BUFFER, 0, arena[f], 0, 48);
+
+      // trail: new points of snakes on screen only (runs listed by WASM), unit 0
+      for (let i = 0, n = o[3]; i < n; i++) {
+        const row = E.tup[i * 3], x = E.tup[i * 3 + 1];
+        gl.texSubImage2D(gl.TEXTURE_2D, 0, x, row, E.tup[i * 3 + 2], 1, gl.RG_INTEGER, gl.SHORT, E.trail, (row * RING + x) * 2);
+      }
+      gl.viewport(0, 0, vw, vh);
+
+      mark(); // floor: clear (nearly free); flat inside area when outside; hex lines; edge band + darkness (see FLOOR_RIM)
+      floorPlan(E.frameBlk, plan);
+      gl.clearColor(plan.clear[0], plan.clear[1], plan.clear[2], 1); gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.disable(gl.BLEND); gl.bindVertexArray(emptyVao);
+      gl.useProgram(ringP);
+      if (plan.out) { gl.uniform1i(firstU, 0); gl.drawArrays(gl.TRIANGLES, 0, FLOOR_RING_SEG * 6); } // inside area
+      if (plan.hexes) { gl.useProgram(hexP); gl.drawArrays(gl.TRIANGLES, 0, plan.hexes * 6); gl.useProgram(ringP); }
+      if (plan.edge) { gl.uniform1i(firstU, plan.out ? 1 : 2); gl.drawArraysInstanced(gl.TRIANGLES, 0, FLOOR_RING_SEG * 6, 2); } // kinds 1+2 or 2+3
+      gl.enable(gl.BLEND);
+      mark(); // food
+      if (nFood) { gl.useProgram(foodP); gl.bindVertexArray(foodVao[f]); gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, nFood); }
+      mark(); // snakes
+      if (nVis) { gl.useProgram(ribP); gl.bindVertexArray(hdrVao[f]); gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 2 * (maxK + 3), nVis); }
+      mark(); // labels (same headers)
+      if (nVis) { gl.useProgram(lblP); gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, nVis); }
+      mark(); // minimap
+      if (nMini) { gl.useProgram(miniP); gl.bindVertexArray(miniVao[f]); gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, nMini); }
+      if (qs) { gl.endQuery(tq.TIME_ELAPSED_EXT); pending.push(qs); }
+      while (pending.length && gl.getQueryParameter(pending[0][4], gl.QUERY_RESULT_AVAILABLE)) {
+        const done = pending.shift(), ok = !gl.getParameter(tq.GPU_DISJOINT_EXT);
+        const ms = done.map((q) => { const v = gl.getQueryParameter(q, gl.QUERY_RESULT) / 1e6; gl.deleteQuery(q); return v; });
+        if (ok) { R.passMs = ms; R.gpuMs = ms.reduce((a, b) => a + b, 0); }
+      }
+    },
+  };
+  return R;
+}
+/* ============================================================================
+   WebGPU renderer (preferred). Same passes and same look as the WebGL one.
+   - One upload per frame (a byte copy of the WASM per-frame block), plus the
+     new trail points of snakes on screen.
+   - Five direct draws in one pass with one shared bind group (measured
+     cheaper than bundles + indirect draws for so few draws).
+   - Optional per-pass GPU timestamps (when the browser exposes them).
+   ========================================================================== */
+async function createGPU(canvas, E) {
+  if (!navigator.gpu) throw new Error("this browser has no WebGPU");
+  const adapter = await navigator.gpu.requestAdapter({ powerPreference: "high-performance" });
+  if (!adapter) throw new Error("no WebGPU adapter (graphics driver)");
+  const canTime = adapter.features.has("timestamp-query"), F16 = adapter.features.has("shader-f16");
+  const device = await adapter.requestDevice({ requiredFeatures: [...(canTime ? ["timestamp-query"] : []), ...(F16 ? ["shader-f16"] : [])] });
+  const ctx = canvas.getContext("webgpu");
+  if (!ctx) throw new Error("canvas has no webgpu context");
+  const format = navigator.gpu.getPreferredCanvasFormat();
+  ctx.configure({ device, format, alphaMode: "opaque" });
+  const { NS, RING } = E;
+  const q = device.queue, U = GPUBufferUsage, TU = GPUTextureUsage;
+  device.pushErrorScope("validation");
+
+  const WGSL = /* wgsl */ `${F16 ? "enable f16;" : ""}
+// colour maths in half precision where the GPU supports it (big win on mobile GPUs)
+alias hf = ${F16 ? "f16" : "f32"}; alias hv3 = vec3<hf>; alias hv4 = vec4<hf>;
+struct Frame { camHalf: vec4f, pxTime: vec4f, resWR: vec4f };
+struct Mini { c: vec4f };
+@group(0) @binding(0) var<uniform> F: Frame;
+@group(0) @binding(3) var<storage, read> trail: array<u32>; // x | y<<16, a byte copy of WASM memory
+@group(0) @binding(4) var atlasTex: texture_2d<f32>;
+@group(0) @binding(5) var linClamp: sampler;
+@group(0) @binding(6) var<uniform> M: Mini;
+// skin palette (128 main, then 128 stripe colours): read once per vertex, passed to pixels flat
+@group(0) @binding(7) var<uniform> PAL: array<vec4f, 256>;
+const RM: i32 = ${RING - 1};
+const CR: f32 = 2.38095238;   // 1 / 0.42: circle radius in segment units
+const SP: f32 = 0.42;
+
+fn quad(vi: u32) -> vec2f { return vec2f(f32(vi & 1u), f32(vi >> 1u)); }
+
+// ---------- floor (see render-gl.js: every part one flat colour; the shape kinds) ----------
+const FB = vec3f(${FLOOR_BASE.join(", ")}); const FD = vec3f(${FLOOR_DARK.join(", ")});
+fn rimHW() -> f32 { return max(2., F.pxTime.x * 1.5); }            // half width of the edge line (world units)
+fn lineFade() -> f32 { return 1. - clamp((F.pxTime.x - 3.) * .5, 0., 1.); } // zoomed far out: lines fade out
+fn corner(k: u32) -> vec2f { return vec2f(select(0., 1., k == 1u || k == 4u || k == 5u), select(0., 1., k == 2u || k == 3u || k == 5u)); } // 2 triangles
+struct RingO { @builtin(position) pos: vec4f, @location(0) @interpolate(flat) col: vec3f };
+// instance index = shape kind (the draw's first instance picks them)
+@vertex fn vsRing(@builtin(vertex_index) vi: u32, @builtin(instance_index) kind: u32) -> RingO {
+  let q = vi / 6u; let dk = corner(vi % 6u);
+  let d = length(F.camHalf.xy); let reach = length(F.camHalf.zw); let WR = F.resWR.z; let hw = rimHW();
+  let rIn = WR - hw; let rOut = WR + hw; let rHide = WR + 32.;
+  var R = vec2f(rOut, d + reach + 8.); var vis = d + reach > rOut; var col = FD;           // 3: darkness outside
+  if (kind == 0u) { R = vec2f(0., rIn); vis = d - reach < rIn; col = FB; }               // 0: inside (camera outside)
+  else if (kind == 1u) { R = vec2f(rOut, rHide); vis = d + reach > rOut && d - reach < rHide; } // 1: thin dark ring
+  else if (kind == 2u) { R = vec2f(rIn, rOut); vis = d + reach > rIn && d - reach < rOut; col = vec3f(${FLOOR_RIM_COL.join(", ")}); } // 2: edge line
+  // only the arc in view (see render-gl.js); kind 0: the whole circle
+  let ca = atan2(F.camHalf.y, F.camHalf.x); let re = reach + select(R.y - R.x, 0., R.y - R.x > 64.) + 4.; let r0 = max(R.x, 1.);
+  let cs = (d * d + r0 * r0 - re * re) / (2. * max(d, 1.) * r0);
+  let span = select(acos(min(cs, 1.)), 3.14159265, kind == 0u || cs <= -1.);
+  let a = ca + ((f32(q) + dk.x) * ${(2 / FLOOR_RING_SEG).toFixed(8)} - 1.) * span; let r = select(R.x, R.y, dk.y > .5);
+  let w = vec2f(cos(a), sin(a)) * r; let c = (w - F.camHalf.xy) / F.camHalf.zw;
+  var o: RingO; o.pos = select(vec4f(2., 2., 2., 1.), vec4f(c.x, -c.y, 0., 1.), vis); o.col = col * (1. - F.resWR.w); return o;
+}
+@fragment fn fsRing(i: RingO) -> @location(0) vec4f { return vec4f(i.col, 1.); } // one flat colour: no maths per pixel
+struct HexO { @builtin(position) pos: vec4f, @location(0) @interpolate(flat) col: vec3f };
+@vertex fn vsHex(@builtin(vertex_index) vi: u32) -> HexO {
+  let ii = vi / 6u;                                                // one dot per 6 vertices: no instancing (tiny instances run badly)
+  // a dot at each hex corner: each hex owns 2 of its 6 (every corner is shared by 3 hexes:
+  // its right one and its upper-right one); unit hex: inradius .5
+  var dc = array<vec2f, 2>(vec2f(.5774, 0.), vec2f(.2887, .5));
+  let S = vec2f(${FLOOR_HX}, ${FLOOR_HY});
+  let nx = i32(ceil(2. * F.camHalf.z / S.x)) + 3;               // columns, first column and row: as floorPlan
+  let f0 = vec2i(floor((F.camHalf.xy - F.camHalf.zw) / S)) - 1;
+  let cell = i32(ii >> 2u); let e = ii & 1u;
+  let ctr = (vec2f(f32(cell % nx + f0.x), f32(cell / nx + f0.y)) + f32((ii >> 1u) & 1u) * .5) * S;
+  var o: HexO;
+  if (length(ctr) > F.resWR.z) { o.pos = vec4f(2., 2., 2., 1.); return o; } // outside the world: no dots
+  let k = corner(vi % 6u);                                         // 2 triangles
+  let P = ctr + dc[e] * 46.;
+  let c = (P + (k * 2. - 1.) * F.pxTime.x * max(1., F.pxTime.z) - F.camHalf.xy) / F.camHalf.zw; // a square 2 CSS pixels wide
+  o.pos = vec4f(c.x, -c.y, 0., 1.);
+  let d = length(P); let WR = F.resWR.z;
+  var col = vec3f(${FLOOR_DOT.join(", ")});
+  col = mix(col, vec3f(${FLOOR_DOT_EDGE.join(", ")}), smoothstep(WR - 1600., WR - 200., d));
+  // detail, free (per vertex): each dot its own brightness; a dotted circle every FLOOR_RING_SPAN units
+  let h = fract(sin(dot(floor(P), vec2f(12.9898, 78.233))) * 43758.5453);
+  let rg = select(1., 1.7, abs(((d + 23.) - ${FLOOR_RING_SPAN}. * floor((d + 23.) / ${FLOOR_RING_SPAN}.)) - 23.) < 23.);
+  col *= (.72 + .5 * h) * rg;
+  o.col = mix(FB, col, lineFade()) * (1. - F.resWR.w);         // [w]: darker behind the start page
+  return o;
+}
+@fragment fn fsHex(i: HexO) -> @location(0) vec4f { return vec4f(i.col, 1.); } // one flat colour: no blending, no maths
+
+// ---------- food ----------
+struct FoodO { @builtin(position) pos: vec4f, @location(0) l: vec2f,
+  @location(1) @interpolate(flat) r: f32, @location(2) @interpolate(flat) info: vec4u, @location(3) @interpolate(flat) col: vec3f };
+// One instance per pellet, straight from memory (x, y Q1 | value, skin, born lo, born hi).
+// The list holds the pellets of the cells in view; the rest of the margin is culled here.
+@vertex fn vsFood(@builtin(vertex_index) vi: u32,
+                  @location(0) pq: vec2i, @location(1) b: vec4u) -> FoodO {
+  var o: FoodO;
+  let p = vec2f(pq) * .5; let r = min(3.5 + sqrt(f32(b.x) / 16.) * 2.6, 15.);
+  let c0 = p - F.camHalf.xy;
+  if (b.x == 0u || any(abs(c0) > F.camHalf.zw + r * ${FOOD_GLOW} + F.pxTime.x * 1.5)) { o.pos = vec4f(2., 2., 2., 1.); return o; }
+  let q = quad(vi) * 2. - 1.;                               // 4 corners: fewest vertices
+  let tiny = r / F.pxTime.x < 1.6;                         // under ~1.6 px: no halo
+  let l = q * select(r * ${FOOD_GLOW}, r * .7 + F.pxTime.x * 1.5, tiny);
+  let c = (c0 + l) / F.camHalf.zw;
+  // age in quarter-steps, smooth (the clock has fractions); "born in the future" (online:
+  // drawn slightly in the past) counts as just born, not wrapped round to fully grown
+  var age = F.pxTime.w - f32(b.z | (b.w << 8u)); age = age - 65536. * floor(age / 65536.); if (age > 60000.) { age = 0.; }
+  o.pos = vec4f(c.x, -c.y, 0., 1.); o.l = l; o.r = r; o.info = vec4u(0u, b.y, (((b.z | (b.w << 8u)) * 37u + u32(pq.x & 255)) & 255u), u32(min(age, 255.) * 16.)); // pulse phase: from the pellet itself
+  o.col = PAL[b.y & 127u].rgb; return o;
+}
+@fragment fn fsFood(i: FoodO) -> @location(0) vec4f {
+  let d = length(i.l); let r = i.r; let aa = F.pxTime.x * 1.2;
+  let c = i.col;
+  let pulse = .75 + .25 * sin(F.pxTime.y * 4. + f32(i.info.z) * .0245);
+  let born = smoothstep(0., 10., f32(i.info.w) * .0625); // fade in, smoothly every frame
+  let rr = r * (.4 + .6 * born);
+  if (d >= max(rr * ${FOOD_GLOW}, rr * .7 + aa)) { discard; } // corner of the quad, outside the glow: nothing to blend
+  let core = hf((1. - smoothstep(rr * .7 - aa, rr * .7 + aa, d)) * born);
+  var glow = hf(0.);
+  if (r / F.pxTime.x >= 1.6) { let t = min(d / (rr * ${FOOD_GLOW}), 1.); let g = 1. - t * t; glow = hf(g * g * pulse * born); } // fuller halo, same quad
+  let ch = hv3(c);
+  let rgb = ch * glow + mix(ch, hv3(1.), hf(.55 * (1. - d / (rr * .7)))) * core;
+  return vec4f(vec3f(rgb), f32(core));
+}
+
+// ---------- snakes: ribbons built from the trail buffer ----------
+struct RibO { @builtin(position) pos: vec4f, @location(0) t: f32, @location(1) v: f32, @location(2) dir: vec2f,
+  @location(3) @interpolate(flat) ca: vec3f, @location(4) @interpolate(flat) fl: u32,
+  @location(5) @interpolate(flat) r: f32, @location(6) @interpolate(flat) nl: f32, @location(7) @interpolate(flat) cb: vec3f };
+fn T(h2: vec4u, k: i32) -> vec2f {
+  let v = trail[h2.x * ${RING}u + u32((i32(h2.y) - k) & RM)];
+  return vec2f(f32(bitcast<i32>(v << 16u) >> 16u), f32(bitcast<i32>(v) >> 16u)) * .5;
+}
+fn fwd(h1: vec4f) -> vec2f { return vec2f(cos(h1.z), sin(h1.z)); }
+// Strip order: tail cap, body samples tail->head, head, head cap. All snakes share
+// one instanced draw sized for the longest, so spare vertices must be nearly free:
+// they repeat the head cap (no texture reads) and form zero-area triangles.
+@vertex fn vsRib(@builtin(vertex_index) vi: u32, @location(0) h0: vec4f, @location(1) h1: vec4f, @location(2) h2: vec4u) -> RibO {
+  // body samples sit on trail points whose ring index is a multiple of the stride, so
+  // the same points stay sampled as the snake moves (no wobble when zoomed out)
+  let n = i32(h2.z); let st = i32(h1.y); let i0 = n - 1 - ((n - 1 - i32(h2.y)) & (st - 1));
+  let K = select(0, (i0 - 1) / st + 1, i0 >= 1);
+  let j = i32(vi >> 1u); let side = (vi & 1u) == 0u;
+  let W = h1.w; let hr = h0.w * W;
+  var p: vec2f; var tg: vec2f; var t: f32;
+  if (j <= 0) {                       // tail cap: 2 texture reads
+    let a = T(h2, n - 2); let b = T(h2, n - 1); var d = b - a; let l = length(d);
+    if (l > 1e-3) { d = d / l; } else { d = -fwd(h1); }
+    p = mix(a, b, h0.z) + d * hr; tg = -d; t = f32(n - 1) + CR * W;
+  } else if (j <= K) {                // body sample: 3 texture reads
+    let i = max(i0 - (j - 1) * st, 1);
+    let a = T(h2, i - 1); let b = T(h2, i); let d = a - T(h2, i + 1); let l = length(d);
+    p = mix(a, b, h0.z); if (l > 1e-3) { tg = d / l; } else { tg = fwd(h1); } t = f32(i);
+  } else if (j == K + 1) { p = h0.xy; tg = fwd(h1); t = 0.; }       // head
+  else { tg = fwd(h1); p = h0.xy + tg * hr; t = -CR * W; }           // head cap (and spares)
+  let nrm = vec2f(-tg.y, tg.x) * hr;
+  let c = (p + select(-nrm, nrm, side) - F.camHalf.xy) / F.camHalf.zw;
+  var o: RibO;
+  o.pos = vec4f(c.x, -c.y, 0., 1.); o.t = t; o.v = select(-W, W, side); o.dir = tg;
+  let sk = h2.w & 127u; o.ca = PAL[sk].rgb; o.cb = PAL[128u + sk].rgb;
+  o.fl = (h2.w >> 8u) | (h2.y << 8u); o.r = h0.w; o.nl = f32(n - 1); // flags | newest ring index
+  return o;
+}
+fn shade(k: f32, l: vec2f, nd: f32, f: vec2f, ca: vec3f, cb: vec3f, r: f32, newest: u32) -> vec3f {
+  let ki = u32(k);
+  // stripes follow each scale's fixed trail index (newest - k), not its count from the
+  // head, so they stay put as the snake moves instead of sliding and flickering
+  var base = ca; if (ki != 0u && (((newest - ki) >> 2u) & 1u) == 1u) { base = cb; }
+  var c = base * (1.05 - .55 * nd * nd);
+  let sp = l - vec2f(-.28, -.36);
+  c += vec3f(.28) * exp(-dot(sp, sp) * 7.);
+  c = mix(c * .55, c, 1. - smoothstep(.82, 1., nd));
+  if (ki == 0u) { // head: eyes
+    let sd = vec2f(-f.y, f.x); let aa = F.pxTime.x * 1.2 / r;
+    for (var e = 0; e < 2; e++) {
+      let ec = f * .32 + sd * select(-.45, .45, e == 0);
+      c = mix(c, vec3f(.97), 1. - smoothstep(.3 - aa, .3 + aa, length(l - ec)));
+      c = mix(c, vec3f(.03, .04, .07), 1. - smoothstep(.16 - aa, .16 + aa, length(l - ec - f * .11)));
+    }
+  }
+  return c;
+}
+@fragment fn fsRib(i: RibO) -> @location(0) vec4f {
+  let aa = F.pxTime.x * 1.2 / i.r; let av = abs(i.v);
+  if (av > 1. + aa && (i.fl & 5u) == 0u) { discard; } // outside the body and no glow: skip everything
+  let f = normalize(i.dir); let side = vec2f(-f.y, f.x);
+  var h = 0.; if (av < 1.) { h = sqrt(1. - av * av) * CR; }
+  let k0 = clamp(select(floor(i.t + .5), ceil(i.t - h), av < 1.), 0., i.nl); let k1 = min(k0 + 1., i.nl);
+  let l0 = -f * (i.t - k0) * SP + side * i.v; let l1 = -f * (i.t - k1) * SP + side * i.v;
+  let n0 = length(l0); let n1 = length(l1);
+  let e0 = 1. - smoothstep(1. - aa, 1. + aa, n0); let e1 = (1. - smoothstep(1. - aa, 1. + aa, n1)) * (1. - e0);
+  let a = e0 + e1;
+  var gc = i.ca * 1.2; var glow = 0.;
+  let gd = min(n0, n1); // distance to the nearest scale circle: round glow, also at head and tail
+  if ((i.fl & 1u) != 0u) { glow = exp(-pow(max(gd - .8, 0.) / .45, 2.)) * (.55 + .25 * sin(F.pxTime.y * 18.)) * (1. - a); }
+  else if ((i.fl & 4u) != 0u) { glow = exp(-pow(max(gd - .85, 0.) / .3, 2.)) * (.45 + .15 * sin(F.pxTime.y * 2.5 + i.t * .3)) * (1. - a); gc = vec3f(1., .78, .3); }
+  if (a <= 0. && glow <= .003) { discard; }
+  var c = vec3f(0.);
+  if (e0 > 0.) { c += shade(k0, l0, n0, f, i.ca, i.cb, i.r, i.fl >> 8u) * e0; }
+  if (e1 > 0.) { c += shade(k1, l1, n1, f, i.ca, i.cb, i.r, i.fl >> 8u) * e1; }
+  if ((i.fl & 2u) == 0u) { // other snakes (not yours): a faint thin red outline, so they stand out
+    var rim = smoothstep(.9 - aa, .9 + aa, av);
+    if ((k0 == 0. && dot(l0, f) > 0.) || (k0 == i.nl && dot(l0, f) < 0.)) { rim = max(rim, smoothstep(.9 - aa, .9 + aa, n0)); } // round head front, tail end
+    c = mix(c, vec3f(.85, .18, .22) * a, rim * .5);
+  }
+  if ((i.fl & 4u) != 0u) { c += vec3f(1., .85, .4) * .18 * a * (.5 + .5 * sin(i.t * .8 - F.pxTime.y * 3.)); } // shimmering scales
+  return vec4f(c + gc * glow, a);
+}
+
+// ---------- labels: one quad per visible snake, from the atlas ----------
+struct LblO { @builtin(position) pos: vec4f, @location(0) uv: vec2f };
+@vertex fn vsLbl(@builtin(vertex_index) vi: u32, @location(0) h0: vec4f, @location(2) h2: vec4u) -> LblO {
+  let q = quad(vi);
+  let c = (h0.xy - vec2f(0., h0.w * 1.25) - F.camHalf.xy) / F.camHalf.zw;
+  let off = vec2f(q.x - .5, q.y - 1.) * vec2f(${E.SLOT_W}., ${E.SLOT_H}.) * F.pxTime.z;
+  var o: LblO;
+  o.pos = vec4f(c.x + off.x * 2. / F.resWR.x, -c.y - off.y * 2. / F.resWR.y, 0., 1.);
+  let slot = h2.x;
+  o.uv = (vec2f(f32(slot % ${E.CELLS_X}u), f32(slot / ${E.CELLS_X}u)) + q) / vec2f(${E.CELLS_X}., ${E.CELLS_Y}.);
+  return o;
+}
+@fragment fn fsLbl(i: LblO) -> @location(0) vec4f { return textureSample(atlasTex, linClamp, i.uv); }
+
+// ---------- minimap ----------
+struct MiniO { @builtin(position) pos: vec4f, @location(0) l: vec2f, @location(1) s: vec2f, @location(2) @interpolate(flat) info: u32, @location(3) @interpolate(flat) col: vec3f };
+@vertex fn vsMini(@builtin(vertex_index) vi: u32, @location(0) p: vec3f, @location(1) info: u32) -> MiniO {
+  let kind = info & 255u;
+  let q = quad(vi) * 2. - 1.;
+  var ext = vec2f(p.z * select(1., 1.03, kind == 0u) + 1.5 / M.c.z);
+  if (kind == 3u) { ext = vec2f(p.z, f32(info >> 8u) / 16777215.) + 6. / M.c.z; }
+  let m = p.xy + q * ext;
+  var o: MiniO;
+  o.pos = vec4f(M.c.xy + vec2f(m.x, -m.y) * M.c.z * 2. / F.resWR.xy, 0., 1.);
+  o.l = q * ext; o.s = ext; o.info = info; o.col = PAL[(info >> 8u) & 127u].rgb; return o;
+}
+fn over(a: hv4, b: hv4) -> hv4 { return a + b * (hf(1.) - a.a); }
+@fragment fn fsMini(i: MiniO) -> @location(0) vec4f {
+  let kind = i.info & 255u; let aa = 1. / M.c.z;
+  var c = hv4(0.);
+  // pixels that would add nothing are discarded (no blending); flat areas skip the edge maths
+  if (kind == 0u) {
+    let d = length(i.l); if (d > 1. + aa) { discard; }
+    let c0 = hv4(hv3(.047, .066, .118) * hf(.9), hf(.9)); let cz = hv4(hv3(.98, .44, .52) * hf(.07), hf(.07));
+    if (abs(d - .35) > aa && d < 1. - 4. * aa) { c = select(c0, over(cz, c0), d < .35); }
+    else {
+      c = c0 * hf(1. - smoothstep(1. - aa, 1. + aa, d));
+      c = over(cz * hf(1. - smoothstep(.35 - aa, .35 + aa, d)), c);
+      c = over(hv4(hv3(.98, .44, .52) * hf(.5), hf(.5)) * hf(1. - smoothstep(0., 2. * aa, abs(d - (1. - 2. * aa)))), c);
+    }
+  } else if (kind == 1u) {
+    let r = i.s.x - 1.5 * aa; let dd = length(i.l); if (dd > r + aa) { discard; }
+    let a = hf((1. - smoothstep(r - aa, r + aa, dd)) * f32((i.info >> 16u) & 255u) / 255.);
+    c = hv4(hv3(i.col) * a, a);
+  } else if (kind == 2u) {
+    let d = length(i.l); let r = i.s.x - 1.5 * aa; if (d > r + aa) { discard; }
+    c = over(hv4(1.) * hf(1. - smoothstep(r * .55 - aa, r * .55 + aa, d)), hv4(hv3(.3), hf(.3)) * hf(1. - smoothstep(r - aa, r + aa, d)));
+  } else {
+    let h = i.s - 6. * aa; let e = abs(i.l) - h; let d = abs(max(e.x, e.y)); if (d > 1.5 * aa) { discard; }
+    let a = hf((1. - smoothstep(.5 * aa, 1.5 * aa, d)) * .4); c = hv4(hv3(a), a);
+  }
+  return vec4f(c);
+}
+`;
+  const mod = device.createShaderModule({ code: WGSL });
+  const info = await mod.getCompilationInfo();
+  const errs = info.messages.filter((m) => m.type === "error");
+  if (errs.length) throw new Error("WGSL: " + errs.map((m) => `${m.lineNum}:${m.linePos} ${m.message}`).join("\n"));
+
+  // ---- resources ----
+  const buf = (size, usage) => device.createBuffer({ size: Math.ceil(size / 4) * 4, usage });
+  // ONE buffer mirrors the WASM per-frame block: frame uniforms + all instance data
+  const A = E.arena, arenaBuf = buf(A.size, U.UNIFORM | U.VERTEX | U.COPY_DST);
+  const miniUBuf = buf(16, U.UNIFORM | U.COPY_DST);
+  const palBuf = buf(E.palette.byteLength, U.UNIFORM | U.COPY_DST);
+  q.writeBuffer(palBuf, 0, E.palette);
+  const trailBuf = buf(NS * RING * 4, U.STORAGE | U.COPY_DST);
+  q.writeBuffer(trailBuf, 0, E.mem, E.ptr.trail, NS * RING * 4); // all of it once: a renderer remade after a lost device starts in step
+  // trail copy on the GPU: rows of on-screen snakes are kept in sync by WASM's upload list
+  const plan = {}; // floor: clear colour, flat side, hex count (see floorPlan)
+  const atlasTex = device.createTexture({ size: [E.AW, E.AH], format: "rgba8unorm", // drawn ~1:1 with the screen: no mips
+    usage: TU.TEXTURE_BINDING | TU.RENDER_ATTACHMENT | TU.COPY_DST });
+  const linClamp = device.createSampler({ magFilter: "linear", minFilter: "linear" }); // the atlas has no mips
+
+  const V = GPUShaderStage.VERTEX, FR = GPUShaderStage.FRAGMENT;
+  const bgl = device.createBindGroupLayout({ entries: [
+    { binding: 0, visibility: V | FR, buffer: {} },
+    { binding: 3, visibility: V, buffer: { type: "read-only-storage" } },
+    { binding: 4, visibility: FR, texture: {} },
+    { binding: 5, visibility: FR, sampler: {} },
+    { binding: 6, visibility: V | FR, buffer: {} },
+    { binding: 7, visibility: V, buffer: {} },
+  ] });
+  const bind = device.createBindGroup({ layout: bgl, entries: [
+    { binding: 0, resource: { buffer: arenaBuf, offset: 0, size: 48 } }, { binding: 3, resource: { buffer: trailBuf } },
+    { binding: 4, resource: atlasTex.createView() }, { binding: 5, resource: linClamp },
+    { binding: 6, resource: { buffer: miniUBuf } },
+    { binding: 7, resource: { buffer: palBuf } },
+  ] });
+  const layout = device.createPipelineLayout({ bindGroupLayouts: [bgl] });
+  const PREMUL = { color: { srcFactor: "one", dstFactor: "one-minus-src-alpha" }, alpha: { srcFactor: "one", dstFactor: "one-minus-src-alpha" } };
+  const pipe = (vs, fs, buffers, blend, fmt = format, strip = true) => device.createRenderPipeline({
+    layout, vertex: { module: mod, entryPoint: vs, buffers },
+    fragment: { module: mod, entryPoint: fs, targets: [{ format: fmt, blend }] },
+    primitive: { topology: strip ? "triangle-strip" : "triangle-list" },
+  });
+  const inst = (stride, attrs) => [{ arrayStride: stride, stepMode: "instance", attributes: attrs.map(([l, o, f]) => ({ shaderLocation: l, offset: o, format: f })) }];
+  const foodL = inst(8, [[0, 0, "sint16x2"], [1, 4, "uint8x4"]]);
+  const hdrL = inst(48, [[0, 0, "float32x4"], [1, 16, "float32x4"], [2, 32, "uint32x4"]]);
+  const lblL = inst(48, [[0, 0, "float32x4"], [2, 32, "uint32x4"]]);
+  const miniL = inst(16, [[0, 0, "float32x3"], [1, 12, "uint32"]]);
+  const P = {
+    ring: pipe("vsRing", "fsRing", [], undefined, format, false),
+    hex: pipe("vsHex", "fsHex", [], undefined, format, false),
+    food: pipe("vsFood", "fsFood", foodL, PREMUL),
+    rib: pipe("vsRib", "fsRib", hdrL, PREMUL),
+    lbl: pipe("vsLbl", "fsLbl", lblL, PREMUL),
+    mini: pipe("vsMini", "fsMini", miniL, PREMUL),
+  };
+
+  // ---- the five draws: [pipeline, vertex-data offset in the arena] ----
+  const DRAWS = [[null, -1], [P.food, A.food], [P.rib, A.hdr], [P.lbl, A.hdr], [P.mini, A.mini]]; // 0: the floor (its own draws, in encodeDirect)
+  // reused every frame: no per-frame allocations
+  const counts = new Uint32Array([0, 0, 4, 0, 0, 0, 4, 0, 4, 0]); // (vertices, instances): floor (unused), food, snakes, labels, minimap
+  const mainAtt = { view: null, loadOp: "clear", storeOp: "store", clearValue: [0, 0, 0, 1] }; // clearValue: the floor colour (plan.clear)
+  const mainDesc = { colorAttachments: [mainAtt] };
+  const setCounts = (food, maxK, nVis, nMini) => { counts[3] = food; counts[4] = 2 * (maxK + 3); counts[5] = nVis; counts[7] = nVis; counts[9] = nMini; };
+  const encodeDirect = (pass, i) => {
+    if (i === 0) { // floor: the pass cleared (nearly free); flat inside area when outside; hex lines; edge band + darkness
+      pass.setPipeline(P.ring);
+      if (plan.out) pass.draw(FLOOR_RING_SEG * 6, 1, 0, 0);
+      if (plan.hexes) { pass.setPipeline(P.hex); pass.draw(plan.hexes * 6); pass.setPipeline(P.ring); }
+      if (plan.edge) pass.draw(FLOOR_RING_SEG * 6, 2, 0, plan.out ? 1 : 2); // kinds 1+2 or 2+3
+      return;
+    }
+    const [p, off] = DRAWS[i], vc = counts[i * 2], ic = counts[i * 2 + 1];
+    if (!ic) return;
+    pass.setPipeline(p);
+    if (off >= 0) pass.setVertexBuffer(0, arenaBuf, off);
+    pass.draw(vc, ic);
+  };
+
+  // ---- GPU timestamps (optional) ----
+  let qset = null, resolveBuf = null, readBuf = null, reading = false, mapping = false;
+  if (canTime) {
+    qset = device.createQuerySet({ type: "timestamp", count: 12 });
+    resolveBuf = device.createBuffer({ size: 96, usage: U.QUERY_RESOLVE | U.COPY_SRC });
+    readBuf = device.createBuffer({ size: 96, usage: U.MAP_READ | U.COPY_DST });
+  }
+  const err = await device.popErrorScope();
+  if (err) throw new Error("WebGPU setup: " + err.message);
+
+  const R = {
+    name: "WebGPU" + (F16 ? " (f16)" : ""), gpuMs: -1, passMs: null, canTime, device,
+    passNames: ["clear", "floor", "food", "snakes", "labels", "map"],
+    resize() {},
+    placeMini(cx, cy, r) { q.writeBuffer(miniUBuf, 0, new Float32Array([cx, cy, r, 0])); },
+    labelSlot(src, x, y) {
+      q.copyExternalImageToTexture({ source: src }, { texture: atlasTex, origin: { x, y }, premultipliedAlpha: true }, [src.width, src.height]);
+    },
+    draw(frameNo, playing, timing) {
+      const o = E.frameOut, nFood = o[0], nVis = o[1], maxK = o[2], nMini = playing ? o[4] : 0;
+      // ONE upload for all per-frame data, straight from WebAssembly memory
+      q.writeBuffer(arenaBuf, 0, E.mem, A.base, A.food + nFood * 8);
+      // trail: new points of snakes on screen only (runs listed by WASM)
+      for (let i = 0, n = o[3]; i < n; i++) {
+        const off = (E.tup[i * 3] * RING + E.tup[i * 3 + 1]) * 4;
+        q.writeBuffer(trailBuf, off, E.mem, E.ptr.trail + off, E.tup[i * 3 + 2] * 4);
+      }
+      const enc = device.createCommandEncoder();
+      const view = ctx.getCurrentTexture().createView();
+      setCounts(nFood, maxK, nVis, nMini);
+      floorPlan(E.frameBlk, plan);
+      // GPU timing splits the frame into separately timed passes, which costs extra; only
+      // every 8th frame is measured, so the CPU figures show what normal frames cost
+      if (!(timing && canTime && !reading && (frameNo & 7) === 0)) {
+        mainAtt.view = view; mainAtt.clearValue = plan.clear;
+        const pass = enc.beginRenderPass(mainDesc);
+        pass.setBindGroup(0, bind);
+        for (let i = 0; i < 5; i++) encodeDirect(pass, i);
+        pass.end();
+      } else { // measuring: the clear, then one pass per draw, each timestamped
+        for (let i = 0; i < 6; i++) {
+          const pass = enc.beginRenderPass({ colorAttachments: [{ view, loadOp: i ? "load" : "clear", storeOp: "store", clearValue: plan.clear }],
+            timestampWrites: { querySet: qset, beginningOfPassWriteIndex: i * 2, endOfPassWriteIndex: i * 2 + 1 } });
+          if (i) { pass.setBindGroup(0, bind); encodeDirect(pass, i - 1); }
+          pass.end();
+        }
+        enc.resolveQuerySet(qset, 0, 12, resolveBuf, 0);
+        enc.copyBufferToBuffer(resolveBuf, 0, readBuf, 0, 96);
+        reading = true;
+      }
+      q.submit([enc.finish()]);
+      if (reading && !mapping) {
+        mapping = true;
+        readBuf.mapAsync(GPUMapMode.READ).then(() => {
+          const t = new BigUint64Array(readBuf.getMappedRange());
+          const ms = [0, 1, 2, 3, 4, 5].map((i) => Number(t[i * 2 + 1] - t[i * 2]) / 1e6);
+          readBuf.unmap(); reading = mapping = false;
+          if (ms.every((v) => v >= 0 && v < 1000)) { R.passMs = ms; R.gpuMs = ms.reduce((a, b) => a + b, 0); }
+        }, () => { reading = mapping = false; });
+      }
+    },
+  };
+  return R;
+}
+/* ============================================================================
+   Death information sheet (both pages; inlined by build.sh).
+   The picture is the moment of death as it looked on this screen, copied on the spot right
+   after that frame was drawn, while the canvas still holds it (WebGPU and WebGL keep a frame
+   until the end of the task that drew it), scaled to at most 960 px wide. Offline: the frame
+   where the death happens, drawn once more with the snake in (the sim's deathPose()). Online:
+   the frame where your head, as drawn, first touches a body or the edge (the page checks that
+   itself); if it never saw one, the server's crash step from the DEATH message. Nothing else
+   is copied while you play. "Download information sheet" then
+   draws a PNG card with the run's numbers and that picture on a 2D canvas: nothing is sent
+   anywhere.
+   ========================================================================== */
+const deathShot = { img: null };
+function copyCanvas(cv) {
+  try {
+    const w = Math.min(960, cv.width), h = Math.max(1, Math.round(cv.height * w / cv.width));
+    const c = document.createElement("canvas"); c.width = w; c.height = h;
+    c.getContext("2d").drawImage(cv, 0, 0, w, h); return c;
+  } catch (e) { return null; }
+}
+function grabDeathShot(cv) { deathShot.img = copyCanvas(cv); }
+// d: { name, mode, length, peak, best, kills, rankNow, rankBest, total, killer, seconds, colour }
+function downloadDeathSheet(d) {
+  const W = 1000, pad = 40, pic = deathShot.img;
+  const pw = W - pad * 2, ph = pic ? Math.round(pic.height * pw / pic.width) : 0;
+  const cells = [
+    ["Length when you died", d.length.toLocaleString()],
+    ["Longest this run", d.peak.toLocaleString()],
+    ["Your best ever (this device)", d.best.toLocaleString()],
+    ["Highest place this run", d.rankBest ? `#${d.rankBest}` : "–"],
+    ["Place when you died", d.rankNow ? `#${d.rankNow} of ${d.total}` : "–"],
+    ["Kills", String(d.kills)],
+    ["Time alive", d.seconds >= 60 ? `${Math.floor(d.seconds / 60)} min ${Math.round(d.seconds % 60)} s` : `${Math.round(d.seconds)} s`],
+    ["Killed by", d.killer],
+    ["Mode", d.mode],
+  ];
+  // online, for checking deaths against the screen: where the picture came from, and the connection
+  if (d.picture) cells.push(["Picture", d.picture]);
+  if (d.net) cells.push(["Connection", d.net]);
+  const cols = 3, cw = (pw - (cols - 1) * 14) / cols, chh = 84, rows = Math.ceil(cells.length / cols);
+  const H = 170 + rows * (chh + 14) + (pic ? ph + 60 : 0) + 50;
+  const c = document.createElement("canvas"); c.width = W; c.height = H;
+  const g = c.getContext("2d"), font = "system-ui, -apple-system, Segoe UI, Roboto, sans-serif";
+  g.fillStyle = "#070a12"; g.fillRect(0, 0, W, H);
+  const grad = g.createLinearGradient(pad, 0, pad + 300, 0); grad.addColorStop(0, "#34d399"); grad.addColorStop(1, "#38bdf8");
+  g.fillStyle = grad; g.font = `800 44px ${font}`; g.textBaseline = "alphabetic"; g.fillText("ouro", pad, 74);
+  g.fillStyle = "#93a0bd"; g.font = `500 18px ${font}`;
+  g.fillText(`Run report · ${new Date().toLocaleString()}`, pad, 104);
+  g.fillStyle = d.colour || "#34d399"; g.beginPath(); g.arc(pad + 9, 137, 9, 0, Math.PI * 2); g.fill();
+  g.fillStyle = "#e8edf8"; g.font = `700 24px ${font}`; g.fillText(d.name, pad + 28, 145);
+  let y = 170;
+  cells.forEach(([k, v], i) => {
+    const x = pad + (i % cols) * (cw + 14), yy = y + Math.floor(i / cols) * (chh + 14);
+    g.fillStyle = "rgba(255,255,255,.05)"; g.strokeStyle = "rgba(255,255,255,.10)";
+    g.beginPath(); g.roundRect(x, yy, cw, chh, 12); g.fill(); g.stroke();
+    let fs = 28; g.font = `700 ${fs}px ${font}`;
+    while (g.measureText(v).width > cw - 32 && fs > 18) g.font = `700 ${--fs}px ${font}`; // long values: smaller first
+    g.fillStyle = "#e8edf8";
+    let t = v; while (g.measureText(t).width > cw - 32 && t.length > 2) t = t.slice(0, -2) + "…";
+    g.fillText(t, x + 16, yy + 40);
+    g.fillStyle = "#93a0bd"; g.font = `600 13px ${font}`; g.fillText(k.toUpperCase(), x + 16, yy + 66);
+  });
+  y += rows * (chh + 14) + 10;
+  if (pic) {
+    g.fillStyle = "#93a0bd"; g.font = `600 14px ${font}`; g.fillText("THE MOMENT OF DEATH", pad, y + 22);
+    g.save(); g.beginPath(); g.roundRect(pad, y + 34, pw, ph, 14); g.clip(); g.drawImage(pic, pad, y + 34, pw, ph); g.restore();
+    g.strokeStyle = "rgba(255,255,255,.12)"; g.beginPath(); g.roundRect(pad, y + 34, pw, ph, 14); g.stroke();
+    y += ph + 60;
+  }
+  g.fillStyle = "#5d6a86"; g.font = `500 13px ${font}`; g.fillText("Play at br8t.com/ouro", pad, H - 22);
+  c.toBlob((b) => {
+    if (!b) return;
+    const a = document.createElement("a"), stamp = new Date().toISOString().slice(0, 16).replace(/[:T]/g, "-");
+    a.href = URL.createObjectURL(b); a.download = `ouro-run-${stamp}.png`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 10000);
+  }, "image/png");
+}
+"use strict";
+
+/* Skin palette — must match the shader's table (index = skin id). */
+const SKINS = [
+  ["#34d399", "#059669"], ["#38bdf8", "#0369a1"], ["#a78bfa", "#6d28d9"], ["#f472b6", "#be185d"],
+  ["#fbbf24", "#b45309"], ["#fb7185", "#be123c"], ["#a3e635", "#4d7c0f"], ["#22d3ee", "#0e7490"],
+  ["#fb923c", "#c2410c"], ["#818cf8", "#4338ca"], ["#f1f5f9", "#64748b"], ["#facc15", "#27272a"],
+];
+// Skins 12..127: the colour picker's choices (everyone builds the same list, so only the number is sent).
+// 24 hues x 4 lightnesses, 12 soft hues, 8 greys; the stripe colour is a darker shade of the same.
+{
+  const hsl = (h, s, l) => { const f = (n) => { const k = (n + h / 30) % 12, a = s * Math.min(l, 1 - l);
+    return Math.round(255 * (l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1)))).toString(16).padStart(2, "0"); }; return "#" + f(0) + f(8) + f(4); };
+  const add = (h, s, l) => SKINS.push([hsl(h, s, l), hsl(h, s, l * 0.55)]);
+  for (const l of [0.35, 0.5, 0.65, 0.8]) for (let h = 0; h < 360; h += 15) add(h, 0.85, l);
+  for (let h = 0; h < 360; h += 30) add(h, 0.35, 0.6);
+  for (let i = 0; i < 8; i++) add(0, 0, 0.12 + i * 0.115);
+}
+const nearestSkin = (hex) => { // the picker's colour → the closest skin from 12 on
+  const c = (h) => [1, 3, 5].map((o) => parseInt(h.substr(o, 2), 16)), [r, g, b] = c(hex);
+  let best = 12, bd = 1e9;
+  for (let i = 12; i < SKINS.length; i++) { const [R, G, B] = c(SKINS[i][0]), d = 2 * (R - r) ** 2 + 4 * (G - g) ** 2 + 3 * (B - b) ** 2; if (d < bd) { bd = d; best = i; } }
+  return best;
+};
+const BOT_NAMES = ["Noodle", "Slinky", "Viper", "Kaa", "Mamba", "Wiggles", "Nagini", "Zigzag", "Sir Hiss", "Boop", "Cobra Kai",
+  "Pythonista", "Rattler", "Sidewinder", "Jormungandr", "Ouroboros", "Danger Noodle", "Spaghetti", "Slithers", "Taipan",
+  "Adder", "Asp", "Basilisk", "Garter", "Krait", "Anaconda", "Boa", "Copperhead", "Hognose", "Kingsnake", "Milk Snake",
+  "Racer", "Whip", "Coral", "Sssam", "Hisssy", "Zero Cool", "Lil Fang", "Mr. Scales", "Big Tony", "Worm", "Longboi", "Snek", "Nope Rope", "Sneaky", "Wriggle", "Laces",
+  "Ziggy", "Pretzel", "Hissy Fit", "Captain Coil", "Medusa", "Twister", "Slurp", "Sir Slides-a-lot", "Wyrm", "Sssteve",
+  "Fangs Out", "Noodle Doodle", "Scaley Dan", "Velvet Viper", "Zap"];
+
+(async () => {
+  const $ = (id) => document.getElementById(id);
+  if (location.protocol === "file:") $("dl")?.remove(); // already a downloaded copy
+  const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+                  set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
+
+  /* ---------------- WebAssembly ---------------- */
+  const bin = Uint8Array.from(atob(WASM_BASE64), (c) => c.charCodeAt(0));
+  const { instance } = await WebAssembly.instantiate(bin, { env: { now: () => performance.now() } });
+  const W = instance.exports;
+  const BOTS = 100;
+  W.init((Math.random() * 4294967295) >>> 0, BOTS);
+  const WR = W.worldRadius();
+
+  /* ---------------- Zero-copy views into WebAssembly memory ----------------
+     Memory never grows (all static), so these stay valid forever. */
+  const mem = W.memory.buffer, NS = W.snakeCount(), RING = W.ring();
+  const SN = 8, snap = new Float32Array(mem, W.snapPtr(), NS * SN); // per snake: alive, x, y, mass, skin, tier, near, kills
+  const lb = new Int32Array(mem, W.rankPrep(), 12);
+  const frameBlk = new Float32Array(mem, W.frameBlkPtr(), 12); // std140 Frame block, written by WASM
+  const frameOut = new Int32Array(mem, W.frameOutPtr(), 8);    // counts for this frame
+  const frameMs = new Float32Array(mem, W.frameMsPtr(), 2);    // WASM-side timings
+  // label atlas at the screen's own pixel density (not always 2x): smaller texture, same sharpness
+  const SLOT_W = 150, SLOT_H = 34, LS = Math.min(2, Math.max(1, window.devicePixelRatio || 1)), CELLS_X = 8, CELLS_Y = Math.ceil(NS / CELLS_X);
+  const E = {
+    mem, NS, RING, SLOT_W, SLOT_H, CELLS_X, CELLS_Y, AW: SLOT_W * LS * CELLS_X, AH: SLOT_H * LS * CELLS_Y,
+    frameBlk, frameOut,
+    trail: new Int16Array(mem, W.trailPtr(), NS * RING * 2),
+    tup: new Uint32Array(mem, W.tupPtr(), NS * 6),          // trail uploads: (row, first index, count)...
+    ptr: { trail: W.trailPtr() },
+  };
+  // The per-frame GPU block in WASM memory: offsets relative to its start (frame uniforms at 0)
+  const base = W.frameBlkPtr();
+  E.arena = { base, hdr: W.hdrPtr() - base, mini: W.miniPtr() - base,
+              food: W.foodPtr() - base, size: W.foodPtr() - base + W.maxFood() * 8 };
+  E.arenaBytes = new Uint8Array(mem, base, E.arena.size);
+  // skin palette as 24 vec4s (12 main colours, then 12 stripe colours) for a uniform buffer
+  E.palette = new Float32Array(SKINS.length * 8); // 128 main colours, then 128 stripe colours
+  SKINS.forEach(([a, b], i) => [a, b].forEach((h, k) => [1, 3, 5].forEach((o, c) => { E.palette[(k * SKINS.length + i) * 4 + c] = parseInt(h.substr(o, 2), 16) / 255; })));
+
+  /* ---------------- Renderer: WebGPU, or WebGL 2 when chosen ----------------
+     If WebGPU fails (at start or later: driver reset, GPU process restart) the game
+     stops and shows why, with "Try again" and "Use WebGL instead"; it never
+     switches silently. ?renderer=webgl (or the menu) picks WebGL directly. */
+  const canvas = $("gl");
+  const saved = store.get("serpent.renderer") || "auto";
+  const want = new URLSearchParams(location.search).get("renderer") || saved;
+  // Is this browser running the site with its JavaScript/WebAssembly optimizer off
+  // (Edge "Enhance your security on the web", Chrome "V8 optimizer" blocked)? That
+  // mode also turns WebGPU off and makes the game ~30x slower. A tight loop tells:
+  // a few ms with the optimizer, 10x more without it.
+  function optimizerOff() { // fastest of 3 runs: the first one includes compiling
+    let best = 1e9;
+    for (let k = 0; k < 3; k++) {
+      const t = performance.now(); let x = 0;
+      for (let i = 0; i < 3e6; i++) x = (x + i * 7) | 0;
+      best = Math.min(best, performance.now() - t + (x & 0));
+    }
+    return best > 25; // ~5 ms with the optimizer, 50+ without
+  }
+  const site = location.hostname || "this file";
+  const securityHint = () => `<p style="margin:0 0 14px;padding:10px;border-radius:10px;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.3);font-size:14px;line-height:1.5">
+    <b>Likely cause:</b> your browser runs this site in a high-security mode (its JavaScript/WebAssembly optimizer is off here), which also turns off WebGPU and makes the game run about 30× slower.
+    <b>Edge:</b> Settings → Privacy, search and services → “Enhance your security on the web” → Exceptions → add <b>${site}</b> (or choose Basic).
+    <b>Chrome:</b> Settings → Privacy and security → Site settings → JavaScript optimization → allow <b>${site}</b>. Then reload.</p>`;
+  function gpuProblem(title, detail) { // resolves when the player picks WebGL
+    return new Promise((done) => {
+      const el = document.createElement("div");
+      el.className = "screen"; el.style.cssText = "z-index:50;background:rgba(4,6,12,.9)";
+      el.innerHTML = `<div class="card glass" style="text-align:left"><h2 style="font-size:24px;margin-bottom:10px">${title}</h2>
+        <p style="font:12.5px/1.5 ui-monospace,monospace;color:#fde68a;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);border-radius:10px;padding:10px;word-break:break-word"></p>
+        <p style="margin:12px 0 18px;color:var(--dim);font-size:14px;line-height:1.5">Step-by-step fixes: <a href="https://developer.chrome.com/docs/web-platform/webgpu/troubleshooting-tips"
+        target="_blank" rel="noopener" style="color:var(--accent2)">WebGPU troubleshooting guide</a>.</p>
+        ${optimizerOff() ? securityHint() : ""}
+        <button class="play" data-a="retry">TRY AGAIN</button>
+        <button class="play" data-a="gl" style="margin-top:10px;background:rgba(255,255,255,.08);color:var(--text);box-shadow:none">Use WebGL instead</button></div>`;
+      el.querySelector("p").textContent = detail;
+      el.querySelector('[data-a="retry"]').onclick = () => { location.href = location.pathname; };
+      el.querySelector('[data-a="gl"]').onclick = () => { store.set("serpent.renderer", "webgl"); el.remove(); done(); }; // remembered; the menu switch changes it back
+      document.body.appendChild(el);
+    });
+  }
+  const toWebGL = () => { location.href = location.pathname + "?renderer=webgl"; };
+  let R = null, gpuDown = false, gpuRestarts = 0;
+  const touchDevice = matchMedia("(hover: none)").matches || navigator.maxTouchPoints > 0;
+  if (want !== "webgl") {
+    try { R = await createGPU(canvas, E); }
+    catch (e) {
+      console.warn("WebGPU failed:", e);
+      // a browser with no WebGPU at all has nothing to fix: Auto goes straight to WebGL
+      if (want !== "auto" || navigator.gpu) await gpuProblem("WebGPU isn't working", String(e && e.message || e));
+      R = null;
+      if (canvas.getContext("webgpu")) canvas.replaceWith(canvas.cloneNode()); // a failed WebGPU attempt holds the canvas
+    }
+    if (R) watchGPU(R);
+  }
+  // Phones and tablets drop the graphics device when you leave the page (another app, the
+  // home screen, a locked screen). There WebGPU is simply made again when you come back,
+  // with every snake's trail and name label sent anew; elsewhere a lost device is shown.
+  function watchGPU(r) {
+    r.device.lost.then((info) => {
+      if (info.reason === "destroyed" || R !== r) return;
+      if (touchDevice || document.hidden) restartGPU();
+      else gpuProblem("WebGPU stopped", `The graphics device was lost: ${info.message || "no reason given"}`).then(toWebGL);
+    });
+    let shown = false; // a WebGPU error while playing: show the first one (the rest are usually the same)
+    r.device.addEventListener("uncapturederror", (ev) => { if (!shown && R === r && !gpuDown) { shown = true; gpuProblem("WebGPU error", ev.error.message).then(toWebGL); } });
+  }
+  async function restartGPU() {
+    if (gpuDown) return;
+    gpuDown = true; // the main loop skips drawing meanwhile
+    if (document.hidden) await new Promise((ok) => { const f = () => { if (!document.hidden) { document.removeEventListener("visibilitychange", f); ok(); } }; document.addEventListener("visibilitychange", f); });
+    for (let i = 0; i < 4; i++) {
+      try {
+        const r = await createGPU(canvas, E);
+        R = r; watchGPU(r); resize(); slotKey.fill(""); gpuDown = false; gpuRestarts++;
+        return;
+      } catch (e) { console.warn("WebGPU restart failed:", e); await new Promise((ok) => setTimeout(ok, 400 * (i + 1))); }
+    }
+    gpuProblem("WebGPU stopped", "The graphics device was lost and could not be started again.").then(toWebGL);
+  }
+  if (!R) R = createGL($("gl"), E);
+  if (!R) { document.body.innerHTML = '<p style="padding:40px;font:18px system-ui;color:#fff">This game needs WebGPU or WebGL 2.</p>'; return; }
+  const cv = $("gl");
+  // Pixel density cap: GPU cost is mostly pixels, so on integrated graphics a
+  // lower cap is the biggest single saving (Sharp = up to 2x, Balanced 1.25x, Fast 1x).
+  const QUAL = { sharp: 2, balanced: 1.25, fast: 1 };
+  let quality = store.get("serpent.quality") || "sharp";
+  $("tech").textContent = `WebAssembly sim · GPU-built snakes · 5 draws`;
+  // Renderer switch (Auto = WebGPU if available). Applying it needs a fresh page.
+  const rsEl = $("rsw");
+  for (const b of rsEl.querySelectorAll("button")) {
+    b.setAttribute("aria-pressed", b.dataset.r === (store.get("serpent.renderer") || "auto")); // after any "Use WebGL instead"
+    b.onclick = () => { store.set("serpent.renderer", b.dataset.r); location.href = location.pathname; };
+  }
+  $("rnow").textContent = R.name;
+  const qEl = $("qsw");
+  const markQ = () => { for (const b of qEl.querySelectorAll("button")) b.setAttribute("aria-pressed", b.dataset.q === quality); };
+  for (const b of qEl.querySelectorAll("button")) b.onclick = () => { quality = b.dataset.q; store.set("serpent.quality", quality); markQ(); resize(); };
+  markQ();
+
+  let vw = 0, vh = 0;
+  const miniEl = $("mini");
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, QUAL[quality] || 2);  // always full sharpness: never lowered automatically
+    vw = Math.max(1, Math.round(innerWidth * dpr)); vh = Math.max(1, Math.round(innerHeight * dpr)); // at least 1: a page opened in a background tab has no size yet, and a 0x0 canvas made WebGPU fail to start
+    if (cv.width !== vw || cv.height !== vh) { cv.width = vw; cv.height = vh; }
+    R.resize(vw, vh);
+    const r = miniEl.getBoundingClientRect();
+    R.placeMini(((r.left + r.width / 2) / innerWidth) * 2 - 1, 1 - ((r.top + r.height / 2) / innerHeight) * 2, (r.width / 2 - 3) * (vw / innerWidth));
+  }
+  addEventListener("resize", resize); resize();
+
+  /* ---------------- UI ---------------- */
+  let skinSel = (+(store.get("serpent.skin") ?? 0) | 0) & 127;
+  const skinsEl = $("skins");
+  const pickSkin = (i) => { skinSel = i; store.set("serpent.skin", i); [...skinsEl.children].forEach((c, j) => c.setAttribute("aria-pressed", j === Math.min(i, 12))); };
+  const stripes = ([a, b]) => `repeating-linear-gradient(135deg, ${a} 0 7px, ${b} 7px 14px)`;
+  SKINS.slice(0, 12).forEach((sk, i) => {
+    const el = document.createElement("button");
+    el.className = "skin"; el.title = `Skin ${i + 1}`; el.style.background = stripes(sk);
+    el.onclick = () => pickSkin(i);
+    skinsEl.appendChild(el);
+  });
+  { // last: any colour (a colour picker; the snake gets the nearest of 116 shades)
+    const el = document.createElement("label"), inp = document.createElement("input");
+    el.className = "skin pick"; el.title = "Pick your own colour"; inp.type = "color";
+    const show = () => { el.style.background = skinSel >= 12 ? stripes(SKINS[skinSel]) : ""; };
+    inp.value = SKINS[skinSel >= 12 ? skinSel : 12][0];
+    inp.addEventListener("input", () => { pickSkin(nearestSkin(inp.value)); show(); });
+    el.onclick = () => { if (skinSel < 12) { pickSkin(nearestSkin(inp.value)); show(); } };
+    el.appendChild(inp); skinsEl.appendChild(el); show();
+  }
+  pickSkin(skinSel);
+  const nameEl = $("name"); nameEl.value = store.get("serpent.name") ?? "";
+  let best = +(store.get("serpent.best") ?? 0);
+  const names = []; for (let i = 0; i < NS; i++) names.push(BOT_NAMES[(i * 7 + 3) % BOT_NAMES.length] + ["", " II", " III", " IV"][Math.min(3, Math.floor(i / BOT_NAMES.length))]);
+  // No nickname typed: a random name from the computer snakes' list, picked anew each game
+  let autoName = BOT_NAMES[Math.floor(Math.random() * BOT_NAMES.length)];
+  const playerName = () => nameEl.value.trim() || autoName;
+
+  let state = "menu"; // menu | play | dead
+
+  // this run's numbers, for the information sheet
+  const run = { t0: 0, peak: 0, rankBest: 0, rankNow: 0, total: 0 }; let lastRun = null, grabPending = false;
+  function start() {
+    Object.assign(run, { t0: performance.now(), peak: 0, rankBest: 0, rankNow: 0, total: 0 });
+    store.set("serpent.name", nameEl.value.trim());
+    if (!nameEl.value.trim()) autoName = BOT_NAMES[Math.floor(Math.random() * BOT_NAMES.length)];
+    W.spawnPlayer(skinSel); // also moves the camera there and fills food around it
+    state = "play"; document.body.classList.add("playing");
+    $("menu").classList.add("hidden"); $("over").classList.add("hidden");
+    nameEl.blur();
+  }
+  function toMenu() {
+    if (state === "play") W.killPlayer();
+    state = "menu"; document.body.classList.remove("playing");
+    $("over").classList.add("hidden"); $("menu").classList.remove("hidden");
+  }
+  function onDeath() {
+    state = "dead";
+    const len = Math.floor(lastMass * 10), k = W.kills(0);
+    const isBest = len > best; if (isBest) { best = len; store.set("serpent.best", best); }
+    $("oLen").textContent = len; $("oKills").textContent = k; $("oBest").textContent = best;
+    $("oBest").classList.toggle("new", isBest);
+    const killer = W.killer();
+    $("by").innerHTML = killer > 0 ? `Crashed into <b>${names[killer]}</b>` : "You hit the edge of the world";
+    lastRun = { name: playerName(), mode: "Offline", length: len, peak: Math.max(run.peak, len), best, kills: k, rankNow: run.rankNow, rankBest: run.rankBest,
+      total: run.total, killer: killer > 0 ? names[killer] : "The edge of the world", seconds: (performance.now() - run.t0) / 1000, colour: SKINS[skinSel][0] };
+    grabPending = true; // the next frame drawn is copied for the sheet
+    setTimeout(() => { if (state === "dead") { $("over").classList.remove("hidden"); document.body.classList.remove("playing"); } }, 900);
+  }
+  $("play").onclick = start; $("again").onclick = start;
+  $("toStart").onclick = toMenu;
+  $("sheet").onclick = () => { if (lastRun) downloadDeathSheet(lastRun); };
+  nameEl.addEventListener("keydown", (e) => { if (e.key === "Enter") start(); e.stopPropagation(); });
+
+  /* ---------------- Input ---------------- */
+  let aim = 0, mouseBoost = false, keyBoost = false, touchBoost = false, keyTurn = 0, usingKeys = false; const keysDown = new Set();
+  let mx = innerWidth / 2 + 100, my = innerHeight / 2;
+  // The mouse takes over again only when it really moves: browsers also send "moves" when
+  // the page changes under a still cursor, which used to swing the snake toward it.
+  let keyAnchorX = 0, keyAnchorY = 0;
+  cv.addEventListener("pointermove", (e) => {
+    if (e.pointerType !== "mouse") return;
+    mx = e.clientX; my = e.clientY;
+    if (usingKeys && Math.hypot(mx - keyAnchorX, my - keyAnchorY) > 6) usingKeys = false;
+  });
+  cv.addEventListener("mousedown", () => { mouseBoost = true; });
+  addEventListener("mouseup", () => { mouseBoost = false; });
+  const touches = new Map();
+  cv.addEventListener("touchstart", (e) => { for (const t of e.changedTouches) touches.set(t.identifier, t); onTouch(); e.preventDefault(); }, { passive: false });
+  cv.addEventListener("touchmove", (e) => { for (const t of e.changedTouches) touches.set(t.identifier, t); onTouch(); e.preventDefault(); }, { passive: false });
+  const endT = (e) => { for (const t of e.changedTouches) touches.delete(t.identifier); onTouch(); };
+  cv.addEventListener("touchend", endT); cv.addEventListener("touchcancel", endT);
+  function onTouch() {
+    touchBoost = touches.size >= 2;
+    const t = touches.values().next().value;
+    if (t) { mx = t.clientX; my = t.clientY; usingKeys = false; }
+  }
+  addEventListener("keydown", (e) => {
+    if (e.repeat) return;
+    const k = e.key;
+    if (k === " " || k === "Shift" || k === "ArrowUp" || k === "w") { keyBoost = true; e.preventDefault(); }
+    else if (k === "ArrowLeft" || k === "a" || k === "ArrowRight" || k === "d") {
+      keysDown.add(k === "ArrowLeft" || k === "a" ? "L" : "R"); keyTurn = (keysDown.has("R") ? 1 : 0) - (keysDown.has("L") ? 1 : 0);
+      if (!usingKeys) { usingKeys = true; keyAnchorX = mx; keyAnchorY = my; }
+    }
+    else if (k === "p" || k === "P") $("perf").classList.toggle("off");
+    else if (k === "Enter" && state !== "play") start();
+    else if (k === "Escape" && state !== "menu") toMenu();
+  });
+  addEventListener("keyup", (e) => {
+    const k = e.key;
+    if (k === " " || k === "Shift" || k === "ArrowUp" || k === "w") keyBoost = false;
+    else if (k === "ArrowLeft" || k === "a" || k === "ArrowRight" || k === "d") {
+      keysDown.delete(k === "ArrowLeft" || k === "a" ? "L" : "R"); keyTurn = (keysDown.has("R") ? 1 : 0) - (keysDown.has("L") ? 1 : 0);
+    }
+  });
+  addEventListener("blur", () => { keyBoost = mouseBoost = false; keyTurn = 0; keysDown.clear(); });
+
+  /* ---------------- HUD (throttled DOM work; ranking done in WASM) ---------------- */
+  const TIERS = ["ROOKIE", "CASUAL", "HUNTER", "ELITE", "LEGEND"];
+  const TIER_COL = ["#6ee7b7", "#7dd3fc", "#fcd34d", "#fda4af", "#fbbf24"];
+  const lbEl = $("lb");
+  // leaderboard text size: − / + in its title; remembered (phones start smaller).
+  // On phones and touch screens the level shows as one coloured letter until the board is made full size.
+  const boardEl = $("board"), smallScreen = matchMedia("(max-width: 640px), (hover: none)");
+  let lbScale = parseFloat(store.get("serpent.lbscale"));
+  if (!(lbScale >= 0.6 && lbScale <= 1.5)) lbScale = matchMedia("(max-width: 640px)").matches ? 0.8 : 1;
+  const setLbScale = (v, save) => {
+    lbScale = Math.round(Math.max(0.6, Math.min(1.5, v)) * 100) / 100;
+    boardEl.style.setProperty("--lbs", lbScale);
+    boardEl.classList.toggle("short", smallScreen.matches && lbScale < 1);
+    if (save) store.set("serpent.lbscale", lbScale);
+  };
+  setLbScale(lbScale);
+  smallScreen.addEventListener("change", () => setLbScale(lbScale));
+  for (const bt of document.querySelectorAll(".lbsz button[data-d]")) {
+    bt.addEventListener("pointerdown", (e) => e.stopPropagation());
+    bt.onclick = (e) => { setLbScale(lbScale + 0.1 * +bt.dataset.d, true); e.currentTarget.blur(); };
+  }
+  // Resize in any direction: the left edge sets the width, the bottom edge the height (rows
+  // past it are cut off), the bottom-left corner both. The board is pinned top-right, so
+  // dragging left/down grows it. × folds it to its title bar (▾ opens it). All remembered.
+  const lbOl = $("lb"), lbX = $("lbX");
+  let lbW = parseFloat(store.get("serpent.lbw")) || 0, lbH = parseFloat(store.get("serpent.lbh")) || 0; // 0: fit the content
+  const applyLbSize = () => {
+    boardEl.style.width = lbW ? lbW + "px" : ""; lbOl.style.maxHeight = lbH ? lbH + "px" : "";
+    boardEl.classList.toggle("sized", !!(lbW || lbH));
+    // made narrow by hand: the level badges shrink to one coloured letter, then go, so the room shows names
+    boardEl.classList.toggle("tgS", lbW > 0 && lbW < 250); boardEl.classList.toggle("tgX", lbW > 0 && lbW < 190);
+  };
+  const setLbClosed = (c) => { boardEl.classList.toggle("closed", c); document.body.classList.toggle("lbOpen", !c); lbX.textContent = c ? "▾" : "×"; lbX.title = c ? "Show the leaderboard" : "Hide the leaderboard"; };
+  applyLbSize(); setLbClosed(store.get("serpent.lbclosed") === "1");
+  lbX.addEventListener("pointerdown", (e) => e.stopPropagation());
+  lbX.onclick = (e) => { const c = !boardEl.classList.contains("closed"); setLbClosed(c); store.set("serpent.lbclosed", c ? "1" : "0"); e.currentTarget.blur(); };
+  for (const h of boardEl.querySelectorAll("[data-rs]")) h.addEventListener("pointerdown", (e) => {
+    e.preventDefault(); e.stopPropagation(); h.setPointerCapture(e.pointerId);
+    const dir = h.dataset.rs, x0 = e.clientX, y0 = e.clientY, w0 = boardEl.offsetWidth, h0 = lbOl.offsetHeight;
+    const move = (m) => { // screen pixels → the board's own (it may be scaled)
+      if (dir.includes("w")) lbW = Math.round(Math.max(150, Math.min(640, w0 + (x0 - m.clientX) / lbScale)));
+      if (dir.includes("s")) lbH = Math.round(Math.max(20, Math.min(lbOl.scrollHeight, h0 + (m.clientY - y0) / lbScale)));
+      applyLbSize();
+    };
+    const up = () => { h.removeEventListener("pointermove", move); h.removeEventListener("pointerup", up); h.removeEventListener("pointercancel", up); store.set("serpent.lbw", lbW); store.set("serpent.lbh", lbH); };
+    h.addEventListener("pointermove", move); h.addEventListener("pointerup", up); h.addEventListener("pointercancel", up);
+  });
+  // a double click on any edge goes back to fitting the content
+  for (const h of boardEl.querySelectorAll("[data-rs]")) h.addEventListener("dblclick", () => { lbW = lbH = 0; applyLbSize(); store.set("serpent.lbw", 0); store.set("serpent.lbh", 0); });
+  const esc = (t) => t.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
+  let lastMass = 10, lastLb = "";
+  function updateHud() {
+    W.rankPrep(); // fills lb: [alive, player rank, top 10 ids...]
+    let html = "";
+    for (let i = 0; i < 10 && lb[2 + i] >= 0; i++) {
+      const s = lb[2 + i], b = s * SN, t = snap[b + 5];
+      const tag = s === 0 ? `<span class="tg you" data-l="YOU" data-s="Y"></span>` : `<span class="tg t${t}" title="${TIERS[t]}" data-l="${TIERS[t]}" data-s="${TIERS[t][0]}"></span>`;
+      html += `<li class="${s === 0 ? "me" : ""}"><span class="n">${i + 1}</span><span class="dot" style="background:${SKINS[snap[b + 4]][0]}"></span><span class="nm">${esc(s === 0 ? playerName() : names[s])}</span>${tag}<span class="sc">${Math.floor(snap[b + 3] * 10)}</span></li>`;
+    }
+    if (html !== lastLb) { lbEl.innerHTML = html; lastLb = html; }
+    // keep label atlas slots in sync (bots change level when they respawn)
+    for (let s = 0; s < NS; s++) {
+      const key = s === 0 ? "p:" + playerName() : snap[s * SN] ? "t" + snap[s * SN + 5] : slotKey[s];
+      if (key !== slotKey[s]) drawSlot(s, key);
+    }
+    if (state !== "play") return;
+    $("len").textContent = Math.floor(snap[3] * 10);
+    run.peak = Math.max(run.peak, Math.floor(snap[3] * 10)); run.rankNow = lb[1]; run.total = lb[0];
+    if (lb[1] > 0) run.rankBest = run.rankBest ? Math.min(run.rankBest, lb[1]) : lb[1];
+    $("rank").textContent = lb[1];
+    $("total").textContent = lb[0];
+    $("kills").textContent = snap[7];
+  }
+
+  /* ---------------- Name + level labels (GPU) ----------------
+     Each snake owns one slot of a texture atlas. A slot is re-drawn with Canvas2D
+     only when its text changes (bot respawns with another level); every frame
+     the labels are a single instanced draw that reuses the snake headers. */
+  const slotKey = new Array(NS).fill("");
+  const slotCanvas = document.createElement("canvas");
+  slotCanvas.width = SLOT_W * LS; slotCanvas.height = SLOT_H * LS;
+  const sc = slotCanvas.getContext("2d");
+  const FONT = 'Outfit, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif';
+  function drawSlot(s, key) {
+    slotKey[s] = key;
+    sc.setTransform(LS, 0, 0, LS, 0, 0);
+    sc.clearRect(0, 0, SLOT_W, SLOT_H);
+    sc.textAlign = "center"; sc.textBaseline = "alphabetic";
+    sc.shadowColor = "rgba(0,0,0,.6)"; sc.shadowBlur = 2.5; sc.shadowOffsetY = 0.5;
+    sc.font = `600 12px ${FONT}`; sc.fillStyle = "rgba(255,255,255,.92)";
+    const name = s === 0 ? playerName() : names[s];
+    if (s === 0) { sc.fillText(name, SLOT_W / 2, SLOT_H - 6); }
+    else {
+      const t = +key.slice(1);
+      sc.fillText(name, SLOT_W / 2, SLOT_H - 17);
+      sc.font = `600 9.5px ${FONT}`; sc.fillStyle = TIER_COL[t]; sc.letterSpacing = "0.6px";
+      sc.fillText(`LV ${t + 1} · ${TIERS[t]}`, SLOT_W / 2, SLOT_H - 6);
+      sc.letterSpacing = "0px";
+    }
+    R.labelSlot(slotCanvas, (s % CELLS_X) * SLOT_W * LS, Math.floor(s / CELLS_X) * SLOT_H * LS);
+  }
+  // re-draw every label once the web font has loaded
+  document.fonts?.ready.then(() => slotKey.fill(""));
+
+  /* ---------------- Main loop ----------------
+     JS gathers input, makes ONE WebAssembly call and hands its output to the GPU. */
+  const perfEl = $("perf");
+  const T = { sim: 0, prep: 0, gl: 0, hud: 0, n: 0 };
+  let frameNo = 0, last = performance.now(), fpsAcc = 0, perfT = 0, hudT = 0;
+
+  const MENU_DIM = 0.4; let dimV = MENU_DIM;
+  function frame(now) {
+    requestAnimationFrame(frame);
+    const playing = state === "play";
+    if (!playing && now - last < 30) return; // menu / game-over: ~30 fps is plenty
+    const dt = Math.min((now - last) / 1000, 0.25); last = now;
+    if (playing) {
+      // Keys steer relative to where the snake is heading NOW: aim a little to that side
+      // (it then turns at its own top speed) or straight ahead. An aim that ran on by itself
+      // could get more than half a turn ahead of a slow-turning big snake, which then turned
+      // the other way.
+      if (usingKeys) aim = W.playerAng() + keyTurn * 0.6;
+      else aim = Math.atan2(my - innerHeight / 2, mx - innerWidth / 2);
+    }
+
+    // --- everything but drawing: input, 60 Hz sim, camera, culling, render data, draw counts
+    W.frame(dt, aim, mouseBoost || keyBoost || touchBoost ? 1 : 0, playing ? 0 : state === "dead" ? 1 : 2, vw, vh, innerWidth, (now / 1000) % 3600);
+    if (playing && !snap[0]) onDeath();
+    if (snap[0]) lastMass = snap[3];
+    const t2 = performance.now();
+
+    const timing = !perfEl.classList.contains("off");
+    if (grabPending) W.deathPose(); // the moment of death: this one frame shows your snake where it crashed
+    // start page / game over: the floor is drawn darker (frame block [11]), free, instead of a
+    // see-through full-screen layer over the game (that was every pixel painted twice)
+    dimV += ((playing || grabPending ? 0 : MENU_DIM) - dimV) * Math.min(1, dt * 8);
+    frameBlk[11] = grabPending ? 0 : dimV;
+    if (!gpuDown) { try { R.draw(frameNo++, playing, timing); } catch (e) { if (R.device && touchDevice) restartGPU(); else throw e; } }
+    if (grabPending && !gpuDown) { grabPending = false; grabDeathShot(cv); } // copied right after drawing, while the canvas holds it
+    const t3 = performance.now();
+
+    if ((hudT += dt) > 0.25) { hudT = 0; updateHud(); } // DOM: 4x per second
+    const t4 = performance.now();
+
+    T.sim += frameMs[0]; T.prep += frameMs[1]; T.gl += t3 - t2; T.hud += t4 - t3; T.n++; fpsAcc += dt;
+    if ((perfT += dt) > 0.5 && !perfEl.classList.contains("off")) {
+      const a = (v) => (v / T.n).toFixed(2);
+      let near = 0; for (let s = 1; s < NS; s++) near += snap[s * SN] && snap[s * SN + 6] ? 1 : 0;
+      const gpu = R.gpuMs >= 0 ? `<b>${R.gpuMs.toFixed(2)} ms</b>` + (R.passMs ? " (" + R.passMs.map((v, i) => `${R.passNames[i]} ${v.toFixed(2)}`).join(" · ") + ")" : "") : R.canTime ? "…" : "n/a";
+      perfEl.innerHTML = `<b>${Math.round(T.n / fpsAcc)}</b> fps · <b>${R.name}</b> · CPU/frame: sim <b>${a(T.sim)}</b> · prep <b>${a(T.prep)}</b> · draw <b>${a(T.gl)}</b> · dom <b>${a(T.hud)}</b> ms` +
+        `<br>GPU ${gpu}<br>${frameOut[0]} food slots (GPU-culled) · ${frameOut[1]} snakes drawn · full-detail bots <b>${near}</b> / ${NS - 1}` + benchTxt;
+      perfT = 0; fpsAcc = 0; T.sim = T.prep = T.gl = T.hud = T.n = 0;
+    }
+  }
+  // Simulation speed on this device, measured once warmed up (the first calls include
+  // compiling). Timing 120 steps in one go keeps coarse/jittered browser timers out of it.
+  let benchTxt = "";
+  setTimeout(() => {
+    if (state !== "menu") return;
+    const us = W.bench(120);
+    benchTxt = `<br>sim benchmark: <b>${us.toFixed(1)} µs</b> per step`;
+    if (us > 150) {
+      const n = $("slowNote"); n.hidden = false;
+      n.innerHTML = optimizerOff() ? securityHint() :
+        `The simulation is running slowly here (${Math.round(us)} µs per step; typical is 10–40). Check for battery saver / efficiency mode or a busy CPU.`;
+    }
+  }, 2500);
+  W.snapshot(); updateHud();
+  window.__serpent = { W, snap, names, renderer: () => R.name, get device() { return R.device; } }; // debugging / automated tests
+  requestAnimationFrame((t) => { last = t; frame(t); });
+})();
+</script>
+</body>
+</html>
