@@ -46,3 +46,22 @@ id,name,repo,play_url,author_demo,render,build,delivery,language,stars,category,
 45,Ouro,CatanCats/Ouro,https://br8t.com/ouro/,,WebAssembly + WebGPU,C→WASM；在线版 Rust 联网,离线单文件自包含；在线多人需服务端,JavaScript,,io 贪吃蛇,2026-11-16
 46,Black Tide,,https://fable52.games/play/black-tide-hdab0j,,three.js,,单文件 HTML,HTML,0,FPS,2026-11-16
 47,Undertow,,https://fable52.games/play/undertow-y8xvs5,,three.js,,单文件 HTML,HTML,0,模拟,2026-11-16
+48,Rawza Ring,Hashmatullahzaher/mazar-rawza-race,https://fable52.games/play/rawza-ring,https://hashmatullahzaher.github.io/mazar-rawza-race/,three.js,,源码仓库,JavaScript,0,竞速,2026-11-17
+49,Mini RPG,ertertwert/Mini-RPG,https://fable52.games/play/mini-rpg,https://ertertwert.com/MiniRPG.html,原生 JS,,源码仓库,JavaScript,0,RPG,2026-11-17
+50,"ぽん、と森は灯る (Pon, the Forest Lights Up)",shioa2006-game/ONE_PROMPT_WORLDS,https://fable52.games/play/pon-to-mori-wa-tomoru,https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game/index.html,原生 JS,,源码仓库,JavaScript,0,休闲,2026-11-17
+51,Graveyard Shift,ethanplusai/zombies,https://fable52.games/play/graveyard-shift,https://zombies.ethanplus.ai/,three.js,,源码仓库,JavaScript,0,FPS,2026-11-17
+52,太阳系三维沙盘 · Solar System 3D,,https://fable52.games/play/solar-system-3d,,原生 JS,,单文件 HTML,HTML,0,模拟,2026-11-17
+53,Duel Knights,bitofastickler/duel-knights,https://fable52.games/play/duel-knights,https://bitofastickler.github.io/duel-knights/,three.js,,源码仓库,JavaScript,0,,2026-11-17
+54,SHUTTERPINE,DQuanBui/shutterpine,https://fable52.games/play/shutterpine,https://dquanbui.github.io/shutterpine/,three.js,,源码仓库,JavaScript,0,,2026-11-17
+55,Last Return,StefanKnol/Last-Return,https://fable52.games/play/last-return,https://last-return.sknol.com/,原生 WebGL,,源码仓库,JavaScript,0,,2026-11-17
+56,Escape the Fable,ai-gamez-r-funz/escape-the-fable,https://fable52.games/play/escape-the-fable,https://ai-gamez-r-funz.github.io/escape-the-fable/,原生 JS,,源码仓库,JavaScript,0,解谜,2026-11-17
+57,The Long Climb,HILAYTRIVEDI/thirty-days,https://fable52.games/play/the-long-climb,https://hilaytrivedi.github.io/thirty-days/,three.js,,源码仓库,JavaScript,0,模拟,2026-11-17
+58,うしろのハニワ (The Haniwa Behind You),shioa2006-game/ONE_PROMPT_WORLDS,https://fable52.games/play/ushiro-no-haniwa,https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game6/index.html,原生 JS,,源码仓库,JavaScript,0,解谜,2026-11-17
+59,ひとつぶ庭園 (One-Grain Garden),shioa2006-game/ONE_PROMPT_WORLDS,https://fable52.games/play/hitotsubu-teien,https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game2/index.html,原生 JS,,源码仓库,JavaScript,0,解谜,2026-11-17
+60,ひつじが いっぴき (One Sheep: Koro the Sheepdog's Day),shioa2006-game/ONE_PROMPT_WORLDS,https://fable52.games/play/hitsuji-ga-ippiki,https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game8/index.html,原生 JS,,源码仓库,JavaScript,0,模拟,2026-11-17
+61,切りもどし ― 鋏と春の小さな鉢 (Cutting Back),shioa2006-game/ONE_PROMPT_WORLDS,https://fable52.games/play/kirimodoshi,https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game7/index.html,原生 JS,,源码仓库,JavaScript,0,解谜,2026-11-17
+62,Circular Tic Tac Toe,muhammad-sayed-mahdy/circular-tic-tac-toe-web,https://fable52.games/play/circular-tic-tac-toe,https://muhammad-sayed-mahdy.github.io/circular-tic-tac-toe-web/,原生 JS,,源码仓库,JavaScript,0,策略,2026-11-17
+63,Liquid Labyrinth,tuki0918/maze-exit,https://fable52.games/play/liquid-labyrinth,https://maze.bbbit.cc/,three.js,,源码仓库,JavaScript,0,解谜,2026-11-17
+64,LUMEN REEL ― まわる灯台と三つの海路,shioa2006-game/ONE_PROMPT_WORLDS,https://fable52.games/play/lumen-reel,https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game4/index.html,原生 JS,,源码仓库,JavaScript,0,策略,2026-11-17
+65,REEL DELVE ― まわる迷宮と三人の旅,shioa2006-game/ONE_PROMPT_WORLDS,https://fable52.games/play/reel-delve,https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game5/index.html,原生 JS,,源码仓库,JavaScript,0,解谜,2026-11-17
+66,EMBERDEEP ― 燈守りの坑道 (Lampkeeper's Mine),shioa2006-game/ONE_PROMPT_WORLDS,https://fable52.games/play/emberdeep-tomoshimori,https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game3/index.html,原生 JS,,源码仓库,JavaScript,0,动作,2026-11-17

@@ -4,7 +4,7 @@
 
 **仓库地址**：[GuoCoder/awesome-html-games](https://github.com/GuoCoder/awesome-html-games)
 
-**收录**：47 款（本地离线归档 21 款，其余为在线演示或源码链接） · 数据快照：2026-11-16
+**收录**：66 款（本地离线归档 22 款，其余为在线演示或源码链接） · 数据快照：2026-11-17
 
 ## 离线运行说明
 
@@ -693,6 +693,234 @@
 <sub>类别：模拟 · 技术：three.js · 语言：HTML · 体量：1.7 MB · 游玩量：26</sub>
 
 [离线归档](games/47/) ｜ [在线试玩](https://fable52.games/play/undertow-y8xvs5)
+
+### 48 · Rawza Ring
+
+![Rawza Ring](screenshots/48.jpg)
+
+**EN**: A 3D street race on the real streets around the Blue Mosque in Mazar-i-Sharif, built by Claude Fable 5.2 from one prompt in about 40 minutes.
+
+<sub>类别：竞速 · 技术：three.js · 语言：JavaScript · 游玩量：1</sub>
+
+[在线试玩](https://fable52.games/play/rawza-ring) ｜ [作者演示站](https://hashmatullahzaher.github.io/mazar-rawza-race/) ｜ [源码](https://github.com/Hashmatullahzaher/mazar-rawza-race)
+
+*感谢作者 **@Hashmatullahzaher** 的开源分享！*
+
+### 49 · Mini RPG
+
+![Mini RPG](screenshots/49.jpg)
+
+**EN**: A small pixel-art RPG with a town, a world map, turn-based battles and an Endless Tower. The author's first game, made while learning Fable 5.2.
+
+<sub>类别：RPG · 技术：原生 JS · 语言：JavaScript · 游玩量：2</sub>
+
+[在线试玩](https://fable52.games/play/mini-rpg) ｜ [作者演示站](https://ertertwert.com/MiniRPG.html) ｜ [源码](https://github.com/ertertwert/Mini-RPG)
+
+*感谢作者 **@ertertwert** 的开源分享！*
+
+### 50 · ぽん、と森は灯る (Pon, the Forest Lights Up)
+
+![ぽん、と森は灯る (Pon, the Forest Lights Up)](screenshots/50.jpg)
+
+**EN**: Fling a spore and a mushroom grows where it lands; every new mushroom is your next launcher. Light up a dark forest on your way to the great tree.
+
+<sub>类别：休闲 · 技术：原生 JS · 语言：JavaScript · 游玩量：2</sub>
+
+[在线试玩](https://fable52.games/play/pon-to-mori-wa-tomoru) ｜ [作者演示站](https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game/index.html) ｜ [源码](https://github.com/shioa2006-game/ONE_PROMPT_WORLDS)
+
+*感谢作者 **@shioa2006-game** 的开源分享！*
+
+### 51 · Graveyard Shift
+
+![Graveyard Shift](screenshots/51.jpg)
+
+**EN**: Round-based zombie survival at a roadside diner and gas station: board the windows, earn points, buy guns off the wall and get the power back on.
+
+<sub>类别：FPS · 技术：three.js · 语言：JavaScript · 游玩量：17</sub>
+
+[在线试玩](https://fable52.games/play/graveyard-shift) ｜ [作者演示站](https://zombies.ethanplus.ai/) ｜ [源码](https://github.com/ethanplusai/zombies)
+
+*感谢作者 **@ethanplusai** 的开源分享！*
+
+### 52 · 太阳系三维沙盘 · Solar System 3D
+
+![太阳系三维沙盘 · Solar System 3D](screenshots/52.jpg)
+
+**EN**: A 3D solar system at true distances: 36 bodies on real orbits, from Mercury to the Oort Cloud, with Voyager and New Horizons, at up to 10 years a second.
+
+<sub>类别：模拟 · 技术：原生 JS · 语言：HTML · 体量：996 KB · 游玩量：8</sub>
+
+[离线归档](games/52/) ｜ [在线试玩](https://fable52.games/play/solar-system-3d)
+
+*感谢作者 **k** 的分享！*
+
+### 53 · Duel Knights
+
+![Duel Knights](screenshots/53.jpg)
+
+**EN**: A torch-lit 3D sword duel: pick one of seven knights, a foe and an arena, then parry, feint and dodge your way to three round wins.
+
+<sub>技术：three.js · 语言：JavaScript · 游玩量：6</sub>
+
+[在线试玩](https://fable52.games/play/duel-knights) ｜ [作者演示站](https://bitofastickler.github.io/duel-knights/) ｜ [源码](https://github.com/bitofastickler/duel-knights)
+
+*感谢作者 **@bitofastickler** 的开源分享！*
+
+### 54 · SHUTTERPINE
+
+![SHUTTERPINE](screenshots/54.jpg)
+
+**EN**: A first-person mystery in a night forest: follow a vanished photographer's trail with her film camera, the only thing that can see what's following you.
+
+<sub>技术：three.js · 语言：JavaScript · 游玩量：5</sub>
+
+[在线试玩](https://fable52.games/play/shutterpine) ｜ [作者演示站](https://dquanbui.github.io/shutterpine/) ｜ [源码](https://github.com/DQuanBui/shutterpine)
+
+*感谢作者 **@DQuanBui** 的开源分享！*
+
+### 55 · Last Return
+
+![Last Return](screenshots/55.jpg)
+
+**EN**: First-person horror where a handheld LiDAR scanner is the only way to see. The points stay where you painted them, and something down there is never drawn.
+
+<sub>技术：原生 WebGL · 语言：JavaScript · 游玩量：3</sub>
+
+[在线试玩](https://fable52.games/play/last-return) ｜ [作者演示站](https://last-return.sknol.com/) ｜ [源码](https://github.com/StefanKnol/Last-Return)
+
+*感谢作者 **@StefanKnol** 的开源分享！*
+
+### 56 · Escape the Fable
+
+![Escape the Fable](screenshots/56.jpg)
+
+**EN**: A first-person 1950s escape room generator: keys, padlocks, safe dials and word wheels, and every room is new and guaranteed solvable.
+
+<sub>类别：解谜 · 技术：原生 JS · 语言：JavaScript · 游玩量：3</sub>
+
+[在线试玩](https://fable52.games/play/escape-the-fable) ｜ [作者演示站](https://ai-gamez-r-funz.github.io/escape-the-fable/) ｜ [源码](https://github.com/ai-gamez-r-funz/escape-the-fable)
+
+*感谢作者 **@ai-gamez-r-funz** 的开源分享！*
+
+### 57 · The Long Climb
+
+![The Long Climb](screenshots/57.jpg)
+
+**EN**: Play Jensen Huang founding NVIDIA in a 3D open world: raise money, hire the team and ship the chips before the cash runs out. Permadeath.
+
+<sub>类别：模拟 · 技术：three.js · 语言：JavaScript · 游玩量：3</sub>
+
+[在线试玩](https://fable52.games/play/the-long-climb) ｜ [作者演示站](https://hilaytrivedi.github.io/thirty-days/) ｜ [源码](https://github.com/HILAYTRIVEDI/thirty-days)
+
+*感谢作者 **@HILAYTRIVEDI** 的开源分享！*
+
+### 58 · うしろのハニワ (The Haniwa Behind You)
+
+![うしろのハニワ (The Haniwa Behind You)](screenshots/58.jpg)
+
+**EN**: A grid dungeon crawl crossed with Red Light, Green Light: haniwa freeze while you look and creep closer when you turn. Lead them to their pedestals by gaze alone.
+
+<sub>类别：解谜 · 技术：原生 JS · 语言：JavaScript · 游玩量：3</sub>
+
+[在线试玩](https://fable52.games/play/ushiro-no-haniwa) ｜ [作者演示站](https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game6/index.html) ｜ [源码](https://github.com/shioa2006-game/ONE_PROMPT_WORLDS)
+
+*感谢作者 **@shioa2006-game** 的开源分享！*
+
+### 59 · ひとつぶ庭園 (One-Grain Garden)
+
+![ひとつぶ庭園 (One-Grain Garden)](screenshots/59.jpg)
+
+**EN**: Pour sand, water, seeds and embers into a glass jar and let the grains react to grow a tiny night garden. Nine jars and a free-play jar.
+
+<sub>类别：解谜 · 技术：原生 JS · 语言：JavaScript · 游玩量：2</sub>
+
+[在线试玩](https://fable52.games/play/hitotsubu-teien) ｜ [作者演示站](https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game2/index.html) ｜ [源码](https://github.com/shioa2006-game/ONE_PROMPT_WORLDS)
+
+*感谢作者 **@shioa2006-game** 的开源分享！*
+
+### 60 · ひつじが いっぴき (One Sheep: Koro the Sheepdog's Day)
+
+![ひつじが いっぴき (One Sheep: Koro the Sheepdog's Day)](screenshots/60.jpg)
+
+**EN**: Be Koro the sheepdog and herd the flock into the barn: walk and they bunch up, run and they scatter. Nine pastures from morning to night.
+
+<sub>类别：模拟 · 技术：原生 JS · 语言：JavaScript · 游玩量：2</sub>
+
+[在线试玩](https://fable52.games/play/hitsuji-ga-ippiki) ｜ [作者演示站](https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game8/index.html) ｜ [源码](https://github.com/shioa2006-game/ONE_PROMPT_WORLDS)
+
+*感谢作者 **@shioa2006-game** 的开源分享！*
+
+### 61 · 切りもどし ― 鋏と春の小さな鉢 (Cutting Back)
+
+![切りもどし ― 鋏と春の小さな鉢 (Cutting Back)](screenshots/61.jpg)
+
+**EN**: A bonsai pruning puzzle: cut a branch and two buds sprout from the cut, call spring and they grow. Shape the tree so it flowers in the patch of sun.
+
+<sub>类别：解谜 · 技术：原生 JS · 语言：JavaScript · 游玩量：2</sub>
+
+[在线试玩](https://fable52.games/play/kirimodoshi) ｜ [作者演示站](https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game7/index.html) ｜ [源码](https://github.com/shioa2006-game/ONE_PROMPT_WORLDS)
+
+*感谢作者 **@shioa2006-game** 的开源分享！*
+
+### 62 · Circular Tic Tac Toe
+
+![Circular Tic Tac Toe](screenshots/62.jpg)
+
+**EN**: Tic-tac-toe on a ring: 4 rings × 8 sectors, four in a row wins around the ring, out from the centre or along a spiral. Play a friend or a perfect-play AI.
+
+<sub>类别：策略 · 技术：原生 JS · 语言：JavaScript · 游玩量：2</sub>
+
+[在线试玩](https://fable52.games/play/circular-tic-tac-toe) ｜ [作者演示站](https://muhammad-sayed-mahdy.github.io/circular-tic-tac-toe-web/) ｜ [源码](https://github.com/muhammad-sayed-mahdy/circular-tic-tac-toe-web)
+
+*感谢作者 **@muhammad-sayed-mahdy** 的开源分享！*
+
+### 63 · Liquid Labyrinth
+
+![Liquid Labyrinth](screenshots/63.jpg)
+
+**EN**: Rotate a glass 3D maze and gravity pulls a drop of liquid through it. Steer it to the yellow exit; share any maze by its seed.
+
+<sub>类别：解谜 · 技术：three.js · 语言：JavaScript · 游玩量：2</sub>
+
+[在线试玩](https://fable52.games/play/liquid-labyrinth) ｜ [作者演示站](https://maze.bbbit.cc/) ｜ [源码](https://github.com/tuki0918/maze-exit)
+
+*感谢作者 **@tuki0918** 的开源分享！*
+
+### 64 · LUMEN REEL ― まわる灯台と三つの海路
+
+![LUMEN REEL ― まわる灯台と三つの海路](screenshots/64.jpg)
+
+**EN**: A lighthouse whose lamp room is a slot machine: spin the reels, route the light down three sea lanes, bring lost boats home and rebuild the reels at dawn.
+
+<sub>类别：策略 · 技术：原生 JS · 语言：JavaScript · 游玩量：2</sub>
+
+[在线试玩](https://fable52.games/play/lumen-reel) ｜ [作者演示站](https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game4/index.html) ｜ [源码](https://github.com/shioa2006-game/ONE_PROMPT_WORLDS)
+
+*感谢作者 **@shioa2006-game** 的开源分享！*
+
+### 65 · REEL DELVE ― まわる迷宮と三人の旅
+
+![REEL DELVE ― まわる迷宮と三人の旅](screenshots/65.jpg)
+
+**EN**: A dungeon made of five stone reels: stop them on the right symbols and the three rows become the paths of your swordsman, thief and mage. Reach floor 12.
+
+<sub>类别：解谜 · 技术：原生 JS · 语言：JavaScript · 游玩量：2</sub>
+
+[在线试玩](https://fable52.games/play/reel-delve) ｜ [作者演示站](https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game5/index.html) ｜ [源码](https://github.com/shioa2006-game/ONE_PROMPT_WORLDS)
+
+*感谢作者 **@shioa2006-game** 的开源分享！*
+
+### 66 · EMBERDEEP ― 燈守りの坑道 (Lampkeeper's Mine)
+
+![EMBERDEEP ― 燈守りの坑道 (Lampkeeper's Mine)](screenshots/66.jpg)
+
+**EN**: A top-down action RPG with a single lantern: light braziers, fight the shadows and drive back the dark section by section down to the furnace heart.
+
+<sub>类别：动作 · 技术：原生 JS · 语言：JavaScript · 游玩量：2</sub>
+
+[在线试玩](https://fable52.games/play/emberdeep-tomoshimori) ｜ [作者演示站](https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game3/index.html) ｜ [源码](https://github.com/shioa2006-game/ONE_PROMPT_WORLDS)
+
+*感谢作者 **@shioa2006-game** 的开源分享！*
 
 ## 归档与来源说明
 
