@@ -698,6 +698,8 @@
 
 ![Rawza Ring](screenshots/48.jpg)
 
+**中文**：3D 街头竞速：在阿富汗马扎里沙里夫蓝色清真寺周边的真实街道上飙车；作者称仅凭一条提示、约 40 分钟由 Fable 5.2 生成，源码已开源。
+
 **EN**: A 3D street race on the real streets around the Blue Mosque in Mazar-i-Sharif, built by Claude Fable 5.2 from one prompt in about 40 minutes.
 
 <sub>类别：竞速 · 技术：three.js · 语言：JavaScript · 游玩量：1</sub>
@@ -709,6 +711,8 @@
 ### 49 · Mini RPG
 
 ![Mini RPG](screenshots/49.jpg)
+
+**中文**：像素风小型 RPG：包含城镇、世界地图、回合制战斗与一座无尽之塔；是作者边学 Fable 5.2 边做的第一款游戏，源码已开源。
 
 **EN**: A small pixel-art RPG with a town, a world map, turn-based battles and an Endless Tower. The author's first game, made while learning Fable 5.2.
 
@@ -722,6 +726,8 @@
 
 ![ぽん、と森は灯る (Pon, the Forest Lights Up)](screenshots/50.jpg)
 
+**中文**：投掷孢子，落地处长出蘑菇，每朵新蘑菇又成为下一次的发射台；一路点亮幽暗森林，抵达大树。同属 ONE_PROMPT_WORLDS 开源系列。
+
 **EN**: Fling a spore and a mushroom grows where it lands; every new mushroom is your next launcher. Light up a dark forest on your way to the great tree.
 
 <sub>类别：休闲 · 技术：原生 JS · 语言：JavaScript · 游玩量：2</sub>
@@ -733,6 +739,8 @@
 ### 51 · Graveyard Shift
 
 ![Graveyard Shift](screenshots/51.jpg)
+
+**中文**：轮次制僵尸生存 FPS：守在路边小餐馆与加油站，钉窗封堵、攒分换枪、修好供电，一波波顶住尸潮。源码已开源。
 
 **EN**: Round-based zombie survival at a roadside diner and gas station: board the windows, earn points, buy guns off the wall and get the power back on.
 
@@ -746,6 +754,8 @@
 
 ![太阳系三维沙盘 · Solar System 3D](screenshots/52.jpg)
 
+**中文**：按真实距离与轨道还原的 3D 太阳系沙盘：36 个天体从水星一直排到奥尔特云，附带旅行者号、新视野号探测器轨迹，时间流速最高可达每年 10 秒。自包含单文件，已离线归档。
+
 **EN**: A 3D solar system at true distances: 36 bodies on real orbits, from Mercury to the Oort Cloud, with Voyager and New Horizons, at up to 10 years a second.
 
 <sub>类别：模拟 · 技术：原生 JS · 语言：HTML · 体量：996 KB · 游玩量：8</sub>
@@ -757,6 +767,8 @@
 ### 53 · Duel Knights
 
 ![Duel Knights](screenshots/53.jpg)
+
+**中文**：火把映照下的 3D 剑术对决：从七名骑士中挑选角色、对手与竞技场，靠格挡、佯攻与闪避先赢下三局。源码已开源。
 
 **EN**: A torch-lit 3D sword duel: pick one of seven knights, a foe and an arena, then parry, feint and dodge your way to three round wins.
 
@@ -770,6 +782,8 @@
 
 ![SHUTTERPINE](screenshots/54.jpg)
 
+**中文**：夜林第一人称悬疑：循着一名失踪摄影师留下的踪迹前行，她的胶片相机是唯一能看见身后尾随之物的工具。源码已开源。
+
 **EN**: A first-person mystery in a night forest: follow a vanished photographer's trail with her film camera, the only thing that can see what's following you.
 
 <sub>技术：three.js · 语言：JavaScript · 游玩量：5</sub>
@@ -781,6 +795,8 @@
 ### 55 · Last Return
 
 ![Last Return](screenshots/55.jpg)
+
+**中文**：第一人称恐怖：手持 LiDAR 扫描仪是唯一的探路方式，点云会停留在你扫过的位置；可底下有某种东西，始终不会被扫描到。源码已开源。
 
 **EN**: First-person horror where a handheld LiDAR scanner is the only way to see. The points stay where you painted them, and something down there is never drawn.
 
@@ -794,6 +810,8 @@
 
 ![Escape the Fable](screenshots/56.jpg)
 
+**中文**：1950 年代风格的第一人称密室逃脱生成器：钥匙、挂锁、保险箱转盘与字轮谜题，每局房间随机生成且保证有解。源码已开源。
+
 **EN**: A first-person 1950s escape room generator: keys, padlocks, safe dials and word wheels, and every room is new and guaranteed solvable.
 
 <sub>类别：解谜 · 技术：原生 JS · 语言：JavaScript · 游玩量：3</sub>
@@ -805,6 +823,8 @@
 ### 57 · The Long Climb
 
 ![The Long Climb](screenshots/57.jpg)
+
+**中文**：3D 开放世界创业模拟：扮演黄仁勋创办 NVIDIA，融资、组建团队，在现金烧完之前把芯片做出来；失败即永久结束。源码已开源。
 
 **EN**: Play Jensen Huang founding NVIDIA in a 3D open world: raise money, hire the team and ship the chips before the cash runs out. Permadeath.
 
@@ -818,6 +838,8 @@
 
 ![うしろのハニワ (The Haniwa Behind You)](screenshots/58.jpg)
 
+**中文**：网格地牢撞上「一二三木头人」：你注视时埴轮静止，一转背便悄悄逼近；只能靠视线把它们引回各自的台座。同属 ONE_PROMPT_WORLDS 开源系列。
+
 **EN**: A grid dungeon crawl crossed with Red Light, Green Light: haniwa freeze while you look and creep closer when you turn. Lead them to their pedestals by gaze alone.
 
 <sub>类别：解谜 · 技术：原生 JS · 语言：JavaScript · 游玩量：3</sub>
@@ -829,6 +851,8 @@
 ### 59 · ひとつぶ庭園 (One-Grain Garden)
 
 ![ひとつぶ庭園 (One-Grain Garden)](screenshots/59.jpg)
+
+**中文**：往玻璃罐里倒入沙、水、种子与余烬，让材料彼此反应，长出一座微型夜色庭院；共九只主题罐与一只自由创作罐。同属 ONE_PROMPT_WORLDS 开源系列。
 
 **EN**: Pour sand, water, seeds and embers into a glass jar and let the grains react to grow a tiny night garden. Nine jars and a free-play jar.
 
@@ -842,6 +866,8 @@
 
 ![ひつじが いっぴき (One Sheep: Koro the Sheepdog's Day)](screenshots/60.jpg)
 
+**中文**：扮演牧羊犬 Koro，把羊群赶回羊圈：慢慢走羊群聚拢，一跑就四散；九片牧场，从清晨守到夜晚。同属 ONE_PROMPT_WORLDS 开源系列。
+
 **EN**: Be Koro the sheepdog and herd the flock into the barn: walk and they bunch up, run and they scatter. Nine pastures from morning to night.
 
 <sub>类别：模拟 · 技术：原生 JS · 语言：JavaScript · 游玩量：2</sub>
@@ -853,6 +879,8 @@
 ### 61 · 切りもどし ― 鋏と春の小さな鉢 (Cutting Back)
 
 ![切りもどし ― 鋏と春の小さな鉢 (Cutting Back)](screenshots/61.jpg)
+
+**中文**：盆景修剪解谜：剪掉一枝，切口处会冒出两个芽，唤来春天便抽枝生长；修整树形，让花恰好开在那片阳光里。同属 ONE_PROMPT_WORLDS 开源系列。
 
 **EN**: A bonsai pruning puzzle: cut a branch and two buds sprout from the cut, call spring and they grow. Shape the tree so it flowers in the patch of sun.
 
@@ -866,6 +894,8 @@
 
 ![Circular Tic Tac Toe](screenshots/62.jpg)
 
+**中文**：环形井字棋：4 个圆环、8 个扇区，沿环、由中心向外或沿螺旋连成四子即胜；可双人对战，也可挑战走最优解的 AI。源码已开源。
+
 **EN**: Tic-tac-toe on a ring: 4 rings × 8 sectors, four in a row wins around the ring, out from the centre or along a spiral. Play a friend or a perfect-play AI.
 
 <sub>类别：策略 · 技术：原生 JS · 语言：JavaScript · 游玩量：2</sub>
@@ -877,6 +907,8 @@
 ### 63 · Liquid Labyrinth
 
 ![Liquid Labyrinth](screenshots/63.jpg)
+
+**中文**：转动一座玻璃质感的 3D 迷宫，靠重力牵引一滴液体穿行，把它导向黄色出口；任意迷宫都能通过种子码分享。源码已开源。
 
 **EN**: Rotate a glass 3D maze and gravity pulls a drop of liquid through it. Steer it to the yellow exit; share any maze by its seed.
 
@@ -890,6 +922,8 @@
 
 ![LUMEN REEL ― まわる灯台と三つの海路](screenshots/64.jpg)
 
+**中文**：一座灯台，灯室却是一台老虎机：转动转轮，把灯光沿三条海道路由出去，把迷航的船带回家，黎明时分再重建转轮。同属 ONE_PROMPT_WORLDS 开源系列。
+
 **EN**: A lighthouse whose lamp room is a slot machine: spin the reels, route the light down three sea lanes, bring lost boats home and rebuild the reels at dawn.
 
 <sub>类别：策略 · 技术：原生 JS · 语言：JavaScript · 游玩量：2</sub>
@@ -902,6 +936,8 @@
 
 ![REEL DELVE ― まわる迷宮と三人の旅](screenshots/65.jpg)
 
+**中文**：地牢由五个石转轮组成：把转轮停在正确符号上，三条路径便分别对应剑士、盗贼与法师，一路攻到第 12 层。同属 ONE_PROMPT_WORLDS 开源系列。
+
 **EN**: A dungeon made of five stone reels: stop them on the right symbols and the three rows become the paths of your swordsman, thief and mage. Reach floor 12.
 
 <sub>类别：解谜 · 技术：原生 JS · 语言：JavaScript · 游玩量：2</sub>
@@ -913,6 +949,8 @@
 ### 66 · EMBERDEEP ― 燈守りの坑道 (Lampkeeper's Mine)
 
 ![EMBERDEEP ― 燈守りの坑道 (Lampkeeper's Mine)](screenshots/66.jpg)
+
+**中文**：仅凭一盏提灯的俯视角动作 RPG：点亮火盆、迎战阴影，把黑暗一节节逼退，一路下探到熔炉核心。同属 ONE_PROMPT_WORLDS 开源系列。
 
 **EN**: A top-down action RPG with a single lantern: light braziers, fight the shadows and drive back the dark section by section down to the furnace heart.
 
