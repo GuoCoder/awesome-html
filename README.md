@@ -964,6 +964,8 @@
 
 ![挤地铁](screenshots/67.jpg)
 
+**中文**：早高峰通勤解谜：赶在车门关闭前把候车人群推进车厢，先让下车的乘客出来，再把上车的人挤进去。源码已开源。
+
 **EN**: Push the morning crowd into the carriage before the doors close, letting the passengers getting off out first.
 
 <sub>类别：解谜 · 技术：three.js · 语言：JavaScript · 游玩量：5</sub>
@@ -975,6 +977,8 @@
 ### 68 · 夜市套圈
 
 ![夜市套圈](screenshots/68.jpg)
+
+**中文**：夜市套圈小品：十元十二圈，拖拽瞄准、松手抛出，套中什么就带走什么。源码已开源。
 
 **EN**: Twelve rings for ten yuan at a night-market stall: drag up to aim, let go to throw, and keep whatever you ring.
 
@@ -988,6 +992,8 @@
 
 ![相亲角速配](screenshots/69.jpg)
 
+**中文**：相亲角速配：对照阿姨逐条念出的条件判断候选，全部满足就右滑，有一项不符就左滑。源码已开源。
+
 **EN**: Judge the candidates at a matchmaking corner: swipe right if they meet every condition the auntie reads out, left if one fails.
 
 <sub>类别：休闲 · 技术：three.js · 语言：JavaScript · 游玩量：5</sub>
@@ -998,6 +1004,8 @@
 
 ### 70 · Black Tide
 
+**中文**：three.js 第一人称射击作品，目前仅提供在线试玩；未发现可离线资源与公开源码，存疑待人工复核。
+
 <sub>类别：FPS · 技术：three.js · 语言：JavaScript · 体量：1.6 MB · 游玩量：44</sub>
 
 [在线试玩](https://fable52.games/play/black-tid)
@@ -1005,6 +1013,8 @@
 ### 71 · T-Minus
 
 ![T-Minus](screenshots/71.jpg)
+
+**中文**：四人协作的太空任务策略游戏：规划飞船方案、采购硬件、推进科研并争取支持，赶在发射前把任务配齐。源码已开源。
 
 **EN**: A cooperative space-mission game for four stations: plan the spacecraft, procure hardware, run the science and win support before launch.
 
@@ -1018,6 +1028,8 @@
 
 ![晶塔守卫](screenshots/72.jpg)
 
+**中文**：四地图塔防：沿路布置九种防御塔，配合六个大招，每张地图二十波敌人，关卡逐一解锁。源码已开源。
+
 **EN**: Tower defence on four maps: nine towers along the road, six big abilities, twenty waves a map, unlocked one at a time.
 
 <sub>类别：策略 · 技术：three.js · 语言：JavaScript · 游玩量：10</sub>
@@ -1029,6 +1041,8 @@
 ### 73 · 皮衣老黄
 
 ![皮衣老黄](screenshots/73.jpg)
+
+**中文**：十二季度芯片公司经营策略：研发新品、扩张团队、挖角对手，把市场份额夺回来，让市值重回第一。源码已开源。
 
 **EN**: Run a chip company for twelve quarters: research, expand, poach staff and take the map back until the market cap is first again.
 
@@ -1042,6 +1056,8 @@
 
 ![Apex Lap: Blender Edition](screenshots/74.jpg)
 
+**中文**：同一条竞速命题的另一版实现：车辆、赛道零件与场景全部在 Blender 中经 MCP 建模，再导出为 glTF 加载。源码已开源。
+
 **EN**: The same race brief a second way: the car, circuit pieces and scenery modelled in Blender over MCP, exported as glTF.
 
 <sub>类别：竞速 · 技术：three.js · 语言：JavaScript · 游玩量：13</sub>
@@ -1053,6 +1069,8 @@
 ### 75 · Ripcore
 
 ![Ripcore](screenshots/75.jpg)
+
+**中文**：钢碗陀螺对战：拉回瞄准、设定力度后松手甩出，两只陀螺在碗中相撞，先拿到四分者获胜。源码已开源。
 
 **EN**: Two spinning tops in a steel bowl: pull back to aim and set power, release to rip, first to four points.
 
@@ -1066,6 +1084,8 @@
 
 ![骑手](screenshots/76.jpg)
 
+**中文**：电动车送餐模拟：从清晨跑到深夜，穿过老城街巷，在天气、车流和倒计时之间把餐送到。源码已开源。
+
 **EN**: Deliver food across an old city on an electric scooter, from morning to midnight, against weather, traffic and the clock.
 
 <sub>技术：three.js · 语言：JavaScript · 游玩量：8</sub>
@@ -1077,6 +1097,8 @@
 ### 77 · 清潮
 
 ![清潮](screenshots/77.jpg)
+
+**中文**：小队射击：拖拽队伍移动、成员自动开火，在左侧破冰解锁新队员与武器，一步步清掉右侧涌来的尸潮。源码已开源。
 
 **EN**: A squad shooter: drag the squad, it fires on its own, break ice on the left for members and weapons and clear the horde on the right.
 
@@ -1090,6 +1112,8 @@
 
 ![Raptor Race](screenshots/78.jpg)
 
+**中文**：手机竖屏跑酷：沿恐龙小径追赶一颗滚落的蛋，躲开车道上的障碍，一路跑到孵化终点。源码已开源。
+
 **EN**: A portrait runner for phones: chase a runaway egg down a dinosaur trail, dodge what lies in the lanes, and reach the hatching.
 
 <sub>类别：跑酷 · 技术：three.js · 语言：JavaScript · 游玩量：9</sub>
@@ -1101,6 +1125,8 @@
 ### 79 · MAPLE RUN
 
 ![MAPLE RUN](screenshots/79.jpg)
+
+**中文**：三轨无尽跑酷：在枫叶季的乡间铁路上跳跃越过路障、俯身钻过横杆，一路收集金色落叶。源码已开源。
 
 **EN**: A three-track endless runner down a country railway in maple season: jump barriers, roll under gates, collect golden leaves.
 
@@ -1114,6 +1140,8 @@
 
 ![Starship Dogfight](screenshots/80.jpg)
 
+**中文**：第三人称小行星带空战：应对无尽来袭波次，携带六枚导弹，每五波遭遇一艘无畏舰。源码已开源。
+
 **EN**: A third-person space dogfight over an asteroid belt: endless waves, six missiles, and a Dreadnought every fifth wave.
 
 <sub>技术：three.js · 语言：JavaScript · 游玩量：7</sub>
@@ -1125,6 +1153,8 @@
 ### 81 · 三借芭蕉扇
 
 ![三借芭蕉扇](screenshots/81.jpg)
+
+**中文**：回合制西游 RPG：三借芭蕉扇、扇灭火焰山；含五行相克与七十二变，流程约一小时。源码已开源。
 
 **EN**: A turn-based Journey to the West RPG: borrow the palm-leaf fan three times to put out the Flaming Mountains. Five-element counters, seventy-two transformations, about an hour.
 
@@ -1138,6 +1168,8 @@
 
 ![广州漂移](screenshots/82.jpg)
 
+**中文**：雨天广州外卖竞速：骑电动车穿行环线，漂移攒小费，同时把餐盒里的汤稳稳保住。源码已开源。
+
 **EN**: Deliver takeout across a rainy Guangzhou on an e-scooter: thread the ring road, drift for tips, and keep the soup in the box.
 
 <sub>类别：竞速 · 技术：three.js · 语言：JavaScript · 游玩量：7</sub>
@@ -1149,6 +1181,8 @@
 ### 83 · Лисёнок и огненный жёлудь
 
 ![Лисёнок и огненный жёлудь](screenshots/83.jpg)
+
+**中文**：单文件 Canvas 平台跳跃：小狐狸与一颗火橡果的冒险；整份作品 1,465 行 HTML，图形与音效全部由代码实时生成。源码已开源。
 
 **EN**: A one-file platformer about a fox cub and a fiery acorn: 1,465 lines of HTML, with every graphic and sound made in code.
 
@@ -1162,6 +1196,8 @@
 
 ![摸鱼大师](screenshots/84.jpg)
 
+**中文**：办公室摸鱼小品：按住就是偷懒，松开立刻装忙；小心老板转身、摄像头亮红灯和 HR 路过。源码已开源。
+
 **EN**: One control: hold to slack off, release to look busy. The boss turns round, the camera lamp goes red, HR walks past.
 
 <sub>类别：休闲 · 技术：three.js · 语言：JavaScript · 游玩量：8</sub>
@@ -1173,6 +1209,8 @@
 ### 85 · 吃啥拉啥
 
 ![吃啥拉啥](screenshots/85.jpg)
+
+**中文**：搞怪动作：吃下路上的道具再朝身后的怪物发射——辣椒喷火、冰淇淋冻住敌人、西瓜变成巨型弹。源码已开源。
 
 **EN**: Eat what is on the road and fire it at the monsters behind you: chilli flames, ice cream freezes, watermelon goes giant.
 
@@ -1186,6 +1224,8 @@
 
 ![Gabriel's Sweet Town](screenshots/86.jpg)
 
+**中文**：面向儿童的温和角色扮演沙盒：17 个场景、240 多件可移动物品，安装为 PWA 后可离线游玩。源码已开源。
+
 **EN**: A gentle role-play sandbox for kids: 17 places, 240+ movable objects, and offline play once installed.
 
 <sub>技术：原生 JS · 语言：JavaScript · 游玩量：6</sub>
@@ -1197,6 +1237,8 @@
 ### 87 · 搓澡大师
 
 ![搓澡大师](screenshots/87.jpg)
+
+**中文**：限时搓澡小品：赶时间给客人搓背，把污垢搓成一条条，避开发红的痛点，才能拿到小费。源码已开源。
 
 **EN**: Scrub a customer's back against the clock, work the dirt into strings, and keep off the red sore spots for a tip.
 
@@ -1210,6 +1252,8 @@
 
 ![捏泡泡纸](screenshots/88.jpg)
 
+**中文**：限时解压捏泡泡：金色泡泡加时，连成一片可连锁爆破，捏到臭泡泡则本局结束。源码已开源。
+
 **EN**: Pop bubble wrap for time: gold bubbles add seconds, chain bubbles burst a patch, and the stink bubble ends your run.
 
 <sub>类别：休闲 · 技术：three.js · 语言：JavaScript · 游玩量：6</sub>
@@ -1221,6 +1265,8 @@
 ### 89 · Apex Lap
 
 ![Apex Lap](screenshots/89.jpg)
+
+**中文**：三圈环线竞速：公路极速 216 km/h、加速段 270 km/h，氮气必须松开油门才会重新充能。源码已开源。
 
 **EN**: A three-lap circuit race: 216 km/h on the road, 270 on boost, and a boost that only refills once you let go.
 
@@ -1234,6 +1280,8 @@
 
 ![Rufus Crush](screenshots/90.jpg)
 
+**中文**：手机三消：1,036 个关卡，围绕一只黑色拉布拉多忙碌的一生展开；用 Rust 编写，编译为单个可离线运行的 WebAssembly 文件。源码已开源。
+
 **EN**: A match-3 for phones with 1,036 levels about one black lab's very busy life, built in Rust and shipped as one offline WebAssembly file.
 
 <sub>类别：解谜 · 技术：WebAssembly · 语言：JavaScript · 游玩量：5</sub>
@@ -1245,6 +1293,8 @@
 ### 91 · 怒砸办公室
 
 ![怒砸办公室](screenshots/91.jpg)
+
+**中文**：发泄向动作：在保安赶到之前砸烂整间办公室——显示器、奖杯、打卡机、老板椅和保险柜全都拆碎。源码已开源。
 
 **EN**: Smash an office before security arrives: monitors, trophies, the punch clock, the boss's chair and the safe, all in pieces.
 
@@ -1258,6 +1308,8 @@
 
 ![EarthFM · Listening Game](screenshots/92.jpg)
 
+**中文**：基于 NASA 地球数据的四轮听音测验：聆听一段数据声化后的音频，把神秘声音匹配到对应的数值。源码已开源。
+
 **EN**: A four-round listening quiz built from NASA Earth data: hear a sonified dataset, then match the mystery sound to its value.
 
 <sub>技术：原生 JS · 语言：JavaScript · 游玩量：5</sub>
@@ -1269,6 +1321,8 @@
 ### 93 · Jester
 
 ![Jester](screenshots/93.jpg)
+
+**中文**：聚会派对游戏：把任意一段短视频变成关卡，每位玩家偷偷模仿片中一个人，视频回放时带着所有人的剪纸人一起出镜。源码已开源。
 
 **EN**: A party game that turns any short clip into a level: each player secretly copies one person in it, then the clip plays back with everyone's cutouts.
 
