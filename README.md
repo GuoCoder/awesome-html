@@ -4,7 +4,7 @@
 
 **仓库地址**：[GuoCoder/awesome-html-games](https://github.com/GuoCoder/awesome-html-games)
 
-**收录**：66 款（本地离线归档 22 款，其余为在线演示或源码链接） · 数据快照：2026-11-17
+**收录**：93 款（本地离线归档 22 款，其余为在线演示或源码链接） · 数据快照：2026-11-18
 
 ## 离线运行说明
 
@@ -959,6 +959,324 @@
 [在线试玩](https://fable52.games/play/emberdeep-tomoshimori) ｜ [作者演示站](https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game3/index.html) ｜ [源码](https://github.com/shioa2006-game/ONE_PROMPT_WORLDS)
 
 *感谢作者 **@shioa2006-game** 的开源分享！*
+
+### 67 · 挤地铁
+
+![挤地铁](screenshots/67.jpg)
+
+**EN**: Push the morning crowd into the carriage before the doors close, letting the passengers getting off out first.
+
+<sub>类别：解谜 · 技术：three.js · 语言：JavaScript · 游玩量：5</sub>
+
+[在线试玩](https://fable52.games/play/metro-rush) ｜ [作者演示站](https://zhgarylu.github.io/everyday-game/metro/) ｜ [源码](https://github.com/zhgarylu/everyday-game)
+
+*感谢作者 **@zhgarylu** 的开源分享！*
+
+### 68 · 夜市套圈
+
+![夜市套圈](screenshots/68.jpg)
+
+**EN**: Twelve rings for ten yuan at a night-market stall: drag up to aim, let go to throw, and keep whatever you ring.
+
+<sub>类别：休闲 · 技术：three.js · 语言：JavaScript · 游玩量：5</sub>
+
+[在线试玩](https://fable52.games/play/night-market-ring) ｜ [作者演示站](https://zhgarylu.github.io/everyday-game/ring/) ｜ [源码](https://github.com/zhgarylu/everyday-game)
+
+*感谢作者 **@zhgarylu** 的开源分享！*
+
+### 69 · 相亲角速配
+
+![相亲角速配](screenshots/69.jpg)
+
+**EN**: Judge the candidates at a matchmaking corner: swipe right if they meet every condition the auntie reads out, left if one fails.
+
+<sub>类别：休闲 · 技术：three.js · 语言：JavaScript · 游玩量：5</sub>
+
+[在线试玩](https://fable52.games/play/matchmaking-corner) ｜ [作者演示站](https://zhgarylu.github.io/everyday-game/match/) ｜ [源码](https://github.com/zhgarylu/everyday-game)
+
+*感谢作者 **@zhgarylu** 的开源分享！*
+
+### 70 · Black Tide
+
+<sub>类别：FPS · 技术：three.js · 语言：JavaScript · 体量：1.6 MB · 游玩量：44</sub>
+
+[在线试玩](https://fable52.games/play/black-tid)
+
+### 71 · T-Minus
+
+![T-Minus](screenshots/71.jpg)
+
+**EN**: A cooperative space-mission game for four stations: plan the spacecraft, procure hardware, run the science and win support before launch.
+
+<sub>类别：策略 · 技术：原生 JS · 语言：JavaScript · 游玩量：14</sub>
+
+[在线试玩](https://fable52.games/play/t-minus) ｜ [作者演示站](https://missioncontrol.dractec.com/) ｜ [源码](https://github.com/XDracam/spaceappschallenge2026)
+
+*感谢作者 **@XDracam** 的开源分享！*
+
+### 72 · 晶塔守卫
+
+![晶塔守卫](screenshots/72.jpg)
+
+**EN**: Tower defence on four maps: nine towers along the road, six big abilities, twenty waves a map, unlocked one at a time.
+
+<sub>类别：策略 · 技术：three.js · 语言：JavaScript · 游玩量：10</sub>
+
+[在线试玩](https://fable52.games/play/crystal-tower-defense) ｜ [作者演示站](https://zhgarylu.github.io/everyday-game/td/) ｜ [源码](https://github.com/zhgarylu/everyday-game)
+
+*感谢作者 **@zhgarylu** 的开源分享！*
+
+### 73 · 皮衣老黄
+
+![皮衣老黄](screenshots/73.jpg)
+
+**EN**: Run a chip company for twelve quarters: research, expand, poach staff and take the map back until the market cap is first again.
+
+<sub>类别：策略 · 技术：three.js · 语言：JavaScript · 游玩量：10</sub>
+
+[在线试玩](https://fable52.games/play/chip-jacket) ｜ [作者演示站](https://zhgarylu.github.io/everyday-game/chip/) ｜ [源码](https://github.com/zhgarylu/everyday-game)
+
+*感谢作者 **@zhgarylu** 的开源分享！*
+
+### 74 · Apex Lap: Blender Edition
+
+![Apex Lap: Blender Edition](screenshots/74.jpg)
+
+**EN**: The same race brief a second way: the car, circuit pieces and scenery modelled in Blender over MCP, exported as glTF.
+
+<sub>类别：竞速 · 技术：three.js · 语言：JavaScript · 游玩量：13</sub>
+
+[在线试玩](https://fable52.games/play/apex-lap-blender) ｜ [作者演示站](https://ololo-dev.github.io/apex-lap-fable-5-2-blender/) ｜ [源码](https://github.com/ololo-dev/apex-lap-fable-5-2-blender)
+
+*感谢作者 **@ololo-dev** 的开源分享！*
+
+### 75 · Ripcore
+
+![Ripcore](screenshots/75.jpg)
+
+**EN**: Two spinning tops in a steel bowl: pull back to aim and set power, release to rip, first to four points.
+
+<sub>技术：three.js · 语言：JavaScript · 游玩量：9</sub>
+
+[在线试玩](https://fable52.games/play/ripcore) ｜ [作者演示站](https://ripcore.netlify.app) ｜ [源码](https://github.com/majidmanzarpour/threejs-game-skills)
+
+*感谢作者 **@majidmanzarpour** 的开源分享！*
+
+### 76 · 骑手
+
+![骑手](screenshots/76.jpg)
+
+**EN**: Deliver food across an old city on an electric scooter, from morning to midnight, against weather, traffic and the clock.
+
+<sub>技术：three.js · 语言：JavaScript · 游玩量：8</sub>
+
+[在线试玩](https://fable52.games/play/rider) ｜ [作者演示站](https://zhgarylu.github.io/everyday-game/rider/) ｜ [源码](https://github.com/zhgarylu/everyday-game)
+
+*感谢作者 **@zhgarylu** 的开源分享！*
+
+### 77 · 清潮
+
+![清潮](screenshots/77.jpg)
+
+**EN**: A squad shooter: drag the squad, it fires on its own, break ice on the left for members and weapons and clear the horde on the right.
+
+<sub>类别：FPS · 技术：three.js · 语言：JavaScript · 游玩量：6</sub>
+
+[在线试玩](https://fable52.games/play/qingchao) ｜ [作者演示站](https://zhgarylu.github.io/everyday-game/tide/) ｜ [源码](https://github.com/zhgarylu/everyday-game)
+
+*感谢作者 **@zhgarylu** 的开源分享！*
+
+### 78 · Raptor Race
+
+![Raptor Race](screenshots/78.jpg)
+
+**EN**: A portrait runner for phones: chase a runaway egg down a dinosaur trail, dodge what lies in the lanes, and reach the hatching.
+
+<sub>类别：跑酷 · 技术：three.js · 语言：JavaScript · 游玩量：9</sub>
+
+[在线试玩](https://fable52.games/play/raptor-race) ｜ [作者演示站](https://drew879.github.io/raptor-race-fable/) ｜ [源码](https://github.com/drew879/raptor-race-fable)
+
+*感谢作者 **@drew879** 的开源分享！*
+
+### 79 · MAPLE RUN
+
+![MAPLE RUN](screenshots/79.jpg)
+
+**EN**: A three-track endless runner down a country railway in maple season: jump barriers, roll under gates, collect golden leaves.
+
+<sub>类别：跑酷 · 技术：原生 JS · 语言：JavaScript · 游玩量：8</sub>
+
+[在线试玩](https://fable52.games/play/maple-run) ｜ [作者演示站](https://maple-run-fable.vercel.app) ｜ [源码](https://github.com/nanha0130/maple-run-fable)
+
+*感谢作者 **@nanha0130** 的开源分享！*
+
+### 80 · Starship Dogfight
+
+![Starship Dogfight](screenshots/80.jpg)
+
+**EN**: A third-person space dogfight over an asteroid belt: endless waves, six missiles, and a Dreadnought every fifth wave.
+
+<sub>技术：three.js · 语言：JavaScript · 游玩量：7</sub>
+
+[在线试玩](https://fable52.games/play/starship-dogfight) ｜ [作者演示站](https://starshipdogfight.netlify.app) ｜ [源码](https://github.com/majidmanzarpour/threejs-game-skills)
+
+*感谢作者 **@majidmanzarpour** 的开源分享！*
+
+### 81 · 三借芭蕉扇
+
+![三借芭蕉扇](screenshots/81.jpg)
+
+**EN**: A turn-based Journey to the West RPG: borrow the palm-leaf fan three times to put out the Flaming Mountains. Five-element counters, seventy-two transformations, about an hour.
+
+<sub>类别：RPG · 技术：原生 JS · 语言：JavaScript · 游玩量：7</sub>
+
+[在线试玩](https://fable52.games/play/sanjie-bajiaoshan) ｜ [作者演示站](https://xiyouji.vibecoco.ai) ｜ [源码](https://github.com/zenstory-ai/novel-to-game)
+
+*感谢作者 **@zenstory-ai** 的开源分享！*
+
+### 82 · 广州漂移
+
+![广州漂移](screenshots/82.jpg)
+
+**EN**: Deliver takeout across a rainy Guangzhou on an e-scooter: thread the ring road, drift for tips, and keep the soup in the box.
+
+<sub>类别：竞速 · 技术：three.js · 语言：JavaScript · 游玩量：7</sub>
+
+[在线试玩](https://fable52.games/play/gz-drift) ｜ [作者演示站](https://zhgarylu.github.io/everyday-game/gz/) ｜ [源码](https://github.com/zhgarylu/everyday-game)
+
+*感谢作者 **@zhgarylu** 的开源分享！*
+
+### 83 · Лисёнок и огненный жёлудь
+
+![Лисёнок и огненный жёлудь](screenshots/83.jpg)
+
+**EN**: A one-file platformer about a fox cub and a fiery acorn: 1,465 lines of HTML, with every graphic and sound made in code.
+
+<sub>类别：平台 · 技术：Canvas 2D · 语言：JavaScript · 游玩量：8</sub>
+
+[在线试玩](https://fable52.games/play/lisenok-game) ｜ [作者演示站](https://sashatchersunov6-rgb.github.io/lisenok-game/) ｜ [源码](https://github.com/sashatchersunov6-rgb/lisenok-game)
+
+*感谢作者 **@sashatchersunov6-rgb** 的开源分享！*
+
+### 84 · 摸鱼大师
+
+![摸鱼大师](screenshots/84.jpg)
+
+**EN**: One control: hold to slack off, release to look busy. The boss turns round, the camera lamp goes red, HR walks past.
+
+<sub>类别：休闲 · 技术：three.js · 语言：JavaScript · 游玩量：8</sub>
+
+[在线试玩](https://fable52.games/play/moyu-master) ｜ [作者演示站](https://zhgarylu.github.io/everyday-game/moyu/) ｜ [源码](https://github.com/zhgarylu/everyday-game)
+
+*感谢作者 **@zhgarylu** 的开源分享！*
+
+### 85 · 吃啥拉啥
+
+![吃啥拉啥](screenshots/85.jpg)
+
+**EN**: Eat what is on the road and fire it at the monsters behind you: chilli flames, ice cream freezes, watermelon goes giant.
+
+<sub>类别：动作 · 技术：three.js · 语言：JavaScript · 游玩量：6</sub>
+
+[在线试玩](https://fable52.games/play/eat-and-go) ｜ [作者演示站](https://zhgarylu.github.io/everyday-game/eat/) ｜ [源码](https://github.com/zhgarylu/everyday-game)
+
+*感谢作者 **@zhgarylu** 的开源分享！*
+
+### 86 · Gabriel's Sweet Town
+
+![Gabriel's Sweet Town](screenshots/86.jpg)
+
+**EN**: A gentle role-play sandbox for kids: 17 places, 240+ movable objects, and offline play once installed.
+
+<sub>技术：原生 JS · 语言：JavaScript · 游玩量：6</sub>
+
+[在线试玩](https://fable52.games/play/gabriels-sweet-town) ｜ [作者演示站](https://chomachomachoma.github.io/candyland_pwa/) ｜ [源码](https://github.com/chomachomachoma/candyland_pwa)
+
+*感谢作者 **@chomachomachoma** 的开源分享！*
+
+### 87 · 搓澡大师
+
+![搓澡大师](screenshots/87.jpg)
+
+**EN**: Scrub a customer's back against the clock, work the dirt into strings, and keep off the red sore spots for a tip.
+
+<sub>类别：休闲 · 技术：three.js · 语言：JavaScript · 游玩量：6</sub>
+
+[在线试玩](https://fable52.games/play/scrub-master) ｜ [作者演示站](https://zhgarylu.github.io/everyday-game/scrub/) ｜ [源码](https://github.com/zhgarylu/everyday-game)
+
+*感谢作者 **@zhgarylu** 的开源分享！*
+
+### 88 · 捏泡泡纸
+
+![捏泡泡纸](screenshots/88.jpg)
+
+**EN**: Pop bubble wrap for time: gold bubbles add seconds, chain bubbles burst a patch, and the stink bubble ends your run.
+
+<sub>类别：休闲 · 技术：three.js · 语言：JavaScript · 游玩量：6</sub>
+
+[在线试玩](https://fable52.games/play/bubble-wrap) ｜ [作者演示站](https://zhgarylu.github.io/everyday-game/pop/) ｜ [源码](https://github.com/zhgarylu/everyday-game)
+
+*感谢作者 **@zhgarylu** 的开源分享！*
+
+### 89 · Apex Lap
+
+![Apex Lap](screenshots/89.jpg)
+
+**EN**: A three-lap circuit race: 216 km/h on the road, 270 on boost, and a boost that only refills once you let go.
+
+<sub>类别：竞速 · 技术：three.js · 语言：JavaScript · 游玩量：6</sub>
+
+[在线试玩](https://fable52.games/play/apex-lap) ｜ [作者演示站](https://ololo-dev.github.io/apex-lap-fable-5-2/) ｜ [源码](https://github.com/ololo-dev/apex-lap-fable-5-2)
+
+*感谢作者 **@ololo-dev** 的开源分享！*
+
+### 90 · Rufus Crush
+
+![Rufus Crush](screenshots/90.jpg)
+
+**EN**: A match-3 for phones with 1,036 levels about one black lab's very busy life, built in Rust and shipped as one offline WebAssembly file.
+
+<sub>类别：解谜 · 技术：WebAssembly · 语言：JavaScript · 游玩量：5</sub>
+
+[在线试玩](https://fable52.games/play/rufus-crush) ｜ [作者演示站](https://bhoult.github.io/phone-games/rufus-crush/) ｜ [源码](https://github.com/bhoult/phone-games)
+
+*感谢作者 **@bhoult** 的开源分享！*
+
+### 91 · 怒砸办公室
+
+![怒砸办公室](screenshots/91.jpg)
+
+**EN**: Smash an office before security arrives: monitors, trophies, the punch clock, the boss's chair and the safe, all in pieces.
+
+<sub>类别：动作 · 技术：three.js · 语言：JavaScript · 游玩量：5</sub>
+
+[在线试玩](https://fable52.games/play/office-smash) ｜ [作者演示站](https://zhgarylu.github.io/everyday-game/smash/) ｜ [源码](https://github.com/zhgarylu/everyday-game)
+
+*感谢作者 **@zhgarylu** 的开源分享！*
+
+### 92 · EarthFM · Listening Game
+
+![EarthFM · Listening Game](screenshots/92.jpg)
+
+**EN**: A four-round listening quiz built from NASA Earth data: hear a sonified dataset, then match the mystery sound to its value.
+
+<sub>技术：原生 JS · 语言：JavaScript · 游玩量：5</sub>
+
+[在线试玩](https://fable52.games/play/earthfm) ｜ [作者演示站](https://earthfm.vercel.app/play) ｜ [源码](https://github.com/Aarosunn/SpaceApps)
+
+*感谢作者 **@Aarosunn** 的开源分享！*
+
+### 93 · Jester
+
+![Jester](screenshots/93.jpg)
+
+**EN**: A party game that turns any short clip into a level: each player secretly copies one person in it, then the clip plays back with everyone's cutouts.
+
+<sub>技术：three.js · 语言：JavaScript · 游玩量：5</sub>
+
+[在线试玩](https://fable52.games/play/jester) ｜ [作者演示站](https://jester-pi.vercel.app) ｜ [源码](https://github.com/aaron-sulbaran/jester)
+
+*感谢作者 **@aaron-sulbaran** 的开源分享！*
 
 ## 归档与来源说明
 

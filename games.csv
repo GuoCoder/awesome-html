@@ -65,3 +65,30 @@ id,name,repo,play_url,author_demo,render,build,delivery,language,stars,category,
 64,LUMEN REEL ― まわる灯台と三つの海路,shioa2006-game/ONE_PROMPT_WORLDS,https://fable52.games/play/lumen-reel,https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game4/index.html,原生 JS,,源码仓库,JavaScript,0,策略,2026-11-17
 65,REEL DELVE ― まわる迷宮と三人の旅,shioa2006-game/ONE_PROMPT_WORLDS,https://fable52.games/play/reel-delve,https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game5/index.html,原生 JS,,源码仓库,JavaScript,0,解谜,2026-11-17
 66,EMBERDEEP ― 燈守りの坑道 (Lampkeeper's Mine),shioa2006-game/ONE_PROMPT_WORLDS,https://fable52.games/play/emberdeep-tomoshimori,https://shioa2006-game.github.io/ONE_PROMPT_WORLDS/game3/index.html,原生 JS,,源码仓库,JavaScript,0,动作,2026-11-17
+67,挤地铁,zhgarylu/everyday-game,https://fable52.games/play/metro-rush,https://zhgarylu.github.io/everyday-game/metro/,three.js,,源码仓库,JavaScript,0,解谜,2026-11-18
+68,夜市套圈,zhgarylu/everyday-game,https://fable52.games/play/night-market-ring,https://zhgarylu.github.io/everyday-game/ring/,three.js,,源码仓库,JavaScript,0,休闲,2026-11-18
+69,相亲角速配,zhgarylu/everyday-game,https://fable52.games/play/matchmaking-corner,https://zhgarylu.github.io/everyday-game/match/,three.js,,源码仓库,JavaScript,0,休闲,2026-11-18
+70,Black Tide,,https://fable52.games/play/black-tid,,three.js,,平台内嵌,JavaScript,0,FPS,2026-11-18
+71,T-Minus,XDracam/spaceappschallenge2026,https://fable52.games/play/t-minus,https://missioncontrol.dractec.com/,原生 JS,,源码仓库,JavaScript,0,策略,2026-11-18
+72,晶塔守卫,zhgarylu/everyday-game,https://fable52.games/play/crystal-tower-defense,https://zhgarylu.github.io/everyday-game/td/,three.js,,源码仓库,JavaScript,0,策略,2026-11-18
+73,皮衣老黄,zhgarylu/everyday-game,https://fable52.games/play/chip-jacket,https://zhgarylu.github.io/everyday-game/chip/,three.js,,源码仓库,JavaScript,0,策略,2026-11-18
+74,Apex Lap: Blender Edition,ololo-dev/apex-lap-fable-5-2-blender,https://fable52.games/play/apex-lap-blender,https://ololo-dev.github.io/apex-lap-fable-5-2-blender/,three.js,,源码仓库,JavaScript,0,竞速,2026-11-18
+75,Ripcore,majidmanzarpour/threejs-game-skills,https://fable52.games/play/ripcore,https://ripcore.netlify.app,three.js,,源码仓库,JavaScript,0,,2026-11-18
+76,骑手,zhgarylu/everyday-game,https://fable52.games/play/rider,https://zhgarylu.github.io/everyday-game/rider/,three.js,,源码仓库,JavaScript,0,,2026-11-18
+77,清潮,zhgarylu/everyday-game,https://fable52.games/play/qingchao,https://zhgarylu.github.io/everyday-game/tide/,three.js,,源码仓库,JavaScript,0,FPS,2026-11-18
+78,Raptor Race,drew879/raptor-race-fable,https://fable52.games/play/raptor-race,https://drew879.github.io/raptor-race-fable/,three.js,,源码仓库,JavaScript,0,跑酷,2026-11-18
+79,MAPLE RUN,nanha0130/maple-run-fable,https://fable52.games/play/maple-run,https://maple-run-fable.vercel.app,原生 JS,,源码仓库,JavaScript,0,跑酷,2026-11-18
+80,Starship Dogfight,majidmanzarpour/threejs-game-skills,https://fable52.games/play/starship-dogfight,https://starshipdogfight.netlify.app,three.js,,源码仓库,JavaScript,0,,2026-11-18
+81,三借芭蕉扇,zenstory-ai/novel-to-game,https://fable52.games/play/sanjie-bajiaoshan,https://xiyouji.vibecoco.ai,原生 JS,,源码仓库,JavaScript,0,RPG,2026-11-18
+82,广州漂移,zhgarylu/everyday-game,https://fable52.games/play/gz-drift,https://zhgarylu.github.io/everyday-game/gz/,three.js,,源码仓库,JavaScript,0,竞速,2026-11-18
+83,Лисёнок и огненный жёлудь,sashatchersunov6-rgb/lisenok-game,https://fable52.games/play/lisenok-game,https://sashatchersunov6-rgb.github.io/lisenok-game/,Canvas 2D,,源码仓库,JavaScript,0,平台,2026-11-18
+84,摸鱼大师,zhgarylu/everyday-game,https://fable52.games/play/moyu-master,https://zhgarylu.github.io/everyday-game/moyu/,three.js,,源码仓库,JavaScript,0,休闲,2026-11-18
+85,吃啥拉啥,zhgarylu/everyday-game,https://fable52.games/play/eat-and-go,https://zhgarylu.github.io/everyday-game/eat/,three.js,,源码仓库,JavaScript,0,动作,2026-11-18
+86,Gabriel's Sweet Town,chomachomachoma/candyland_pwa,https://fable52.games/play/gabriels-sweet-town,https://chomachomachoma.github.io/candyland_pwa/,原生 JS,,源码仓库,JavaScript,0,,2026-11-18
+87,搓澡大师,zhgarylu/everyday-game,https://fable52.games/play/scrub-master,https://zhgarylu.github.io/everyday-game/scrub/,three.js,,源码仓库,JavaScript,0,休闲,2026-11-18
+88,捏泡泡纸,zhgarylu/everyday-game,https://fable52.games/play/bubble-wrap,https://zhgarylu.github.io/everyday-game/pop/,three.js,,源码仓库,JavaScript,0,休闲,2026-11-18
+89,Apex Lap,ololo-dev/apex-lap-fable-5-2,https://fable52.games/play/apex-lap,https://ololo-dev.github.io/apex-lap-fable-5-2/,three.js,,源码仓库,JavaScript,0,竞速,2026-11-18
+90,Rufus Crush,bhoult/phone-games,https://fable52.games/play/rufus-crush,https://bhoult.github.io/phone-games/rufus-crush/,WebAssembly,,源码仓库,JavaScript,0,解谜,2026-11-18
+91,怒砸办公室,zhgarylu/everyday-game,https://fable52.games/play/office-smash,https://zhgarylu.github.io/everyday-game/smash/,three.js,,源码仓库,JavaScript,0,动作,2026-11-18
+92,EarthFM · Listening Game,Aarosunn/SpaceApps,https://fable52.games/play/earthfm,https://earthfm.vercel.app/play,原生 JS,,源码仓库,JavaScript,0,,2026-11-18
+93,Jester,aaron-sulbaran/jester,https://fable52.games/play/jester,https://jester-pi.vercel.app,three.js,,源码仓库,JavaScript,0,,2026-11-18
