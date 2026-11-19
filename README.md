@@ -4,7 +4,7 @@
 
 **仓库地址**：[GuoCoder/awesome-html-games](https://github.com/GuoCoder/awesome-html-games)
 
-**收录**：93 款（本地离线归档 22 款，其余为在线演示或源码链接） · 数据快照：2026-11-18
+**收录**：94 款（本地离线归档 22 款，其余为在线演示或源码链接） · 数据快照：2026-11-19
 
 ## 离线运行说明
 
@@ -1331,6 +1331,18 @@
 [在线试玩](https://fable52.games/play/jester) ｜ [作者演示站](https://jester-pi.vercel.app) ｜ [源码](https://github.com/aaron-sulbaran/jester)
 
 *感谢作者 **@aaron-sulbaran** 的开源分享！*
+
+### 94 · 柑仔的晚霞航空信
+
+![柑仔的晚霞航空信](screenshots/94.jpg)
+
+**EN**: A cat on a paper plane over a harbour town at sunset: collect dusk stamps, post letters, dodge thunderclouds. Endless, three lives, one roll.
+
+<sub>技术：Canvas 2D · 语言：JavaScript · 游玩量：8</sub>
+
+[在线试玩](https://fable52.games/play/ganzi-wanxia-hangkongxin) ｜ [作者演示站](https://jambocoder159.github.io/ai-game-duel/versions/fable/index.html) ｜ [源码](https://github.com/jambocoder159/ai-game-duel)
+
+*感谢作者 **@jambocoder159** 的开源分享！*
 
 ## 归档与来源说明
 
