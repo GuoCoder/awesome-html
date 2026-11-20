@@ -4,7 +4,7 @@
 
 **仓库地址**：[GuoCoder/awesome-html-games](https://github.com/GuoCoder/awesome-html-games)
 
-**收录**：94 款（本地离线归档 22 款，其余为在线演示或源码链接） · 数据快照：2026-11-19
+**收录**：97 款（本地离线归档 22 款，其余为在线演示或源码链接） · 数据快照：2026-11-20
 
 ## 离线运行说明
 
@@ -1343,6 +1343,42 @@
 [在线试玩](https://fable52.games/play/ganzi-wanxia-hangkongxin) ｜ [作者演示站](https://jambocoder159.github.io/ai-game-duel/versions/fable/index.html) ｜ [源码](https://github.com/jambocoder159/ai-game-duel)
 
 *感谢作者 **@jambocoder159** 的开源分享！*
+
+### 95 · Fault Line Echoes
+
+![Fault Line Echoes](screenshots/95.jpg)
+
+**EN**: A first-person adventure across a white-stone capital and four wild regions: sign the flood report, take commissions, pick one of four fighting styles.
+
+<sub>类别：RPG · 技术：three.js · 语言：JavaScript · 体量：7.4 MB · 游玩量：3</sub>
+
+[在线试玩](https://fable52.games/play/fault-line-echoes-hkbbj1) ｜ [作者演示站](https://github.com/GalokPeng/Fault-Line-Echoes)
+
+*感谢作者 **Galok** 的分享！*
+
+### 96 · LAST LIGHT — Rooftop Run
+
+![LAST LIGHT — Rooftop Run](screenshots/96.jpg)
+
+**EN**: A first-person parkour time trial across a golden-hour city: ten checkpoints from the start roof to the beacon on the tower, and a ghost of your best run.
+
+<sub>技术：three.js · 语言：JavaScript · 游玩量：12</sub>
+
+[在线试玩](https://fable52.games/play/last-light-rooftop-run) ｜ [作者演示站](https://clockendbader.github.io/model-arena/fable-5.2/parkour/) ｜ [源码](https://github.com/clockendbader/model-arena)
+
+*感谢作者 **@clockendbader** 的开源分享！*
+
+### 97 · Papertrails
+
+![Papertrails](screenshots/97.jpg)
+
+**EN**: An endless pop-up book you walk through: paper villages rise and fold away as you wander five biomes, collecting pressed leaves, shells and night stars.
+
+<sub>类别：探索 · 技术：three.js · 语言：JavaScript · 游玩量：12</sub>
+
+[在线试玩](https://fable52.games/play/papertrails) ｜ [作者演示站](https://xikhar.github.io/papertrails/) ｜ [源码](https://github.com/xikhar/papertrails)
+
+*感谢作者 **@xikhar** 的开源分享！*
 
 ## 归档与来源说明
 

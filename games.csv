@@ -93,3 +93,6 @@ id,name,repo,play_url,author_demo,render,build,delivery,language,stars,category,
 92,EarthFM · Listening Game,Aarosunn/SpaceApps,https://fable52.games/play/earthfm,https://earthfm.vercel.app/play,原生 JS,,源码仓库,JavaScript,0,,2026-11-18
 93,Jester,aaron-sulbaran/jester,https://fable52.games/play/jester,https://jester-pi.vercel.app,three.js,,源码仓库,JavaScript,0,,2026-11-18
 94,柑仔的晚霞航空信,jambocoder159/ai-game-duel,https://fable52.games/play/ganzi-wanxia-hangkongxin,https://jambocoder159.github.io/ai-game-duel/versions/fable/index.html,Canvas 2D,,源码仓库,JavaScript,0,,2026-11-19
+95,Fault Line Echoes,,https://fable52.games/play/fault-line-echoes-hkbbj1,https://github.com/GalokPeng/Fault-Line-Echoes,three.js,,作者站点,JavaScript,0,RPG,2026-11-20
+96,LAST LIGHT — Rooftop Run,clockendbader/model-arena,https://fable52.games/play/last-light-rooftop-run,https://clockendbader.github.io/model-arena/fable-5.2/parkour/,three.js,,源码仓库,JavaScript,0,,2026-11-20
+97,Papertrails,xikhar/papertrails,https://fable52.games/play/papertrails,https://xikhar.github.io/papertrails/,three.js,,源码仓库,JavaScript,0,探索,2026-11-20
