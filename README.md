@@ -4,7 +4,7 @@
 
 **仓库地址**：[GuoCoder/awesome-html-games](https://github.com/GuoCoder/awesome-html-games)
 
-**收录**：97 款（本地离线归档 22 款，其余为在线演示或源码链接） · 数据快照：2026-11-20
+**收录**：112 款（本地离线归档 22 款，其余为在线演示或源码链接） · 数据快照：2026-11-21
 
 ## 离线运行说明
 
@@ -1379,6 +1379,182 @@
 [在线试玩](https://fable52.games/play/papertrails) ｜ [作者演示站](https://xikhar.github.io/papertrails/) ｜ [源码](https://github.com/xikhar/papertrails)
 
 *感谢作者 **@xikhar** 的开源分享！*
+
+### 98 · Mall Action (Claude Fable 5.2)
+
+![Mall Action (Claude Fable 5.2)](screenshots/98.jpg)
+
+**EN**: Claude Fable 5.2's 8-bit spy caper: six floors, three elevator shafts, ten top-down store rooms and six hidden packages in an 80s shopping mall.
+
+<sub>类别：动作 · 技术：原生 JS · 语言：JavaScript · 游玩量：1</sub>
+
+[在线试玩](https://fable52.games/play/mall-action-fable) ｜ [作者演示站](https://rlorca.github.io/mall-action/fable-5.2/) ｜ [源码](https://github.com/rlorca/mall-action)
+
+*感谢作者 **@rlorca** 的开源分享！*
+
+### 99 · The Tallow Deep
+
+![The Tallow Deep](screenshots/99.jpg)
+
+**EN**: Claude Opus 5.5's first-person horror roguelike in one HTML file: carry a lantern down ten floors, ration oil and sanity, and outrun a hunter that eats light.
+
+<sub>技术：原生 WebGL · 语言：JavaScript · 游玩量：1</sub>
+
+[在线试玩](https://fable52.games/play/the-tallow-deep) ｜ [作者演示站](https://chojondocho.github.io/single-html-game-bench/claudecode-opus-5-5-max.html) ｜ [源码](https://github.com/chojondocho/single-h)
+
+*感谢作者 **@chojondocho** 的开源分享！*
+
+### 100 · Boo-mas
+
+![Boo-mas](screenshots/100.jpg)
+
+**EN**: A ghost in a Santa hat trails fairy lights around a snow-globe planet: close a loop, and everything inside it lights up before midnight.
+
+<sub>类别：休闲 · 技术：three.js · 语言：JavaScript · 游玩量：9</sub>
+
+[在线试玩](https://fable52.games/play/boo-mas) ｜ [作者演示站](https://robinduckett.github.io/boo-mas/) ｜ [源码](https://github.com/robinduckett/boo-mas)
+
+*感谢作者 **@robinduckett** 的开源分享！*
+
+### 101 · Pocket Roads: Midnight Pass
+
+![Pocket Roads: Midnight Pass](screenshots/101.jpg)
+
+**EN**: A 3.2 km midnight time trial over a Swiss Alpine pass, built for a tablet: two-thumb controls, four checkpoints, medal times and a mode for a real toy car.
+
+<sub>类别：竞速 · 技术：three.js · 语言：JavaScript · 游玩量：7</sub>
+
+[在线试玩](https://fable52.games/play/pocket-roads) ｜ [作者演示站](https://aartiles.github.io/local-model-benchmarks-site/demos/pocket-roads/) ｜ [源码](https://github.com/aartiles/local-model-benchmarks-site)
+
+*感谢作者 **@aartiles** 的开源分享！*
+
+### 102 · Hamster Colony
+
+![Hamster Colony](screenshots/102.jpg)
+
+**EN**: A low-poly 3D hamster cage that runs itself: hamsters eat, drink, take turns on the wheel, sleep, raise families and grow old, generation after generation.
+
+<sub>类别：模拟 · 技术：three.js · 语言：JavaScript · 游玩量：5</sub>
+
+[在线试玩](https://fable52.games/play/hamster-colony) ｜ [作者演示站](https://kostikoneuro.github.io/astra-6-2-solo/5-hamsters/game/) ｜ [源码](https://github.com/KostiKoNeuro/astra-6-2-solo)
+
+*感谢作者 **@KostiKoNeuro** 的开源分享！*
+
+### 103 · Dusk Runner — Rooftop Time Trial
+
+![Dusk Runner — Rooftop Time Trial](screenshots/103.jpg)
+
+**EN**: A first-person parkour time trial over 24 rooftops in eight sectors: vault, wall-run, climb and ride ziplines, then race the ghost of your best run.
+
+<sub>技术：three.js · 语言：JavaScript · 游玩量：5</sub>
+
+[在线试玩](https://fable52.games/play/dusk-runner) ｜ [作者演示站](https://clockendbader.github.io/model-arena/astra-6.2/parkour/) ｜ [源码](https://github.com/clockendbader/model-arena)
+
+*感谢作者 **@clockendbader** 的开源分享！*
+
+### 104 · Saltwake — The Drowned Abbey
+
+![Saltwake — The Drowned Abbey](screenshots/104.jpg)
+
+**EN**: A first-person maritime horror roguelike in one HTML file: descend a drowned abbey, ring three bells and answer your lost sister's call.
+
+<sub>技术：three.js · 语言：JavaScript · 游玩量：2</sub>
+
+[在线试玩](https://fable52.games/play/saltwake) ｜ [作者演示站](https://chojondocho.github.io/single-html-game-bench/codex-gpt-6-2-astra-max.html) ｜ [源码](https://github.com/chojondocho/single-html-game-bench)
+
+*感谢作者 **@chojondocho** 的开源分享！*
+
+### 105 · Lantern Drift · 天燈漂流
+
+![Lantern Drift · 天燈漂流](screenshots/105.jpg)
+
+**EN**: Guide a sky lantern up over Pingxi, Taiwan: catch embers to keep the flame alive, gather wishes, and dodge rain, wires, swallows and tiled eaves.
+
+<sub>技术：Canvas 2D · 语言：JavaScript · 游玩量：2</sub>
+
+[在线试玩](https://fable52.games/play/lantern-drift-astra) ｜ [作者演示站](https://jambocoder159.github.io/ai-game-duel/versions/r2-astra/index.html) ｜ [源码](https://github.com/jambocoder159/ai-game-duel)
+
+*感谢作者 **@jambocoder159** 的开源分享！*
+
+### 106 · Mall Action (Claude Opus 5.5)
+
+![Mall Action (Claude Opus 5.5)](screenshots/106.jpg)
+
+**EN**: Claude Opus 5.5's 8-bit spy caper: ride the elevators, drop the lights on spies, search top-down stores for six packages and escape in a station wagon.
+
+<sub>类别：动作 · 技术：原生 JS · 语言：JavaScript · 游玩量：2</sub>
+
+[在线试玩](https://fable52.games/play/mall-action-opus) ｜ [作者演示站](https://rlorca.github.io/mall-action/opus-5.5/) ｜ [源码](https://github.com/rlorca/mall-action)
+
+*感谢作者 **@rlorca** 的开源分享！*
+
+### 107 · Spillway Run
+
+![Spillway Run](screenshots/107.jpg)
+
+<sub>技术：原生 JS · 语言：JavaScript · 游玩量：1</sub>
+
+[在线试玩](https://fable52.games/play/spillway-run)
+
+### 108 · Lantern Drift · 天燈漂流 (Claude Fable 5.2)
+
+![Lantern Drift · 天燈漂流 (Claude Fable 5.2)](screenshots/108.jpg)
+
+**EN**: Claude Fable 5.2's side of the Lantern Drift duel: steer a paper-cut sky lantern up through eaves, wires, birds and rain clouds, and keep its flame alive.
+
+<sub>技术：原生 JS · 语言：JavaScript · 游玩量：1</sub>
+
+[在线试玩](https://fable52.games/play/lantern-drift-fable) ｜ [作者演示站](https://jambocoder159.github.io/ai-game-duel/versions/r2-fable/index.html) ｜ [源码](https://github.com/jambocoder159/ai-game-duel)
+
+*感谢作者 **@jambocoder159** 的开源分享！*
+
+### 109 · Blackburn Type D
+
+![Blackburn Type D](screenshots/109.jpg)
+
+**EN**: Fly a 1912 Blackburn monoplane through four rings over a fictional town; each ring opens a chapter on the surviving aircraft, with archive photographs.
+
+<sub>技术：three.js · 语言：JavaScript · 游玩量：1</sub>
+
+[在线试玩](https://fable52.games/play/blackburn-type-d) ｜ [作者演示站](https://blackburn-flight.pages.dev/) ｜ [源码](https://github.com/Dun4ev/blackburn-flight)
+
+*感谢作者 **@Dun4ev** 的开源分享！*
+
+### 110 · Santa Express: Chimney Panic!
+
+![Santa Express: Chimney Panic!](screenshots/110.jpg)
+
+**EN**: Fly Santa's sleigh over a Nordic village for 60 seconds and drop presents down glowing chimneys; every delivery in a streak multiplies, up to ×5.
+
+<sub>技术：three.js · 语言：JavaScript · 游玩量：1</sub>
+
+[在线试玩](https://fable52.games/play/santa-express) ｜ [作者演示站](https://thestringtheories.github.io/Santa-Game/) ｜ [源码](https://github.com/thestringtheories/Santa-Game)
+
+*感谢作者 **@thestringtheories** 的开源分享！*
+
+### 111 · 夕陽郵航 (Sunset Airmail)
+
+![夕陽郵航 (Sunset Airmail)](screenshots/111.jpg)
+
+**EN**: GPT-6.2 Astra's side of a two-model duel: steer a cat's paper plane for 60 seconds, collect stamps, dodge thunderclouds and reach the lighthouse.
+
+<sub>技术：Canvas 2D · 语言：JavaScript · 游玩量：1</sub>
+
+[在线试玩](https://fable52.games/play/xiyang-youhang-astra) ｜ [作者演示站](https://jambocoder159.github.io/ai-game-duel/versions/astra/index.html) ｜ [源码](https://github.com/jambocoder159/ai-game-duel)
+
+*感谢作者 **@jambocoder159** 的开源分享！*
+
+### 112 · Mall Action
+
+![Mall Action](screenshots/112.jpg)
+
+**EN**: Zip-line onto a shopping mall, ride the elevators, dodge the men in fedoras and find six packages before security closes in. A 256 × 240 pixel-art caper.
+
+<sub>类别：动作 · 技术：Canvas 2D · 语言：JavaScript · 游玩量：1</sub>
+
+[在线试玩](https://fable52.games/play/mall-action-astra) ｜ [作者演示站](https://rlorca.github.io/mall-action/gpt-6.2-astra-xhigh/) ｜ [源码](https://github.com/rlorca/mall-action)
+
+*感谢作者 **@rlorca** 的开源分享！*
 
 ## 归档与来源说明
 

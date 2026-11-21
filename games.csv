@@ -96,3 +96,18 @@ id,name,repo,play_url,author_demo,render,build,delivery,language,stars,category,
 95,Fault Line Echoes,,https://fable52.games/play/fault-line-echoes-hkbbj1,https://github.com/GalokPeng/Fault-Line-Echoes,three.js,,作者站点,JavaScript,0,RPG,2026-11-20
 96,LAST LIGHT — Rooftop Run,clockendbader/model-arena,https://fable52.games/play/last-light-rooftop-run,https://clockendbader.github.io/model-arena/fable-5.2/parkour/,three.js,,源码仓库,JavaScript,0,,2026-11-20
 97,Papertrails,xikhar/papertrails,https://fable52.games/play/papertrails,https://xikhar.github.io/papertrails/,three.js,,源码仓库,JavaScript,0,探索,2026-11-20
+98,Mall Action (Claude Fable 5.2),rlorca/mall-action,https://fable52.games/play/mall-action-fable,https://rlorca.github.io/mall-action/fable-5.2/,原生 JS,,源码仓库,JavaScript,0,动作,2026-11-21
+99,The Tallow Deep,chojondocho/single-h,https://fable52.games/play/the-tallow-deep,https://chojondocho.github.io/single-html-game-bench/claudecode-opus-5-5-max.html,原生 WebGL,,源码仓库,JavaScript,0,,2026-11-21
+100,Boo-mas,robinduckett/boo-mas,https://fable52.games/play/boo-mas,https://robinduckett.github.io/boo-mas/,three.js,,源码仓库,JavaScript,0,休闲,2026-11-21
+101,Pocket Roads: Midnight Pass,aartiles/local-model-benchmarks-site,https://fable52.games/play/pocket-roads,https://aartiles.github.io/local-model-benchmarks-site/demos/pocket-roads/,three.js,,源码仓库,JavaScript,0,竞速,2026-11-21
+102,Hamster Colony,KostiKoNeuro/astra-6-2-solo,https://fable52.games/play/hamster-colony,https://kostikoneuro.github.io/astra-6-2-solo/5-hamsters/game/,three.js,,源码仓库,JavaScript,0,模拟,2026-11-21
+103,Dusk Runner — Rooftop Time Trial,clockendbader/model-arena,https://fable52.games/play/dusk-runner,https://clockendbader.github.io/model-arena/astra-6.2/parkour/,three.js,,源码仓库,JavaScript,0,,2026-11-21
+104,Saltwake — The Drowned Abbey,chojondocho/single-html-game-bench,https://fable52.games/play/saltwake,https://chojondocho.github.io/single-html-game-bench/codex-gpt-6-2-astra-max.html,three.js,,源码仓库,JavaScript,0,,2026-11-21
+105,Lantern Drift · 天燈漂流,jambocoder159/ai-game-duel,https://fable52.games/play/lantern-drift-astra,https://jambocoder159.github.io/ai-game-duel/versions/r2-astra/index.html,Canvas 2D,,源码仓库,JavaScript,0,,2026-11-21
+106,Mall Action (Claude Opus 5.5),rlorca/mall-action,https://fable52.games/play/mall-action-opus,https://rlorca.github.io/mall-action/opus-5.5/,原生 JS,,源码仓库,JavaScript,0,动作,2026-11-21
+107,Spillway Run,,https://fable52.games/play/spillway-run,,原生 JS,,作者站点,JavaScript,0,,2026-11-21
+108,Lantern Drift · 天燈漂流 (Claude Fable 5.2),jambocoder159/ai-game-duel,https://fable52.games/play/lantern-drift-fable,https://jambocoder159.github.io/ai-game-duel/versions/r2-fable/index.html,原生 JS,,源码仓库,JavaScript,0,,2026-11-21
+109,Blackburn Type D,Dun4ev/blackburn-flight,https://fable52.games/play/blackburn-type-d,https://blackburn-flight.pages.dev/,three.js,,源码仓库,JavaScript,0,,2026-11-21
+110,Santa Express: Chimney Panic!,thestringtheories/Santa-Game,https://fable52.games/play/santa-express,https://thestringtheories.github.io/Santa-Game/,three.js,,源码仓库,JavaScript,0,,2026-11-21
+111,夕陽郵航 (Sunset Airmail),jambocoder159/ai-game-duel,https://fable52.games/play/xiyang-youhang-astra,https://jambocoder159.github.io/ai-game-duel/versions/astra/index.html,Canvas 2D,,源码仓库,JavaScript,0,,2026-11-21
+112,Mall Action,rlorca/mall-action,https://fable52.games/play/mall-action-astra,https://rlorca.github.io/mall-action/gpt-6.2-astra-xhigh/,Canvas 2D,,源码仓库,JavaScript,0,动作,2026-11-21
